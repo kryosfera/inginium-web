@@ -83,7 +83,7 @@ const desde = grupos.at(-1)?.anio, hasta = grupos[0]?.anio;
 
   /* Pista horizontal fijada (la activa trayectoria.ts en escritorio con movimiento) */
   .tray.is-horizontal { height: 100vh; min-height: 640px; padding-block: clamp(84px, 11vh, 112px) 0; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
-  .is-horizontal .cab { margin-bottom: clamp(20px, 3vh, 40px); }
+  .is-horizontal .cab { width: 100%; margin-bottom: clamp(20px, 3vh, 40px); }
   .is-horizontal .progreso { display: block; width: min(320px, 30vw); height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
   .is-horizontal .progreso span { display: block; height: 100%; background: var(--lima); transform-origin: left; transform: scaleX(0); }
   .is-horizontal .vp { max-width: none; width: 100%; min-width: 0; padding: 0; overflow: visible; align-self: center; }
@@ -92,7 +92,7 @@ const desde = grupos.at(-1)?.anio, hasta = grupos[0]?.anio;
   .is-horizontal .num { position: static; justify-content: space-between; width: auto; padding-right: 8px; border-right: 1px solid var(--line); }
   .is-horizontal .num span { font-size: clamp(88px, 11vw, 168px); writing-mode: vertical-rl; transform: rotate(180deg); color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--fg) 45%, transparent); transition: color .5s, -webkit-text-stroke-color .5s; }
   .is-horizontal .anio.is-actual .num span { color: var(--lima); -webkit-text-stroke-color: var(--lima); }
-  .is-horizontal .cursos { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: clamp(220px, 17vw, 260px); gap: 16px; }
+  .is-horizontal .cursos { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: clamp(220px, 17vw, 260px); gap: 16px; }
   .is-horizontal .tc-tit { -webkit-line-clamp: 2; }
 
   @media (prefers-reduced-motion: reduce) {

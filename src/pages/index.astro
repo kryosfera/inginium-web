@@ -90,7 +90,7 @@ const FICHA = [
     </div>
   </section>
 
-  <section class="patro" data-mode="oscuro" aria-labelledby="pat-h">
+  <section class="patro" aria-labelledby="pat-h">
     <div class="wrap patro-in">
       <div class="patro-txt">
         <h2 id="pat-h" data-split>Patrocinio transparente</h2>
@@ -144,13 +144,13 @@ const FICHA = [
   .ficha-info dd { margin: 0; color: var(--muted); font-size: 15px; }
   @media (min-width: 960px) { .aval-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
 
-  .patro { padding-block: clamp(72px, 8vw, 112px); background: var(--bg); color: var(--fg); }
+  .patro { padding-block: clamp(72px, 8vw, 112px); border-top: 1px solid var(--line); }
   .patro-in { display: grid; gap: 36px; }
   .patro-txt { display: grid; gap: 14px; max-width: 760px; }
   .patro h2 { font-size: clamp(30px, 3.6vw, 52px); font-weight: 900; }
   .patro-txt p { font-size: 18px; color: var(--fg); opacity: .9; max-width: 60ch; }
 
-  .caminos { padding-block: 0 clamp(72px, 8vw, 112px); background: var(--bg); color: var(--fg); }
+  .caminos { padding-block: clamp(72px, 8vw, 112px); background: var(--bg); color: var(--fg); }
   .cam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; }
   .camino { position: relative; display: grid; gap: 10px; align-content: end; min-height: clamp(200px, 22vw, 280px); padding: clamp(24px, 3vw, 40px); border: 1px solid var(--line); border-radius: 22px; text-decoration: none; color: var(--fg); background: var(--card); overflow: hidden;
     transition: border-color .25s, background-color .3s, box-shadow .35s cubic-bezier(.16, 1, .3, 1); }
