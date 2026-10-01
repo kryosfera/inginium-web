@@ -48,10 +48,12 @@ Desde un Mac: ejecutar `descargar.sh` en `ksf-workspace/backups/webflow-2026/ing
 
 ## Estado y siguientes pasos
 
-- **01/10/2026 · Fase 1 hecha (tareas 1-9):** andamiaje, utilidades, importación del CMS, sistema visual, ficha de curso, listado con filtros, home y páginas, contacto, SEO y calidad. Código en `kryosfera/inginium-web` (`main`). Spec y plan en `ksf-workspace/docs/superpowers/specs|plans/2026-10-01-inginium-web*`.
+- **01/10/2026 · Fase 1 hecha (tareas 1-10):** andamiaje, utilidades, importación del CMS, sistema visual, ficha de curso, listado con filtros, home y páginas, contacto, SEO y calidad. Código en `kryosfera/inginium-web` (`main`). Spec y plan en `ksf-workspace/docs/superpowers/specs|plans/2026-10-01-inginium-web*`.
+- **01/10/2026 · Revisión final y binarios:** arreglados I1-I2 y M1-M11 de la revisión final (imágenes en línea localizadas tras la fusión, marcador probado con la Container API de Astro, formatos de `imagen`/`programa`/`foto`/`logo`, AVIF de cabecera a calidad 45, `run_worker_first`, `EMAIL_CONTACTO`, etiqueta de SponsorStrip, «cursos impartidos» solo finalizados, JSON-LD escapado, Wrangler 4 fijado, test de `src` y del CDN). **Binarios importados** (`binarios no encontrados: 0`): 39 imágenes de curso, 20 fotos, 28 logos, 2 PDF y 3 imágenes en línea; unos 43 MB en git, ninguno de más de 5 MB (el mayor, el PDF de EII-P 2026, 4,3 MB). Ya no hay referencias al CDN de Webflow en `dist/`.
 - **Decisiones:** Worker de Cloudflare (no Pages); 4 cursos de 2020-21 pasados a finalizados a petición de Joaquín; enlaces de acceso que apuntaban al propio sitio descartados (`url: null`); nombres de patrocinador derivados del fichero del logo (editables); con menos de 3 destacados la home se completa con «Últimas formaciones»; mailto de privacidad alineados con el texto visible (info@inginium.es); sin CSP.
 - **Pendiente de Joaquín:**
-  - Ejecutar `descargar.sh` en el Mac y reimportar (113 binarios: imágenes de curso, logos, fotos de docentes, programas y 3 imágenes en línea).
+  - Las imágenes de curso son carteles con texto: en la cabecera de la ficha el texto del cartel se ve detrás del título (velo oscuro). Valorar un velo más denso o recortes/fotos sin texto.
+  - Fotos de docentes y carteles pesan hasta 3 MB en origen (Astro los optimiza en el build; el repo crece). Valorar reducir los originales.
   - Completar `especialidades` de 15 cursos (los que tienen `especialidades: []` en `src/content/cursos`).
   - Revisar nombres de patrocinadores (algunos toscos: «Palex en», «Ferrer New Print CMYK», «gileadRecurso 2@3x», uno vacío) y marcas repetidas.
   - Cifra de profesionales formados (`src/data/cifras.json`).
