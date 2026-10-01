@@ -58,6 +58,23 @@ test('todos los href internos de todas las páginas resuelven', () => {
   expect(rotos).toEqual([]);
 });
 
+test('todos los src locales resuelven y ninguna página carga del CDN de Webflow', () => {
+  soloUnaVez();
+  const rotos: string[] = [];
+  const remotos: string[] = [];
+  for (const f of paginas()) {
+    const src = readFileSync(f, 'utf8');
+    if (src.includes('cdn.prod.website-files.com')) remotos.push(f);
+    for (const [, s] of src.matchAll(/\ssrc="([^"]*)"/g)) {
+      if (s.startsWith('/') && !s.startsWith('//') && !existe(s)) rotos.push(`${f}: ${s}`);
+      else if (!/^(\/|https?:|data:)/.test(s)) rotos.push(`${f}: relativo ${s}`);
+    }
+  }
+  expect(rotos).toEqual([]);
+  // El CDN de Webflow desaparece al cancelar el plan: todo debe servirse desde el sitio (reimportar con los binarios).
+  expect(remotos).toEqual([]);
+});
+
 test('imagen, programa, profesorado y patrocinadores de cada curso existen', () => {
   soloUnaVez();
   const ids = {
