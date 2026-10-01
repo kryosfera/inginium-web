@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero, nombreDesdeFichero, imagenesDe, reescribirImagenes } from '../../src/lib/cms-import';
+import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero, nombreDesdeFichero, imagenesDe, reescribirImagenes, localizarImagenes } from '../../src/lib/cms-import';
 
 const docentes = new Map([['t1', 'dra-ana'], ['t2', 'dr-luis']]);
 const item = (f: Record<string, unknown>, extra: Record<string, unknown> = {}) =>
@@ -141,5 +141,27 @@ describe('imágenes en línea', () => {
 describe('mapDocente: invisibles en textos planos', () => {
   it('los quita del resumen', () => {
     expect(mapDocente({ fieldData: { name: 'A', slug: 'a', 'teacher-biography-summary': 'Hospital.\u200B' } }, null).resumen).toBe('Hospital.');
+  });
+});
+
+describe('localizarImagenes', () => {
+  const u1 = 'https://cdn.prod.website-files.com/a/agenda%201.png';
+  const u2 = 'https://cdn.prod.website-files.com/a/agenda%202.png';
+  it('localiza el cuerpo existente conservado por la fusión', () => {
+    const nuevo = mapCurso(item({}), { docentes, imagen: null, programa: null });
+    const existente = { ...nuevo, cuerpo: `<p>editado</p><img alt="" src="${u1}" loading="lazy"><img alt="" src="${u2}">` };
+    const fusionado = fusionarCurso({ ...nuevo, cuerpo: 'otro' }, existente);
+    const copias: string[] = [];
+    const r = localizarImagenes(fusionado.cuerpo, 'c', (url, base) => { copias.push(base); return url === u1 ? `/cursos-media/${base}.png` : null; });
+    expect(r.cuerpo).toContain('<p>editado</p>');
+    expect(r.cuerpo).toContain('src="/cursos-media/c-1.png"');
+    expect(r.cuerpo).toContain(`src="${u2}"`);
+    expect(r.faltan).toEqual([u2]);
+    expect(copias).toEqual(['c-1', 'c-2']);
+  });
+  it('una URL repetida se copia una vez', () => {
+    const r = localizarImagenes(`<img src="${u1}"><img src="${u1}">`, 'c', (_u, b) => `/cursos-media/${b}.png`);
+    expect(r.cuerpo.match(/\/cursos-media\/c-1\.png/g)).toHaveLength(2);
+    expect(r.faltan).toEqual([]);
   });
 });

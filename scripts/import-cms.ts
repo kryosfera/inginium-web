@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import yaml from 'js-yaml';
-import { imagenesDe, reescribirImagenes, nombreDesdeFichero, mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
+import { localizarImagenes, nombreDesdeFichero, mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
 
 const bk = process.argv[2];
 if (!bk) { console.error('Falta la ruta del backup de inginium-ksf'); process.exit(1); }
@@ -49,18 +49,15 @@ for (const it of leer('courses').filter(isPublicado)) {
     patros.set(p.id, { id: p.id, nombre: prev?.nombre?.trim() || nombreDesdeFichero(p.url), logo: logo ?? prev?.logo ?? null });
   }
   const nuevo = mapCurso(it, { docentes, imagen: copiar(img, 'src/assets/cursos', f.slug), programa });
-  // Imágenes en línea del cuerpo: copia local si existe; si no, se deja el src remoto y se cuenta como no encontrada.
-  const mapaImg = new Map<string, string>();
-  imagenesDe(nuevo.cuerpo).forEach((u, i) => {
-    const src = local(u);
-    if (!src) { faltan.push(u); return; }
-    mapaImg.set(u, `/cursos-media/${copiar(src, 'public/cursos-media', `${f.slug}-${i + 1}`)}`);
-  });
-  nuevo.cuerpo = reescribirImagenes(nuevo.cuerpo, mapaImg);
   const ruta = `src/content/cursos/${f.slug}.md`;
   let existente: CursoImportado | null = null;
   if (existsSync(ruta)) { const [, fm, ...cuerpo] = readFileSync(ruta, 'utf8').split('---\n'); existente = { ...(yaml.load(fm) as any), id: f.slug, cuerpo: cuerpo.join('---\n').trim() }; }
-  const { id: _id, cuerpo, ...fm } = fusionarCurso(nuevo, existente);
+  const fusionado = fusionarCurso(nuevo, existente);
+  // Imágenes en línea sobre el cuerpo final (también el conservado de una edición a mano): copia local si hay binario.
+  const enLinea = localizarImagenes(fusionado.cuerpo, f.slug, (u, base) => { const src = local(u); return src ? `/cursos-media/${copiar(src, 'public/cursos-media', base)}` : null; });
+  faltan.push(...enLinea.faltan);
+  const { id: _id, cuerpo: _c, ...fm } = fusionado;
+  const cuerpo = enLinea.cuerpo;
   writeFileSync(ruta, `---\n${yaml.dump(fm, { lineWidth: -1 })}---\n${cuerpo}\n`);
   n++;
 }

@@ -61,6 +61,21 @@ export const imagenesDe = (html: string): string[] =>
 export const reescribirImagenes = (html: string, mapa: Map<string, string>): string =>
   html.replace(/(<img\b[^>]*\ssrc=")([^"]+)(")/gi, (m, a, u, c) => (mapa.has(u) ? a + mapa.get(u) + c : m));
 
+/**
+ * Localiza las imágenes en línea del CDN: copia cada URL (una vez, en orden; base `<slug>-<n>`) con `copiar`
+ * y reescribe el src a la ruta pública que devuelve. Las que no tienen binario quedan remotas y se listan en `faltan`.
+ * Se aplica al cuerpo final ya fusionado, que puede ser el editado a mano.
+ */
+export function localizarImagenes(cuerpo: string, slug: string, copiar: (url: string, base: string) => string | null): { cuerpo: string; faltan: string[] } {
+  const mapa = new Map<string, string>();
+  const faltan: string[] = [];
+  [...new Set(imagenesDe(cuerpo))].forEach((u, i) => {
+    const ruta = copiar(u, `${slug}-${i + 1}`);
+    if (ruta) mapa.set(u, ruta); else faltan.push(u);
+  });
+  return { cuerpo: reescribirImagenes(cuerpo, mapa), faltan };
+}
+
 export function patrocinadoresDe(f: Record<string, any>): { id: string; url: string }[] {
   const lista: CmsFile[] = [...(Array.isArray(f['patrocinadores-2']) ? f['patrocinadores-2'] : []), ...(f['logo-patrocinador']?.url ? [f['logo-patrocinador']] : [])];
   const vistos = new Map<string, string>();
