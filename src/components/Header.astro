@@ -56,13 +56,14 @@ const path = Astro.url.pathname;
     padding: var(--pad) var(--gutter);
     background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px) saturate(1.2);
     border-bottom: 1px solid var(--line); color: var(--fg);
-    transition: padding .3s cubic-bezier(.16, 1, .3, 1), background-color .3s, border-color .3s, box-shadow .3s;
+    transition: background-color .3s, border-color .3s, box-shadow .3s;
   }
   .site-header.is-sobre { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
   .site-header.is-compacta { --pad: 10px; box-shadow: 0 8px 24px -16px rgba(11, 11, 44, .35); }
   .brand { display: block; text-decoration: none; color: var(--fg); }
-  .brand :global(svg) { height: 30px; width: auto; display: block; transition: height .3s cubic-bezier(.16, 1, .3, 1); }
-  .is-compacta .brand :global(svg) { height: 26px; }
+  /* Compacta: menos relleno (la cabecera es fija, no mueve la página) y el logo escala con transform. */
+  .brand :global(svg) { height: 30px; width: auto; display: block; transform-origin: left center; transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+  .is-compacta .brand :global(svg) { transform: scale(.87); }
   .desk { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); font: 600 15px/1 var(--f-body); }
   .desk > a:not(.btn) { position: relative; text-decoration: none; opacity: .85; padding-block: 8px; }
   .desk > a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .25s cubic-bezier(.16, 1, .3, 1); }

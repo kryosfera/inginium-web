@@ -32,7 +32,7 @@ html { background: var(--bg); color: var(--fg); font-family: var(--f-body); -web
 input, textarea { caret-color: var(--accent-text); }
 body { margin: 0; background: var(--bg); color: var(--fg); font-size: 17px; line-height: 1.6; }
 [data-mode] { background: var(--bg); color: var(--fg); }
-h1, h2, h3, h4 { font-family: var(--f-display); line-height: 1.05; letter-spacing: -0.02em; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 img { max-width: 100%; height: auto; }
 a { color: inherit; }
