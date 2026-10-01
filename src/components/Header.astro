@@ -8,7 +8,8 @@ const links = [
 const miArea = import.meta.env.PUBLIC_MI_AREA_URL;
 const path = Astro.url.pathname;
 ---
-<header class="site-header">
+<!-- Fija sobre la cabecera oscura de cada página. Sin JS: siempre con fondo claro. Con JS: transparente arriba y compacta con fondo al bajar. -->
+<header class="site-header" data-header transition:name="cabecera">
   <a class="brand" href="/" aria-label="Inginium, inicio"><Fragment set:html={logo} /></a>
   <nav aria-label="Principal" class="desk">
     {links.map((l) => <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>)}
@@ -18,24 +19,66 @@ const path = Astro.url.pathname;
   <details class="mob">
     <summary aria-label="Abrir menú">Menú</summary>
     <nav aria-label="Principal móvil">
-      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      {links.map((l) => <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>)}
       {miArea && <a class="btn btn-secondary" href={miArea}>Mi área</a>}
       <a class="btn btn-lima" href="/cursos">Ver cursos</a>
     </nav>
   </details>
 </header>
+<script>
+  import { onPage } from '../scripts/lifecycle';
+  onPage(() => {
+    const h = document.querySelector<HTMLElement>('[data-header]');
+    if (!h) return;
+    const oscura = document.querySelector('main > [data-mode="oscuro"]:first-child');
+    let raf = 0;
+    const pintar = () => {
+      raf = 0;
+      const arriba = window.scrollY < 24;
+      h.classList.toggle('is-compacta', !arriba);
+      // Arriba y sobre una cabecera oscura: transparente con los colores de la escena.
+      if (arriba && oscura) { h.dataset.mode = 'oscuro'; h.classList.add('is-sobre'); }
+      else { delete h.dataset.mode; h.classList.remove('is-sobre'); }
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(pintar); };
+    pintar();
+    addEventListener('scroll', onScroll, { passive: true });
+    const cerrar = (e: Event) => { const d = h.querySelector('details'); if (d?.open && !d.contains(e.target as Node)) d.open = false; };
+    document.addEventListener('click', cerrar);
+    return () => { removeEventListener('scroll', onScroll); document.removeEventListener('click', cerrar); cancelAnimationFrame(raf); };
+  });
+</script>
 <style>
-  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px var(--gutter); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .site-header {
+    --pad: 18px;
+    position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: var(--pad) var(--gutter);
+    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px) saturate(1.2);
+    border-bottom: 1px solid var(--line); color: var(--fg);
+    transition: padding .3s cubic-bezier(.16, 1, .3, 1), background-color .3s, border-color .3s, box-shadow .3s;
+  }
+  .site-header.is-sobre { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
+  .site-header.is-compacta { --pad: 10px; box-shadow: 0 8px 24px -16px rgba(11, 11, 44, .35); }
   .brand { display: block; text-decoration: none; color: var(--fg); }
-  .brand :global(svg) { height: 30px; width: auto; display: block; }
+  .brand :global(svg) { height: 30px; width: auto; display: block; transition: height .3s cubic-bezier(.16, 1, .3, 1); }
+  .is-compacta .brand :global(svg) { height: 26px; }
   .desk { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); font: 600 15px/1 var(--f-body); }
-  .desk > a:not(.btn) { text-decoration: none; opacity: .85; }
+  .desk > a:not(.btn) { position: relative; text-decoration: none; opacity: .85; padding-block: 8px; }
+  .desk > a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .25s cubic-bezier(.16, 1, .3, 1); }
   .desk > a[aria-current="page"], .desk > a:hover { opacity: 1; }
+  .desk > a[aria-current="page"]::after, .desk > a:not(.btn):hover::after { transform: scaleX(1); }
+  .desk > a[aria-current="page"]::after { background: var(--accent-text); }
   .desk .btn { padding: 11px 18px; }
   .mob { display: none; position: relative; }
-  .mob summary { list-style: none; cursor: pointer; font: 600 15px/1 var(--f-body); padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 999px; }
+  .mob summary { list-style: none; cursor: pointer; font: 600 15px/1 var(--f-body); padding: 12px 16px; min-height: 44px; display: flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; }
   .mob summary::-webkit-details-marker { display: none; }
-  .mob nav { position: absolute; right: 0; top: calc(100% + 8px); display: grid; gap: 14px; min-width: 220px; padding: 18px; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 14px; }
-  .mob nav a:not(.btn) { text-decoration: none; font-weight: 600; }
-  @media (max-width: 900px) { .desk { display: none; } .mob { display: block; } }
+  .mob[open] summary { border-color: var(--fg); }
+  .mob nav { position: absolute; right: 0; top: calc(100% + 8px); display: grid; gap: 4px; min-width: 240px; padding: 12px; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 20px 40px -20px rgba(11, 11, 44, .45); }
+  .mob nav a:not(.btn) { text-decoration: none; font-weight: 600; padding: 12px 10px; border-radius: 10px; }
+  .mob nav a:not(.btn):hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+  .mob nav a[aria-current="page"] { color: var(--accent-text); }
+  .mob nav .btn { margin-top: 8px; justify-content: center; }
+  @media (max-width: 900px) { .desk { display: none; } .mob { display: block; } .site-header { --pad: 12px; } .site-header.is-compacta { --pad: 8px; } }
+  @media (prefers-reduced-motion: reduce) { .site-header, .brand :global(svg), .desk > a::after { transition: none; } }
 </style>
