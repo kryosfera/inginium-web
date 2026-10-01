@@ -22,7 +22,8 @@ const recientes = destacados.length >= MIN ? [] : orden
 const especialidades = new Set(todos.flatMap((c) => c.data.especialidades));
 const creditos = Math.round(todos.reduce((suma, c) => suma + (c.data.creditos ?? 0), 0));
 const cifrasItems = [
-  { valor: todos.length, etiqueta: 'cursos impartidos' },
+  // Solo los ya celebrados: los activos aún no se han impartido.
+  { valor: todos.filter((c) => c.data.estado === 'finalizado').length, etiqueta: 'cursos impartidos' },
   { valor: especialidades.size, etiqueta: 'especialidades' },
   { valor: creditos, etiqueta: 'créditos CFC acreditados' },
   ...(cifras.profesionalesFormados !== null ? [{ valor: cifras.profesionalesFormados, etiqueta: 'profesionales formados' }] : []),
