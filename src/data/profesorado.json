@@ -5,7 +5,7 @@
     "cargo": "Profesora",
     "resumen": "Doctora en Medicina y Especialista en Ginecología y Obstetricia",
     "biografia": "<p>Doctora en Medicina y Especialista en Ginecología y Obstetricia, Hospital Universitario dePoniente, El Ejido, Almería y Clínica Alborán Centro Médico de la Mujer, Almería capital.Experta en menopausia. Miembro de la Sociedad Española de Ginecología yObstetricia (SEGO) y la Asociación Española para el Estudio de la Menopausia (AEEM).Formadora en el grupo de la AEEM “jóvenes expertos”.</p>",
-    "foto": null
+    "foto": "alejandra-herrera-munoz.png"
   },
   {
     "id": "dr-orozco",
@@ -13,7 +13,7 @@
     "cargo": "Unidad de Investigación del Hospital San Juan (Alicante)",
     "resumen": "Médico de Familia en la Unidad de Investigación del Hospital San Juan y Centro de Salud Cabo Huertas (Alicante).",
     "biografia": "<p>Profesor del Departamento de Medicina de la Universidad Miguel Hernández.</p>",
-    "foto": null
+    "foto": "dr-orozco.jpg"
   },
   {
     "id": "dr-gomez-peralta",
@@ -21,7 +21,7 @@
     "cargo": "Jefe de la Unidad de Endocrinología y Nutrición del Hospital General de Segovia",
     "resumen": "Formación académica:\n- Especialidad: Endocrinología y Nutrición (1999).\n- Doctor en Medicina por la Universidad de Navarra (2000).",
     "biografia": "<p><strong>Experiencia profesional</strong>:<br>- Vicepresidente de la Sociedad Castellano Leonesa de Endocrinología, Diabetes y Neurología (SCLEDyN). Desde Oct 2017<br>- Coordinador del Grupo de Diabetes de la Sociedad Castellano Leonesa de Endocrinología, Diabetes y Nutrición (SCLEDyN) (2007 - Actualidad).<br>- Jefe de la Unidad de Endocrinología y Nutrición en el Hospital General de Segovia (2017).<br>- Secretario de la Junta Directiva de la Sociedad Española de Diabetes (Abril 2014 – mayo 2018).<br>- Hospital Nuestra Señora de Sonsoles de Ávila (2009-2011).<br>- Hospital Universitario de Salamanca (2007-2009).<br>- Profesor Honorifico de la Universidad de Salamanca (2007-2009).<br>- Profesor asociado y consultor clínico en la Universidad de Navarra (2000-2007).<br>- Miembro de la Sociedad Española de Diabetes (SED), Sociedad Española de Endocrinología y Nutrición (SEEN) y Professional Member by Special Invitation of the American Diabetes Association (ADA), 2006.<br>- Asesor de la especialidad en la Guía de Buena Práctica Clínica en diabetes 2 (Ministerio de Sanidad y Consumo, 2009), Guía de actuaciones para la adaptación de la Estrategia en Diabetes del SNS en Castilla y León &nbsp;(Consejería de Sanidad, Junta de Castilla y León, 2010), Consenso de las Sociedades Científicas de Castilla y León sobre manejo en Atención Primaria de Diabetes Tipo 2, 2012.<br>- Ha publicado más de 100 capítulos en libros, artículos científicos o comunicaciones en congresos en el campo de la diabetes en revistas como <em>Diabetes Care, Diabetic Medicine, Diabetes Technology and Therapeutics, Diabetes Research and Clinical Practice, Journal of Diabetes and Its Complications, BMC Endocrine Disorders, Plos One, International Journal of Emergency Medicine</em>.<br>- Miembro del steering commitee o investigador principal en más de 15 ensayos clínicos multinacionales fase 3 o 4 en diabetes tipo 1 o tipo 2.<br>- Miembro del Consejo Asesor de la revista oficial de la Sociedad Española de Diabetes (SED) y la Sociedad Española de Endocrinología y Nutrición (SEEN): Endocrinología, Diabetes y Nutrición.<br>- Revisor para Diabetes, <em>Obesity and Metabolism, Diabetic Medicine, BMJ Open Diabetes Research &amp; Care, International Journal of Diabetes and Clinical Research, International Journal of Endocrinology, Diabetes Therapy, Endocrinología y Nutrición, Journal of Diabetes &amp; Metabolism</em>.</p>",
-    "foto": null
+    "foto": "dr-gomez-peralta.png"
   },
   {
     "id": "dr-javier-martin-de-carpi",
@@ -29,7 +29,7 @@
     "cargo": "Hospital Sant Joan de Deu, Barcelona",
     "resumen": "Jefe del Servicio de Gastroenterología, Hepatología y Nutrición Pediátrica del Hospital Sant Joan de Déu, Barcelona.",
     "biografia": "<p>Doctor en Medicina y Cirugía por la Universidad de Zaragoza. Especialista en Pediatría y Areas Específicas, Hospital Miguel Servet de Zaragoza. Jefe del Servicio de Gastroenterología, Hepatología y Nutrición Pediátrica del Hospital Sant Joan de Déu, Barcelona. Coordinador de la Unidad para el Cuidado Integral de la Enfermedad Inflamatoria Intestinal Pediátrica de dicha Sección. Director del Programa de Estancias Formativas en EII pediátrica. Profesor Asociado de la Universidad de Barcelona. Director del Máster de Gastroenterología, Hepatología y Nutrición Pediátrica de la Universidad de Barcelona. Presidente del IV Symposium Internacional de EII Pediátrica, celebrado en Barcelona en 2017. Miembro de la Sociedad Española de Gastroenterología, Hepatología y Nutrición Pediátrica (SEGHNP), de la Sociedad Europea de Gastroenterología, Hepatología y Nutrición Pediátrica (ESPGHAN), de GETECCU (Grupo Español de Trabajo en Enfermedad de Crohn y Colitis Ulcerosa) y de la ECCO (European Crohn’sand Colitis Organization). Miembro del Comité Ejecutivo del Grupo de trabajo de EII (Porto Group) y del Gastrointestinal Committee de la ESPGHAN. Ha participado como co-autor en los principales documentos internacionales de consenso en EII-P, como son la revisión de los Criterios de Oporto, las Guías ECCO-ESPGHAN sobre Enfermedad de Crohn y sobre Colitis Ulcerosa Pediátricas, sobre la Cirugía en la Enfermedad de Crohn Pediátrica, y sobre Endoscopia en EII-P.</p>",
-    "foto": null
+    "foto": "dr-javier-martin-de-carpi.png"
   },
   {
     "id": "dr-jordi-serra",
@@ -37,7 +37,7 @@
     "cargo": "Presidente de ASENEM",
     "resumen": "Jefe de la Sección de Neurogastroenterología y Motilidad. Área de Enfermedades Digestivas. Hospital Universitario Vall d’Hebron, Barcelona",
     "biografia": "",
-    "foto": null
+    "foto": "dr-jordi-serra.png"
   },
   {
     "id": "dr-jose-alfonso-sastre-rincon",
@@ -45,7 +45,7 @@
     "cargo": "Sección de Anestesia Cardiovascular y Torácica.",
     "resumen": "Departamento de Anestesiología, Unidad de Cuidados Críticos y Dolor. Hospital Universitario de Salamanca.",
     "biografia": "<p>Departamento de Anestesiología, Unidad de Cuidados Críticos y Dolor. Hospital Universitario de Salamanca.</p>",
-    "foto": null
+    "foto": "dr-jose-alfonso-sastre-rincon.jpg"
   },
   {
     "id": "dr-raul-hernanz",
@@ -53,7 +53,7 @@
     "cargo": "Oncología Radioterápica.",
     "resumen": "Hospital Universitario Ramón y Cajal de Madrid.",
     "biografia": "<p>Diploma de Estudios Avanzados y Doctorado. Universidad Complutense de Madrid.</p><p>Participación como Investigador Principal e Investigador Colaborador en estudios nacionales e internacionales. Autor y coautor de más de 25 publicaciones en revistas y libros científicos.</p><p>Coordinador científico de la aplicación para dispositivos móviles iOncoR.</p>",
-    "foto": null
+    "foto": "dr-raul-hernanz.png"
   },
   {
     "id": "dra-ana-gutierrez-casbas",
@@ -61,7 +61,7 @@
     "cargo": "Presidenta del Grupo Español de Trabajo en Enfermedad de Crohn y Colitis Ulcerosa (GETECCU).",
     "resumen": "Presidenta del Grupo Español de Trabajo en Enfermedad de Crohn y Colitis Ulcerosa (GETECCU).",
     "biografia": "<p>Presidenta del Grupo Español de Trabajo en Enfermedad de Crohn y Colitis Ulcerosa (GETECCU).</p>",
-    "foto": null
+    "foto": "dra-ana-gutierrez-casbas.png"
   },
   {
     "id": "dra-ana-maria-piera-carbonell",
@@ -69,7 +69,7 @@
     "cargo": "Médico de Familia",
     "resumen": "Centro de Salud La Corredoría, Oviedo. Miembro de los GGTT de Diabetes, Endocrinología y Metabolismo deSEMERGEN.",
     "biografia": "<p>Centro de Salud La Corredoría, Oviedo. Miembro de los GGTT de Diabetes, Endocrinología y Metabolismo deSEMERGEN.</p>",
-    "foto": null
+    "foto": "dra-ana-maria-piera-carbonell.jpg"
   },
   {
     "id": "dra-belen-benito-badorrey",
@@ -77,7 +77,7 @@
     "cargo": "Médico de Familia. ABS Raval Sud. Barcelona",
     "resumen": "Médico de Familia. ABS Raval Sud. Barcelona",
     "biografia": "<p>Médico de Familia. ABS Raval Sud. Barcelona</p>",
-    "foto": null
+    "foto": "dra-belen-benito-badorrey.png"
   },
   {
     "id": "dra-cristina-molera",
@@ -85,7 +85,7 @@
     "cargo": "Servicio de Gastroenterología, Hepatología y Nutrición Pediátrica.",
     "resumen": "Servicio de Gastroenterología, Hepatología y Nutrición Pediátrica. Hospital Sant Joan de Déu, Barcelona.",
     "biografia": "",
-    "foto": null
+    "foto": "dra-cristina-molera.jpeg"
   },
   {
     "id": "dra-paula-peleteiro",
@@ -93,7 +93,7 @@
     "cargo": "Hospital Universitario de Santiago de Compostela",
     "resumen": "Oncología Radioterápica.",
     "biografia": "",
-    "foto": null
+    "foto": "dra-paula-peleteiro.jpg"
   },
   {
     "id": "dra-sabela-lens",
@@ -101,7 +101,7 @@
     "cargo": "Gastroenterología y Hepatología. Hospital Clínic, Barcelona",
     "resumen": "Gastroenterología y Hepatología. Hospital Clínic, Barcelona",
     "biografia": "<p><em>Gastroenterología y Hepatología. Hospital Clínic, Barcelona</em></p>",
-    "foto": null
+    "foto": "dra-sabela-lens.jpeg"
   },
   {
     "id": "eva-saez-torralba",
@@ -109,7 +109,7 @@
     "cargo": "ENFERMERA",
     "resumen": "Enfermera en Centro de Salud de Buenavista, Toledo. Coordinadora de Formación de EIR. Unidad Docente Multiprofesional de Atención Familiar y Comunitaria. Gerencia de Atención Primaria de Toledo.",
     "biografia": "<p>Enfermera en Centro de Salud de Buenavista, Toledo. Coordinadora de Formación de EIR. Unidad Docente Multiprofesional de Atención Familiar y Comunitaria. Gerencia de Atención Primaria de Toledo.<br></p>",
-    "foto": null
+    "foto": "eva-saez-torralba.png"
   },
   {
     "id": "gina-aran",
@@ -117,7 +117,7 @@
     "cargo": "Consultora",
     "resumen": "Consultora de RRHH, comunicadora y formadora, coach especializada en potenciación del talento.",
     "biografia": "<p><strong>Licenciada en ADE, posgrado en RRHH, máster en Psicobiología y Neurociencia Cognitiva, y certificada en Neuromarketing e Innovación por ESADE.</strong></p>",
-    "foto": null
+    "foto": "gina-aran.png"
   },
   {
     "id": "marcos-matabuena",
@@ -125,7 +125,7 @@
     "cargo": "Harvard University, Boston, USA",
     "resumen": "Investigador Postdoctoral en el Departamento de Bioestadística de la Universidad de Harvard. Laboratorio Onnela.\nDoctor en Bioestadística y Aprendizaje Automático por la Universidad de Santiago de Compostela, España.",
     "biografia": "<p>Investigador Postdoctoral en el Departamento de Bioestadística de la Universidad de Harvard. &nbsp;Laboratorio Onnela. Doctor en Bioestadística y Aprendizaje Automático por la Universidad de Santiago de Compostela, España.</p>",
-    "foto": null
+    "foto": "marcos-matabuena.jpeg"
   },
   {
     "id": "maria-martin-ares",
@@ -133,7 +133,7 @@
     "cargo": "Profesora",
     "resumen": "Doctora en Odontología y Cirugía Buscal e Implantología.",
     "biografia": "<p>Clínica Dental Ares Solozábal,Madrid. Profesora Titular de Cirugía Bucal en la Universidad Europea de Madrid. Facultadde Ciencias Biomédicas. Máster de Implantología Oral Avanzada. Investigadora Principaldel Grupo de Investigación en Implantología.</p>",
-    "foto": null
+    "foto": "maria-martin-ares.png"
   },
   {
     "id": "prof-josep-maria-domenech-massons",
@@ -141,7 +141,7 @@
     "cargo": "Catedrático Numerario de Metodología de la Investigación.",
     "resumen": "Especialista en Metodología de la Investigación en Ciencias de la Salud. Laboratorio de Estadística\nAplicada y de Modelización. Universidad Autónoma de Barcelona.",
     "biografia": "<p><em>Profesor del Máster de Metodología de la Investigación en Ciencias de la Salud.</em></p><p><em>Laboratorio de Estadística Aplicada y de Modelización. Universitat Autonòma de Barcelona.</em></p><p><em>Autor de 65 obras y 90 ediciones. Sus obras más conocidas son:</em></p><p><em>Análisis de datos con el sistema SPSS, 1993---port. (José M. Doménech Massons; prof.</em></p><p><em>de la Univ. Autónoma de Barcelona), Psicodiagnóstico y estadística, 1980---port. (José</em></p><p><em>Mª Doménech), Desarrollo cognitivo, 1981---port. (traducción del inglés Josep M.</em></p><p><em>Domenech), Recursos humanos en invest. y desarrollo---(Domènech Massons, Josep;</em></p><p><em>Dpto. de Psicología, Facultad de Filosofía y Letras, Univ. Autónoma de Barcelona),</em></p><p><em>Bioestadística, 1982---port. (Josep Mª Domènech i Massons), Introducción al modelo</em></p><p><em>lineal, 1984---port. (J.M. Domènech Massons).</em></p>",
-    "foto": null
+    "foto": "prof-josep-maria-domenech-massons.png"
   },
   {
     "id": "rosa-tarrago-gil",
@@ -149,7 +149,7 @@
     "cargo": "Profesora",
     "resumen": "Higienista dental de Atención Primaria",
     "biografia": "<p>Higienista dental de Atención Primaria, C.S. Seminario Zaragoza, Servicio Aragonés de Salud.Miembro del Comité Científico de la Comunidad Higiene y Prevención de la SociedadEspañola de Periodoncia (SEPA). Miembro del Grupo de Investigación Cuidados en Salud delInstituto de Investigación Sanitaria de Aragón. Presidenta del Colegio Profesional de HigienistasDentales de Aragón (CPHDA).</p>",
-    "foto": null
+    "foto": "rosa-tarrago-gil.png"
   },
   {
     "id": "zoila-lifante-pedrola",
@@ -157,6 +157,6 @@
     "cargo": "ENFERMERA",
     "resumen": "Doctora en Enfermería por la Universidad de Murcia. Especialista en educación terapéutica en diabetes. Enfermera Familiar y Comunitaria en el Centro de Salud Molina Sur de Murcia. Miembro del Grupo de Educación Terapéutica de la SED.",
     "biografia": "<p>Doctora en Enfermería por la Universidad de Murcia. Especialista en educación terapéutica en diabetes. Enfermera Familiar y Comunitaria en el Centro de Salud Molina Sur de Murcia. Miembro del Grupo de Educación Terapéutica de la SED.</p>",
-    "foto": null
+    "foto": "zoila-lifante-pedrola.png"
   }
 ]

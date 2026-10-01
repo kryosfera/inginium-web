@@ -11,7 +11,7 @@ creditos: 1.6
 estado: finalizado
 url: https://diabetesobjetivomipaciente.es/medicina
 encuesta: null
-imagen: null
+imagen: diabetes-objetivo-mi-paciente-medicina.png
 programa: null
 profesorado:
   - dra-ana-maria-piera-carbonell

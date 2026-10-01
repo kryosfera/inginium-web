@@ -12,7 +12,7 @@ creditos: 1.2
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: metodologia-de-la-investigacion-en-medicina-fundamentos-de-diseno-y-estadistica.png
 programa: null
 profesorado: []
 patrocinadores:

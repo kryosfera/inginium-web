@@ -13,7 +13,7 @@ creditos: 1
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: enfermedad-inflamatoria-intestinal-pediatrica.png
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

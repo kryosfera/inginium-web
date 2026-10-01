@@ -13,7 +13,7 @@ creditos: 1
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: avances-en-enfermedad-inflamatoria-intestinal-pediatrica-2025.png
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

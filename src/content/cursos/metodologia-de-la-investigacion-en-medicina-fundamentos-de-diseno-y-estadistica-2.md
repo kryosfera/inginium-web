@@ -17,7 +17,7 @@ creditos: 1.3
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: metodologia-de-la-investigacion-en-medicina-fundamentos-de-diseno-y-estadistica-2.webp
 programa: null
 profesorado:
   - prof-josep-maria-domenech-massons

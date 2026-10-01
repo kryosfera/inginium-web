@@ -13,7 +13,7 @@ creditos: null
 estado: finalizado
 url: http://motilidad-asenem-seghnp.com
 encuesta: null
-imagen: null
+imagen: neurogastroenterologia-y-motilidad-pediatrica.png
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

@@ -10,7 +10,7 @@ creditos: 1
 estado: finalizado
 url: https://www.cardioskills.es
 encuesta: https://form.jotform.com/220254747045352
-imagen: null
+imagen: metodologia-de-investigacion-clinica-para-el-profesional-sanitario.png
 programa: null
 profesorado: []
 patrocinadores:

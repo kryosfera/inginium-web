@@ -12,7 +12,7 @@ creditos: 1
 estado: finalizado
 url: https://cardioskills-closed.webflow.io/
 encuesta: null
-imagen: null
+imagen: metodologia-de-investigacion-clinica-2023.png
 programa: null
 profesorado: []
 patrocinadores:

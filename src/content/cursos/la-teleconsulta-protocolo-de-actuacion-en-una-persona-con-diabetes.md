@@ -10,7 +10,7 @@ creditos: 0.9
 estado: finalizado
 url: https://www.teleconsulta.info/courses/modulo-3-protocolo-de-actuacion-en-una-persona-con-diabetes/
 encuesta: https://www.teleconsulta.info/courses/modulo-3-protocolo-de-actuacion-en-una-persona-con-diabetes/lessons/encuesta-de-satisfaccion-protocolo-de-actuacion-de-una-persona-con-diabetes/
-imagen: null
+imagen: la-teleconsulta-protocolo-de-actuacion-en-una-persona-con-diabetes.png
 programa: null
 profesorado: []
 patrocinadores:

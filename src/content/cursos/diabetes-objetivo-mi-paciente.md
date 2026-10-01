@@ -11,7 +11,7 @@ creditos: 1.3
 estado: finalizado
 url: https://enf.diabetesobjetivomipaciente.es/
 encuesta: null
-imagen: null
+imagen: diabetes-objetivo-mi-paciente.png
 programa: null
 profesorado:
   - zoila-lifante-pedrola

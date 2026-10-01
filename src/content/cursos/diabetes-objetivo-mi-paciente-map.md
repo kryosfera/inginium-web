@@ -11,7 +11,7 @@ creditos: 1.4
 estado: finalizado
 url: https://map.diabetesobjetivomipaciente.es/
 encuesta: null
-imagen: null
+imagen: diabetes-objetivo-mi-paciente-map.png
 programa: null
 profesorado: []
 patrocinadores:

@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: gestion-estres.png
 programa: null
 profesorado: []
 patrocinadores: []

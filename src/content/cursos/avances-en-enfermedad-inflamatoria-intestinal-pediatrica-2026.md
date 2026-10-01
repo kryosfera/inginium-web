@@ -11,8 +11,8 @@ creditos: null
 estado: activo
 url: https://inscripcion-eii-pediatrica-2026.netlify.app/
 encuesta: null
-imagen: null
-programa: null
+imagen: avances-en-enfermedad-inflamatoria-intestinal-pediatrica-2026.png
+programa: /programas/avances-en-enfermedad-inflamatoria-intestinal-pediatrica-2026.pdf
 profesorado:
   - dr-javier-martin-de-carpi
 patrocinadores:

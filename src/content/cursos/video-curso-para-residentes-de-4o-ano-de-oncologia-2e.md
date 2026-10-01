@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: https://videocurso-r4-oncologia.ksf-learning.net/
 encuesta: null
-imagen: null
+imagen: video-curso-para-residentes-de-4o-ano-de-oncologia-2e.png
 programa: null
 profesorado: []
 patrocinadores:

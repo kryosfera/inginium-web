@@ -10,7 +10,7 @@ creditos: 0.6
 estado: finalizado
 url: https://med.teleconsulta.info/
 encuesta: https://med.teleconsulta.info/courses/modulo-3-protocolo-de-actuacion-en-una-persona-con-diabetes/lessons/encuesta-de-satisfaccion-3/
-imagen: null
+imagen: protocolo-cardiologo-clinico.png
 programa: null
 profesorado: []
 patrocinadores:

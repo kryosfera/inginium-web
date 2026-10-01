@@ -11,7 +11,7 @@ creditos: 0.7
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: xi-curso-geteccu-seghnp-sobre-eiip.png
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

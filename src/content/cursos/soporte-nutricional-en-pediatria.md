@@ -10,7 +10,7 @@ creditos: 1.4
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: soporte-nutricional-en-pediatria.png
 programa: null
 profesorado: []
 patrocinadores:

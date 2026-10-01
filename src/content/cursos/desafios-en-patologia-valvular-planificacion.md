@@ -11,7 +11,7 @@ creditos: 1.4
 estado: finalizado
 url: https://desafios-patologia-valvular.lovable.app/
 encuesta: null
-imagen: null
+imagen: desafios-en-patologia-valvular-planificacion.png
 programa: null
 profesorado: []
 patrocinadores:

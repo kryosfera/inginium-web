@@ -10,7 +10,7 @@ creditos: 0.9
 estado: finalizado
 url: https://teleconsulta.info
 encuesta: https://us18.list-manage.com/survey?u=65eec4c5773c8ae8d4d2acef9&id=8488f6050e
-imagen: null
+imagen: como-realizar-una-comunicacion-exitosa-en-remoto.png
 programa: null
 profesorado:
   - gina-aran

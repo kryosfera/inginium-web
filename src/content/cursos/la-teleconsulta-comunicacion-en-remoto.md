@@ -10,7 +10,7 @@ creditos: 1.2
 estado: finalizado
 url: https://teleconsulta.info
 encuesta: https://form.jotform.com/203504883917057
-imagen: null
+imagen: la-teleconsulta-comunicacion-en-remoto.png
 programa: null
 profesorado:
   - gina-aran

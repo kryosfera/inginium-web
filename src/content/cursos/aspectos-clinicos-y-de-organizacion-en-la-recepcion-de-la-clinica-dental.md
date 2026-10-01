@@ -11,7 +11,7 @@ creditos: 2.3
 estado: finalizado
 url: https://recepciondental.ksf-learning.net/
 encuesta: null
-imagen: null
+imagen: aspectos-clinicos-y-de-organizacion-en-la-recepcion-de-la-clinica-dental.webp
 programa: null
 profesorado: []
 patrocinadores:

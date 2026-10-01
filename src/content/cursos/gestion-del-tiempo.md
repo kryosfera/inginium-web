@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: gestion-del-tiempo.png
 programa: null
 profesorado:
   - gina-aran

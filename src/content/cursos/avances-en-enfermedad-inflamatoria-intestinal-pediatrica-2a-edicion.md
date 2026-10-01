@@ -13,7 +13,7 @@ creditos: 1.1
 estado: finalizado
 url: https://www.cursoeiipediatria.com/precios
 encuesta: null
-imagen: null
+imagen: avances-en-enfermedad-inflamatoria-intestinal-pediatrica-2a-edicion.png
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

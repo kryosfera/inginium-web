@@ -11,7 +11,7 @@ creditos: 1
 estado: finalizado
 url: http://casosentromboelastografia.es/
 encuesta: https://form.jotform.com/220692035877361
-imagen: null
+imagen: actualidad-clinica-en-tromboelastografia.png
 programa: null
 profesorado:
   - dr-jose-alfonso-sastre-rincon

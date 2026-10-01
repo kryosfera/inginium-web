@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: https://ksf-learning.net/courses/video-curso-r4-oncologia/
 encuesta: null
-imagen: null
+imagen: r4-oncologia.png
 programa: null
 profesorado:
   - dr-raul-hernanz

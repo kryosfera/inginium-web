@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: comunicacion-eficiente.png
 programa: null
 profesorado: []
 patrocinadores: []

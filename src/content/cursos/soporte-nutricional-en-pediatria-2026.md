@@ -11,8 +11,8 @@ creditos: 1.4
 estado: finalizado
 url: https://inscripcion-la-mola-2026.netlify.app/
 encuesta: null
-imagen: null
-programa: null
+imagen: soporte-nutricional-en-pediatria-2026.png
+programa: /programas/soporte-nutricional-en-pediatria-2026.pdf
 profesorado: []
 patrocinadores:
   - 6a2ef6bcff6ee0eb74ff078f

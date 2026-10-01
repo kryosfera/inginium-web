@@ -10,7 +10,7 @@ creditos: null
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: tele-agile-and-design-thinking.png
 programa: null
 profesorado:
   - gina-aran

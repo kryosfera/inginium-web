@@ -13,7 +13,7 @@ creditos: 0.8
 estado: finalizado
 url: https://hepatologia-aeeh-seghnp.com
 encuesta: null
-imagen: null
+imagen: hepatologia-en-la-edad-pediatrica-y-adulta.png
 programa: null
 profesorado:
   - dra-cristina-molera

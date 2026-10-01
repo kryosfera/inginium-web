@@ -11,7 +11,7 @@ creditos: 0.7
 estado: finalizado
 url: http://motilidad-asenem-seghnp.com
 encuesta: null
-imagen: null
+imagen: actualizacion-en-neurogastroenterologia-y-motilidad-pediatrica.jpg
 programa: null
 profesorado:
   - dr-javier-martin-de-carpi

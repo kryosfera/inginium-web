@@ -10,7 +10,7 @@ creditos: 1.3
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: abordaje-integral-del-paciente-con-diabetes.png
 programa: null
 profesorado: []
 patrocinadores:

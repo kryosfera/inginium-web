@@ -11,7 +11,7 @@ creditos: 1.3
 estado: finalizado
 url: https://diabetesobjetivomipaciente.es/enfermeria
 encuesta: null
-imagen: null
+imagen: diabetes-objetivo-mi-paciente-enfermeria.png
 programa: null
 profesorado:
   - zoila-lifante-pedrola

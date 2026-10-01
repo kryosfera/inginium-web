@@ -11,7 +11,7 @@ creditos: 1.5
 estado: finalizado
 url: https://curso-odontologiaenlamujer.ksf-learning.net/
 encuesta: null
-imagen: null
+imagen: odontologia-en-la-mujer.png
 programa: null
 profesorado:
   - maria-martin-ares

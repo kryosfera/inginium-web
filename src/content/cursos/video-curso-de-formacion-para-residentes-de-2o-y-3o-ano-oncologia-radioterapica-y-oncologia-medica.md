@@ -11,7 +11,7 @@ creditos: null
 estado: finalizado
 url: https://videocurso-onco.com/
 encuesta: null
-imagen: null
+imagen: video-curso-de-formacion-para-residentes-de-2o-y-3o-ano-oncologia-radioterapica-y-oncologia-medica.png
 programa: null
 profesorado:
   - dr-raul-hernanz

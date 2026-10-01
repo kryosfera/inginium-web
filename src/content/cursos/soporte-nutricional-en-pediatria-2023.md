@@ -11,7 +11,7 @@ creditos: 1.7
 estado: finalizado
 url: null
 encuesta: null
-imagen: null
+imagen: soporte-nutricional-en-pediatria-2023.png
 programa: null
 profesorado: []
 patrocinadores:
