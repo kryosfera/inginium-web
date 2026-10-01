@@ -16,10 +16,11 @@ const imagen = c.data.imagen ? imgs[`../../assets/cursos/${c.data.imagen}`]?.def
 const docentes = (await getEntries(c.data.profesorado.map((id) => ({ collection: 'profesorado' as const, id })))).filter(Boolean) as CollectionEntry<'profesorado'>[];
 const patros = (await getEntries(c.data.patrocinadores.map((id) => ({ collection: 'patrocinadores' as const, id }))))
   .filter((p) => p?.data.logo).map((p) => ({ nombre: p!.data.nombre, logo: p!.data.logo! }));
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: c.data.titulo, description: c.data.resumen,
+const descripcion = c.data.resumen || `Curso de ${c.data.especialidades.join(', ') || 'formación sanitaria'} en Inginium.`;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: c.data.titulo, description: descripcion,
   provider: { '@type': 'Organization', name: 'Inginium', url: 'https://inginium-ksf.com' } };
 ---
-<BaseLayout title={`${c.data.titulo} · Inginium`} description={c.data.resumen || `Curso de ${c.data.especialidades.join(', ') || 'formación sanitaria'} en Inginium.`} jsonLd={jsonLd}>
+<BaseLayout title={`${c.data.titulo} · Inginium`} description={descripcion} jsonLd={jsonLd}>
   <SectionHero kicker={c.data.especialidades.join(' · ') || 'Curso'} titulo={c.data.titulo} entradilla={c.data.resumen} imagen={imagen}>
     {c.data.estado === 'finalizado' ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
   </SectionHero>
@@ -36,10 +37,14 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: c.da
 </BaseLayout>
 <style>
   .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; padding-block: 56px; }
-  .body { display: grid; gap: 48px; }
+  .body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .prose :global(p) { margin-block: 0 1em; max-width: 68ch; }
+  .prose { overflow-wrap: anywhere; }
+  .prose :global(table) { display: block; overflow-x: auto; max-width: 100%; }
+  .prose :global(figure) { margin: 0; }
+  .prose :global(img) { max-width: 100%; height: auto; }
   .prose :global(strong) { font-weight: 700; }
   h2 { font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 20px; }
   .teachers { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding-bottom: 120px; } }
+  @media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } }
 </style>

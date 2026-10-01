@@ -5,6 +5,7 @@ import yaml from 'js-yaml';
 const cursos = readdirSync('src/content/cursos').map((f) => ({ id: f.slice(0, -3), ...(yaml.load(readFileSync(`src/content/cursos/${f}`, 'utf8').split('---')[1]) as any) }));
 const activo = cursos.find((c) => c.estado === 'activo' && c.url)!;
 const finalizado = cursos.find((c) => c.estado === 'finalizado' && c.url)!;
+const activoSinEnlace = cursos.find((c) => c.estado === 'activo' && !c.url);
 const sinImagen = cursos.find((c) => !c.imagen);
 
 test('curso activo: datos y botón de inscripción a la web del curso', async ({ page }) => {
@@ -35,4 +36,24 @@ test('móvil: barra inferior con la acción', async ({ page, isMobile }) => {
   test.skip(!isMobile, 'solo móvil');
   await page.goto(`/cursos/${activo.id}`);
   await expect(page.locator('.facts-bar')).toBeVisible();
+});
+
+test('móvil: la barra no tapa el pie al llegar al final', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'solo móvil');
+  await page.goto(`/cursos/${activo.id}`);
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const enlace = page.locator('footer a').last();
+  await expect(enlace).toBeInViewport();
+  await page.waitForTimeout(400);
+  const bar = page.locator('.facts-bar');
+  if (await bar.isVisible()) {
+    const a = (await enlace.boundingBox())!, b = (await bar.boundingBox())!;
+    expect(a.y + a.height).toBeLessThanOrEqual(b.y);
+  }
+});
+
+test('curso activo sin enlace: sin botón de inscripción', async ({ page }) => {
+  test.skip(!activoSinEnlace, 'ningún curso activo sin enlace en los datos');
+  await page.goto(`/cursos/${activoSinEnlace!.id}`);
+  await expect(page.getByRole('link', { name: /Inscribirme|Acceder al curso/ })).toHaveCount(0);
 });

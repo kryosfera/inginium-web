@@ -11,16 +11,19 @@ const lista = marquee ? [...items, ...items] : items;
       <ul class="track">
         {lista.map((p, i) => (
           <li aria-hidden={marquee && i >= items.length ? 'true' : undefined}>
-            <img src={p.logo} alt={p.nombre || 'Patrocinador del curso'} loading="lazy" height="40" />
+            <img src={p.logo} alt={p.nombre || 'Patrocinador del curso'} loading="lazy" width="120" height="40" />
           </li>
         ))}
       </ul>
     </div>
-    {marquee && <button class="mq-pause" type="button" data-marquee-pause aria-pressed="false"><span aria-hidden="true" data-marquee-glyph>❚❚</span> Pausar logos</button>}
+    {marquee && <button class="mq-pause" type="button" hidden data-marquee-pause aria-pressed="false"><span aria-hidden="true" data-marquee-glyph>❚❚</span> Pausar logos</button>}
   </div>
 )}
 <script>
   // Delegado en document: sobrevive a los cambios de página del ClientRouter sin volver a registrarse.
+  // El botón solo se muestra con JS (sin JS no tendría efecto).
+  document.querySelectorAll<HTMLElement>('[data-marquee-pause]').forEach((b) => (b.hidden = false));
+  document.addEventListener('astro:page-load', () => document.querySelectorAll<HTMLElement>('[data-marquee-pause]').forEach((b) => (b.hidden = false)));
   document.addEventListener('click', (e) => {
     const b = (e.target as Element | null)?.closest<HTMLButtonElement>('[data-marquee-pause]');
     if (!b) return;
@@ -40,6 +43,7 @@ const lista = marquee ? [...items, ...items] : items;
   .mq li { white-space: nowrap; padding-right: 56px; }
   /* Sin :focus-within: el botón conserva el foco tras pulsarlo y la pista debe poder reanudarse. */
   .mq .strip:hover .track, .mq.is-paused .track { animation-play-state: paused; }
+  .mq-pause[hidden] { display: none; }
   .mq-pause { justify-self: end; border: 1px solid var(--line); background: none; color: var(--muted); border-radius: 999px; padding: 6px 11px; font: 600 12px/1 var(--f-body); cursor: pointer; }
   .mq-pause:hover, .mq-pause:focus-visible { color: var(--fg); }
   .mq-pause[aria-pressed="true"] { border-color: currentColor; }

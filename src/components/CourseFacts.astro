@@ -26,8 +26,8 @@ const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…`
       <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
     )}
     {d.programa && (tipo === 'pdf'
-      ? <a class="btn btn-secondary" href={d.programa} download>Programa<span class="sr-only"> (PDF)</span></a>
-      : <a class="btn btn-secondary" href={d.programa} target="_blank" rel="noopener noreferrer">Programa<span class="sr-only"> (imagen, abre en otra pestaña)</span></a>)}
+      ? <a class="btn btn-secondary" href={d.programa} download>Programa (PDF)</a>
+      : <a class="btn btn-secondary" href={d.programa} target="_blank" rel="noopener noreferrer">Programa (imagen)<span class="sr-only"> (abre en otra pestaña)</span></a>)}
   </div>
 </aside>
 <div class="facts-bar">
@@ -36,6 +36,21 @@ const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…`
     ? <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
     : <span class:list={['tag', { 'tag-fin': d.estado === 'finalizado' }]}>{d.estado === 'activo' ? 'Activo' : 'Finalizado'}</span>}
 </div>
+<script>
+  import { onPage } from '../scripts/lifecycle';
+  // La barra se oculta mientras el panel de datos o el CTA final están en pantalla. Sin JS queda visible y con espacio reservado.
+  onPage(() => {
+    const bar = document.querySelector<HTMLElement>('.facts-bar');
+    if (!bar || !('IntersectionObserver' in window)) return;
+    const vistos = new Set<Element>();
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => (e.isIntersecting ? vistos.add(e.target) : vistos.delete(e.target)));
+      bar.classList.toggle('is-oculta', vistos.size > 0);
+    });
+    document.querySelectorAll('.facts, .cta-final').forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  });
+</script>
 <style>
   .facts { position: sticky; top: 96px; align-self: start; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 24px; }
   dl { margin: 0; display: grid; gap: 14px; }
@@ -45,9 +60,13 @@ const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…`
   .acciones { display: grid; gap: 10px; }
   .acciones .btn { justify-content: center; }
   .facts-bar { display: none; }
+  @media (prefers-reduced-motion: reduce) { .facts-bar { transition: none; } }
   @media (max-width: 900px) {
     .facts { position: static; }
-    .facts-bar { position: fixed; inset: auto 0 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); }
+    :global(html:has(.facts-bar)) { scroll-padding-bottom: 96px; }
+    :global(body:has(.facts-bar)) { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+    .facts-bar.is-oculta { transform: translateY(100%); visibility: hidden; }
+    .facts-bar { position: fixed; inset: auto 0 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); transition: transform .2s, visibility .2s; }
     .bar-titulo { font: 700 14px/1.25 var(--f-display); min-width: 0; }
     .facts-bar .btn { flex: none; padding: 14px 18px; }
   }
