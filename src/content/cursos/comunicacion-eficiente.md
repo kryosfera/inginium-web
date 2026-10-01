@@ -7,7 +7,7 @@ fechas: null
 anio: 2020
 duracion: null
 creditos: null
-estado: activo
+estado: finalizado
 url: null
 encuesta: null
 imagen: null
