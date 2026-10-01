@@ -1,6 +1,6 @@
 ---
 titulo: Gestión del estrés
-resumen: Curso para identificar las diferentes respuestas del estrés con el objetivo de aplicar técnicas de reducción del mismo para un bienestar personal y profesional óptimo, así como una mejora de la eficiencia.
+resumen: Curso online de 8 horas para identificar las respuestas al estrés y aplicar técnicas para reducirlo, con el fin de mejorar el bienestar personal y profesional y la eficiencia. Incluye estrategias de gestión, inteligencia emocional y un plan de gestión del estrés.
 especialidades: []
 modalidad: online
 fechas: null
@@ -15,6 +15,38 @@ programa: null
 profesorado: []
 patrocinadores: []
 destacado: false
+aprenderas:
+- Identificar qué es el estrés y sus respuestas.
+- Aplicar estrategias de gestión del estrés.
+- Reconocer el papel de la inteligencia emocional.
+- Elaborar un plan de gestión del estrés.
+dirigidoA: null
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Contenidos
+  items:
+  - hora: null
+    titulo: ¿Qué es el estrés?
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Estrategias de gestión del estrés
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: La inteligencia emocional
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Plan de gestión del estrés
+    tipo: bloque
+    ponentes: []
+    moderacion: []
 ---
 <p>Curso acerca de la identificación de las causas del estrés así como de técnicas de reducción del mismo y mejora de la eficiencia.</p>
 

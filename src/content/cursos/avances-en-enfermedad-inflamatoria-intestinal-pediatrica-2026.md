@@ -159,10 +159,10 @@ agenda:
     titulo: Mesa de casos clínicos
     tipo: mesa
     ponentes:
-    - Fernando Muñoz
-    - Esther García Planella
-    - Víctor Navas
-    - Ruth García Romero
+    - Dr. Fernando Muñoz
+    - Dra. Esther García-Planella
+    - Dr. Víctor Navas
+    - Dra. Ruth García-Romero
     moderacion:
     - Dr. Javier Martín de Carpi
     detalle: Panel de expertos

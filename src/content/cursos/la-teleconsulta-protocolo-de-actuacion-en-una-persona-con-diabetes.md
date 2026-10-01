@@ -1,6 +1,6 @@
 ---
 titulo: La teleconsulta. Protocolo de actuación en una persona con diabetes
-resumen: Actualmente estamos viviendo una transformación digital, acelerada por la pandemia de la COVID-19 y la teleconsulta se está instaurando como una forma más de atender a las personas con diferentes patologías.
+resumen: 'Módulo online para mejorar la competencia de los profesionales de atención primaria (médicos y enfermeras) en la visita a distancia del paciente con diabetes: protocolo de consulta y educación terapéutica multidisciplinar. Del 15 de abril al 31 de diciembre de 2021; 6 horas y 0,9 créditos.'
 especialidades: []
 modalidad: online
 fechas: 15 de abril al 31 de diciembre de 2021
@@ -16,6 +16,28 @@ profesorado: []
 patrocinadores:
   - 5fbcbf3a9d448a5e2ac29da3
 destacado: false
+dirigidoA: Profesionales de atención primaria (médicos y enfermeras)
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Contenidos
+  items:
+  - hora: null
+    titulo: Bienvenida
+    tipo: apertura
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Protocolo de consulta en el paciente con diabetes
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Educación terapéutica en diabetes. Un modelo multidisciplinar, también en la teleconsulta
+    tipo: bloque
+    ponentes: []
+    moderacion: []
 ---
 <p>Desde hace varios años se han ido desarrollando sistemas de atención médica a las personas en la distancia, sin embargo su utilización en España ha sido muy desigual hasta el confinamiento obligatorio debido a la pandemia.</p><p>Este módulo pretender mejorar la competencia de los profesionales de atención primaria (médicos y enfermeras) en las visitas a distancia de un paciente con diabetes.</p>
 
