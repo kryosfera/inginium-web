@@ -4,15 +4,15 @@ import type { CollectionEntry } from 'astro:content';
 import Pattern from './Pattern.astro';
 import { etiquetaModalidad, textoCreditos } from '../lib/curso-vista';
 import { slugEspecialidad } from '../lib/cursos';
-interface Props { curso: CollectionEntry<'cursos'> }
-const { curso } = Astro.props;
+interface Props { curso: CollectionEntry<'cursos'>; reveal?: boolean }
+const { curso, reveal = true } = Astro.props;
 const d = curso.data;
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/cursos/*', { eager: true });
 const imagen = d.imagen ? imgs[`../assets/cursos/${d.imagen}`]?.default : undefined;
 const fin = d.estado === 'finalizado';
 const meta = [etiquetaModalidad(d.modalidad), textoCreditos(d.creditos), d.fechas].filter(Boolean).join(' · ');
 ---
-<article class:list={['card', { fin }]} data-reveal data-id={curso.id} data-especialidades={d.especialidades.map(slugEspecialidad).join(' ')} data-anio={d.anio ?? ''} data-estado={d.estado} data-texto={`${d.titulo} ${d.resumen}`}>
+<article class:list={['card', { fin }]} data-reveal={reveal ? '' : undefined} data-id={curso.id} data-especialidades={d.especialidades.map(slugEspecialidad).join(' ')} data-anio={d.anio ?? ''} data-estado={d.estado} data-texto={`${d.titulo} ${d.resumen}`}>
   <div class="media">
     {imagen
       ? <Image src={imagen} alt="" widths={[400, 800]} sizes="(max-width: 700px) 100vw, 400px" loading="lazy" />

@@ -65,6 +65,43 @@ test('movimiento reducido: el filtro cambia al instante', async ({ page }) => {
   expect(await page.locator('.card:visible').count()).toBe(0);
 });
 
+test('filtrar y quitar el filtro deja todas las tarjetas íntegras (sin transform residual)', async ({ page }) => {
+  await page.goto('/cursos');
+  const chip = page.locator('button[data-esp]').first();
+  await chip.click();
+  await expect(chip).toHaveAttribute('aria-pressed', 'true');
+  await chip.click();
+  await expect(chip).toHaveAttribute('aria-pressed', 'false');
+  const estadoTarjetas = () => page.evaluate(() => [...document.querySelectorAll<HTMLElement>('.card')].map((c) => {
+    const cs = getComputedStyle(c);
+    const r = c.getBoundingClientRect();
+    const g = c.closest('.grid')!.getBoundingClientRect();
+    const tr = cs.transform;
+    return { id: c.dataset.id, ok: (tr === 'none' || tr === 'matrix(1, 0, 0, 1, 0, 0)') && cs.opacity === '1' && cs.visibility === 'visible'
+      && r.left >= g.left - 1 && r.right <= g.right + 1 && r.top >= g.top - 1 && r.bottom <= g.bottom + 1 };
+  }));
+  await expect.poll(async () => (await estadoTarjetas()).filter((c) => !c.ok).map((c) => c.id), { timeout: 8000 }).toEqual([]);
+  await page.waitForTimeout(1500);
+  expect((await estadoTarjetas()).filter((c) => !c.ok)).toEqual([]);
+});
+
+test('teclear lentamente conserva los espacios del buscador', async ({ page }) => {
+  await page.goto('/cursos');
+  const q = page.locator('input[name="q"]');
+  await q.pressSequentially('diabetes objetivo', { delay: 250 });
+  await expect(q).toHaveValue('diabetes objetivo');
+  await page.waitForTimeout(400);
+  await expect(q).toHaveValue('diabetes objetivo');
+});
+
+test('sin JS los chips no se muestran como botones inertes', async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto('/cursos');
+  await expect(page.locator('button[data-esp]').first()).toBeHidden();
+  await ctx.close();
+});
+
 test.describe('sin JavaScript', () => {
   test.use({ javaScriptEnabled: false });
   test('se listan todos los cursos', async ({ page }) => {

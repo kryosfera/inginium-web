@@ -23,18 +23,17 @@ const entradilla = activos.length === 0 ? 'Consulta el archivo de cursos celebra
     <FilterBar especialidades={especialidades} anios={anios} />
     <section id="activos" aria-labelledby="activos-h">
       <h2 id="activos-h">Cursos activos</h2>
-      {activos.length > 0
-        ? <div class="grid">{activos.map((c) => <CourseCard curso={c} />)}</div>
-        : <p class="vacio">Pronto anunciaremos nuevos cursos.</p>}
+      <p class="vacio" hidden={activos.length > 0}>Pronto anunciaremos nuevos cursos.</p>
+      <div class="grid">{activos.map((c) => <CourseCard curso={c} reveal={false} />)}</div>
     </section>
     <section id="archivo" aria-labelledby="archivo-h">
       <h2 id="archivo-h">Archivo</h2>
       <p class="intro">Cursos ya celebrados, con su programa y profesorado.</p>
-      <div class="grid">{finalizados.map((c) => <CourseCard curso={c} />)}</div>
+      <div class="grid">{finalizados.map((c) => <CourseCard curso={c} reveal={false} />)}</div>
     </section>
   </div>
   <ContactCTA />
-  <script type="application/json" id="filtro-datos" set:html={JSON.stringify({ especialidades, anios })} />
+  <script type="application/json" id="filtro-datos" set:html={JSON.stringify({ especialidades, anios }).replace(/</g, '\\u003c')} />
   <script>import '../../scripts/filtros';</script>
 </BaseLayout>
 <style>
@@ -42,6 +41,7 @@ const entradilla = activos.length === 0 ? 'Consulta el archivo de cursos celebra
   section { display: grid; gap: 20px; align-content: start; }
   section[hidden] { display: none; }
   h2 { font-size: clamp(24px, 2.6vw, 32px); }
+  .vacio[hidden] { display: none; }
   .intro, .vacio { margin: 0; color: var(--muted); }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
   .grid :global(.card[hidden]) { display: none; }

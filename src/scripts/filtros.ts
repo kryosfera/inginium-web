@@ -1,11 +1,10 @@
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onPage } from './lifecycle';
 import { leerFiltro, escribirFiltro, aplicarFiltro, type CursoFiltrable, type Filtro } from '../lib/filtros';
 import { slugEspecialidad } from '../lib/cursos';
 
-gsap.registerPlugin(Flip, ScrollTrigger);
+gsap.registerPlugin(Flip);
 
 onPage(() => {
   const form = document.querySelector<HTMLFormElement>('form.filtros');
@@ -26,18 +25,31 @@ onPage(() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let f: Filtro = leerFiltro(new URLSearchParams(location.search), especialidades, anios);
 
+  const activos = document.getElementById('activos')!;
+  const archivo = document.getElementById('archivo')!;
+  const vacioActivos = activos.querySelector<HTMLElement>('.vacio')!;
+  const limpiar = () => gsap.set(cards, { clearProps: 'transform,opacity,visibility' });
+  const detener = () => { gsap.killTweensOf(cards); Flip.killFlipsOf(cards); };
+
   const pintar = (animar: boolean) => {
-    q.value = f.q; anio.value = f.anio ? String(f.anio) : '';
+    anio.value = f.anio ? String(f.anio) : '';
     chips.forEach((c) => c.setAttribute('aria-pressed', String(!!f.especialidad && slugEspecialidad(f.especialidad) === c.dataset.esp)));
     const visibles = new Set(aplicarFiltro(lista, f).map((c) => c.id));
-    const estado = animar && !reduce ? Flip.getState(cards) : null;
+    const conAnimacion = animar && !reduce;
+    if (conAnimacion) { detener(); limpiar(); }
+    const estado = conAnimacion ? Flip.getState(cards) : null;
     for (const [id, el] of porId) el.hidden = !visibles.has(id);
-    document.querySelectorAll<HTMLElement>('#activos, #archivo').forEach((s) => { s.hidden = !s.querySelector('.card:not([hidden])'); });
     const hayFiltro = !!(f.especialidad || f.anio || f.q);
-    // Las tarjetas ocultas/mostradas cambian la maquetación: recalcula los disparadores de revelado (si no, las que suben quedarían invisibles).
-    ScrollTrigger.refresh();
+    // Con filtro, la sección de activos solo se oculta si no queda ningún resultado; si hay resultados solo en el archivo, avisa en su sitio.
+    const nActivos = activos.querySelectorAll('.card:not([hidden])').length;
+    activos.hidden = visibles.size === 0;
+    archivo.hidden = !archivo.querySelector('.card:not([hidden])');
+    vacioActivos.hidden = nActivos > 0;
+    vacioActivos.textContent = hayFiltro ? 'Ningún curso activo coincide con el filtro.' : 'Pronto anunciaremos nuevos cursos.';
     resultado.textContent = !hayFiltro ? '' : visibles.size ? `${visibles.size} ${visibles.size === 1 ? 'curso' : 'cursos'}` : 'Ningún curso coincide con el filtro.';
-    if (estado) Flip.from(estado, { duration: 0.45, ease: 'power2.out', absolute: true, onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.3 }) });
+    if (estado) Flip.from(estado, { duration: 0.45, ease: 'power2.out', absolute: true, scale: false,
+      onEnter: (els) => gsap.fromTo(els, { opacity: 0 }, { opacity: 1, duration: 0.3 }),
+      onComplete: limpiar });
   };
   const aplicar = () => {
     const qs = escribirFiltro(f);
@@ -55,6 +67,10 @@ onPage(() => {
     const e = especialidades.find((x) => slugEspecialidad(x) === c.dataset.esp) ?? null;
     f = { ...f, especialidad: f.especialidad === e ? null : e }; aplicar();
   }));
+  q.value = f.q;
+  chips.forEach((c) => { c.closest<HTMLElement>('.chips')!.hidden = false; });
   pintar(false);
-  return () => { clearTimeout(t); offs.forEach((x) => x()); };
+  // Entrada inicial propia (opacidad y desplazamiento, sin scale) para no chocar con Flip.
+  if (!reduce) gsap.from(cards.filter((c) => !c.hidden), { opacity: 0, y: 24, duration: 0.6, ease: 'power3.out', stagger: { amount: 0.5 }, clearProps: 'transform,opacity,visibility' });
+  return () => { clearTimeout(t); detener(); offs.forEach((x) => x()); };
 });
