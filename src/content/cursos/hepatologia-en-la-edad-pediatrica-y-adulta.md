@@ -1,6 +1,6 @@
 ---
 titulo: Hepatología en la edad pediátrica y adulta
-resumen: Explora las últimas investigaciones y técnicas en el campo de la Hepatología en la edad pediátrica y adulta con expertos líderes en la materia.
+resumen: 'Jornada presencial de hepatología pediátrica y del adulto, con bienvenida de los presidentes de la AEEH y la SEGHNP: colestasis intrahepáticas, hepatopatía autoinmune, hepatitis víricas, NAFLD y enfermedades vasculares hepáticas. Madrid, 14 de marzo de 2023, también en streaming; 6 horas y 0,8 créditos.'
 especialidades:
   - Pediatría
   - Cirugía
@@ -22,6 +22,152 @@ patrocinadores:
   - 63e37f6032b0b04a4fc98dcd
   - 63e37f76f9080923f3ff95a9
 destacado: false
+aprenderas:
+- Revisar las colestasis intrahepáticas familiares progresivas.
+- Comparar el diagnóstico y el manejo de la hepatitis autoinmune en el niño y en el adulto.
+- Actualizar el tratamiento de las hepatitis víricas C, B y Delta.
+- Plantear el abordaje terapéutico de la enfermedad hepática metabólica en el niño y en el adulto.
+- 'Conocer las estrategias diagnóstico-terapéuticas de las enfermedades vasculares con repercusión hepática: visión clínica, radiología intervencionista y cirugía.'
+dirigidoA: null
+sede: Hotel Vincci Soho, Madrid (también en streaming)
+coordinacion: []
+sociedades:
+- AEEH
+- SEGHNP
+agenda:
+- seccion: Programa
+  items:
+  - hora: 10:00–10:15
+    titulo: Bienvenida
+    tipo: apertura
+    ponentes:
+    - Dr. José Luis Calleja
+    - Dr. Javier Martín de Carpi
+    moderacion: []
+  - hora: 10:15–11:00
+    titulo: Colestasis intrahepáticas familiares progresivas
+    tipo: ponencia
+    ponentes:
+    - Dr. Enrique Medina
+    moderacion:
+    - Dra. Cristina Molera
+  - hora: 11:00–12:00
+    titulo: Hepatopatía autoinmune
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. María Rubio
+    - Dra. Elena Gómez
+  - hora: 11:00–11:25
+    titulo: Peculiaridades en el diagnóstico y manejo de la HAI en población pediátrica
+    tipo: ponencia
+    ponentes:
+    - Dra. Mónica Rodríguez
+    moderacion: []
+  - hora: 11:25–11:45
+    titulo: Controversias y desafíos en la hepatitis autoinmune del adulto
+    tipo: ponencia
+    ponentes:
+    - Dr. Álvaro Díaz
+    moderacion: []
+  - hora: 11:45–12:00
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 12:00–12:30
+    titulo: Pausa café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 12:30–13:30
+    titulo: Hepatitis víricas
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Inés Loverdos
+    - Dra. Inmaculada Fernández
+  - hora: 12:30–12:50
+    titulo: Dónde estamos con los tratamientos VHC y hacia dónde iremos con VHB/Delta
+    tipo: ponencia
+    ponentes:
+    - Dra. Loreto Hierro
+    moderacion: []
+  - hora: 12:50–13:10
+    titulo: Experiencia del Plan Nacional VHC y novedades terapéuticas en hepatitis B/Delta
+    tipo: ponencia
+    ponentes:
+    - Dra. Sabela Lens
+    moderacion: []
+  - hora: 13:10–13:30
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 13:30–15:00
+    titulo: Comida de trabajo
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 15:00–16:00
+    titulo: NAFLD
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. María Mercadal
+    - Dr. José Luis Calleja
+  - hora: 15:00–15:20
+    titulo: Enfermedad hepática metabólica pediátrica. ¿Cuál debería ser un enfoque terapéutico realista y efectivo?
+    tipo: ponencia
+    ponentes:
+    - Dra. Ruth Diez
+    moderacion: []
+  - hora: 15:20–15:40
+    titulo: 'Enfermedad hepática metabólica en el adulto: influencia de los hábitos de vida y nuevas dianas terapéuticas'
+    tipo: ponencia
+    ponentes:
+    - Dr. Manuel Romero-Gómez
+    moderacion: []
+  - hora: 15:40–16:00
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 16:00–17:15
+    titulo: 'Enfermedades vasculares con repercusión hepática: estrategias diagnóstico-terapéuticas en el niño y en el adulto'
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Cristina Molera
+    - Dra. Sabela Lens
+  - hora: 16:00–16:20
+    titulo: Visión del clínico
+    tipo: ponencia
+    ponentes:
+    - Dr. Joan Carles García-Pagán
+    moderacion: []
+  - hora: 16:20–16:40
+    titulo: Papel del radiólogo intervencionista
+    tipo: ponencia
+    ponentes:
+    - Dr. Juan José Espejo
+    moderacion: []
+  - hora: 16:40–17:00
+    titulo: Opciones quirúrgicas
+    tipo: ponencia
+    ponentes:
+    - Dr. José Andrés Molino
+    moderacion: []
+  - hora: 17:00–17:15
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 17:15–17:30
+    titulo: Cierre de la jornada
+    tipo: cierre
+    ponentes: []
+    moderacion: []
 ---
 <p>Bienvenidos a la jornada de formación sobre Hepatología en la Edad Pediátrica y Adulta. Estamos encantados de teneros con nosotros en el Hotel Vincci Soho de Madrid. La jornada se llevará a cabo de forma presencial y también estará disponible en streaming para aquellos que no puedan asistir en persona.</p>
 

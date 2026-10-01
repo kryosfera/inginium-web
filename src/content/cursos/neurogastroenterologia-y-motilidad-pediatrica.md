@@ -1,6 +1,6 @@
 ---
 titulo: Neurogastroenterología y motilidad pediátrica
-resumen: Explora las últimas investigaciones y técnicas en el campo de la Neurogastroenterología y motilidad pediátrica con expertos líderes en la materia.
+resumen: 'Jornada presencial ASENEM-SEGHNP de neurogastroenterología y motilidad pediátrica: trastornos motores esofágicos, dismotilidad gastrointestinal y trastornos del eje cerebro-intestino, y desórdenes de la defecación. Barcelona, 30 de mayo de 2023; 6 horas.'
 especialidades:
   - Pediatría
   - Cirugía
@@ -25,6 +25,153 @@ patrocinadores:
   - 644b8e021a3d2464b01c7c8b
   - 644b8e021befa2b8d343d142
 destacado: false
+aprenderas:
+- Reconocer las manifestaciones extradigestivas de la ERGE y aplicar la pH-impedanciometría en pediatría.
+- Valorar la utilidad de los estudios de motilidad esofágica e intestinal en la práctica clínica.
+- Abordar la dismotilidad esofágica, la aerofagia, el síndrome de rumiación, la dispepsia funcional y la gastroparesia.
+- Conocer el enfoque psicológico de los trastornos del eje cerebro-intestino.
+- Actualizar el manejo del estreñimiento refractario y el uso de la manometría anorrectal y el biofeedback.
+- Revisar los trastornos de motilidad en niños operados de patología colorrectal.
+dirigidoA: Profesionales de la salud interesados en la neurogastroenterología y la motilidad pediátrica
+sede: Hotel NH Stadium, Barcelona
+coordinacion: []
+sociedades:
+- ASENEM
+- SEGHNP
+agenda:
+- seccion: Programa
+  items:
+  - hora: 09:00–09:15
+    titulo: Presentación de la jornada
+    tipo: apertura
+    ponentes:
+    - Dr. Javier Martín de Carpi
+    - Dr. Jordi Serra
+    moderacion: []
+  - hora: 09:15–11:10
+    titulo: Mesa redonda de trastornos motores esofágicos
+    tipo: mesa
+    ponentes: []
+    moderacion:
+    - Dr. Carlos Ruiz
+  - hora: 09:15–09:40
+    titulo: Manifestaciones extradigestivas o aerodigestivas de la ERGE. ¿Cuándo considerarlas?
+    tipo: ponencia
+    ponentes:
+    - Dra. Melinda Moriczi
+    moderacion: []
+  - hora: 09:40–10:05
+    titulo: Aplicación práctica de la pH-impedanciometría en Pediatría
+    tipo: ponencia
+    ponentes:
+    - Dra. Inmaculada Hidalgo
+    moderacion: []
+  - hora: 10:05–10:30
+    titulo: Utilidad de los estudios de motilidad esofágica en la práctica clínica
+    tipo: ponencia
+    ponentes:
+    - Dra. Elizabeth Barba
+    moderacion: []
+  - hora: 10:30–10:55
+    titulo: Abordaje diagnóstico y terapéutico de la dismotilidad esofágica
+    tipo: ponencia
+    ponentes:
+    - Dr. Leonel Rodríguez
+    moderacion: []
+  - hora: 10:55–11:10
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 11:10–11:40
+    titulo: Café-descanso
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 11:40–13:35
+    titulo: Mesa redonda de dismotilidad gastrointestinal y trastornos del eje cerebro-intestino
+    tipo: mesa
+    ponentes: []
+    moderacion:
+    - Dra. Sandra Montells
+  - hora: 11:40–12:05
+    titulo: Aerofagia y síndrome de rumiación. Los infravalorados
+    tipo: ponencia
+    ponentes:
+    - Dra. Etna Masip
+    moderacion: []
+  - hora: 12:05–12:30
+    titulo: Abordaje y/o enfoque psicológico de los trastornos del eje cerebro-intestino
+    tipo: ponencia
+    ponentes:
+    - Dra. Angela Cabestany
+    moderacion: []
+  - hora: 12:30–12:55
+    titulo: Dispepsia funcional y gastroparesia. Diagnóstico diferencial, presentación y manejo
+    tipo: ponencia
+    ponentes:
+    - Dr. Leonel Rodríguez
+    moderacion: []
+  - hora: 12:55–13:20
+    titulo: Utilidad de los estudios de motilidad intestinal en la práctica clínica
+    tipo: ponencia
+    ponentes:
+    - Dra. Carolina Malagelada
+    moderacion: []
+  - hora: 13:20–13:35
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 13:35–15:00
+    titulo: Comida
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 15:00–16:50
+    titulo: Mesa redonda de desórdenes de la defecación
+    tipo: mesa
+    ponentes: []
+    moderacion:
+    - Dra. Johanna Martinez
+  - hora: 15:00–15:25
+    titulo: Trastornos de motilidad en niños postoperados de patología colorrectal
+    tipo: ponencia
+    ponentes:
+    - Dra Laura Saura
+    - Dr. Pedro Palazón
+    - Dra Clara Massaguer
+    - Dra. Elena Muñoz
+    moderacion: []
+    detalle: 'Enfermedad de Hirschsprung: Dra Laura Saura y Dr. Pedro Palazón. Malformación anorrectal: Dra Clara Massaguer y Dra. Elena Muñoz'
+  - hora: 15:25–15:50
+    titulo: Actualización en manejo del estreñimiento refractario. ¿Qué opciones tenemos?
+    tipo: ponencia
+    ponentes:
+    - Dr. Miguel Angel Carro
+    moderacion: []
+  - hora: 15:50–16:15
+    titulo: Utilidad de la manometría anorrectal y biofeedback en la práctica clínica
+    tipo: ponencia
+    ponentes:
+    - Dr. Cesar Sánchez
+    moderacion: []
+  - hora: 16:15–16:30
+    titulo: Discusión
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 16:30–16:55
+    titulo: Situación actual de la motilidad pediátrica en España
+    tipo: ponencia
+    ponentes:
+    - Dr. Andrés Bodas
+    moderacion: []
+  - hora: 16:55–17:00
+    titulo: Clausura
+    tipo: cierre
+    ponentes: []
+    moderacion: []
 ---
 <p>Esta jornada de formación está diseñada para profesionales de la salud interesados en la neurogastroenterología y la motilidad pediátrica. En este curso, los participantes tendrán la oportunidad de aprender sobre las últimas investigaciones y avances en el campo, así como también de compartir experiencias y conocimientos con otros profesionales del sector.</p><p>La jornada ASENEM-SEGHNP de Neurogastroenterología y Motilidad Pediátrica se llevará a cabo en la ciudad de Barcelona, en el Hotel NH Stadium, un lugar ideal para disfrutar de una experiencia educativa única en un entorno acogedor y confortable.</p>
 

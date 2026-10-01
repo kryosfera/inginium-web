@@ -1,6 +1,6 @@
 ---
 titulo: Soporte Nutricional en Pediatría
-resumen: El curso está dirigido a médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría que por su actividad diaria necesitan ampliar conocimientos en nutrición clínica y en el soporte nutricional enteral.
+resumen: 'Curso presencial para médicos adjuntos de Pediatría con 1-5 años de ejercicio: valoración nutricional y requerimientos, indicaciones y tipos de soporte nutricional, talleres prácticos y casos clínicos. Terrassa (Barcelona), 4 y 5 de noviembre de 2021; 10 horas y 1,4 créditos.'
 especialidades: []
 modalidad: presencial
 fechas: Este curso se celebró de forma presencial los días 4 y 5 de noviembre de 2021 en Terrassa (Barcelona).
@@ -16,6 +16,126 @@ profesorado: []
 patrocinadores:
   - 616412272d64099da9d91dfa
 destacado: false
+aprenderas:
+- Valorar el estado nutricional y calcular los requerimientos en pediatría.
+- Indicar el soporte nutricional y elegir sistemas de administración y vías de acceso.
+- Conocer los tipos de soluciones nutricionales.
+- Abordar los trastornos de la conducta alimentaria en la infancia.
+- 'Aplicar el soporte nutricional en casos clínicos: parálisis cerebral infantil, lactante con cardiopatía, paciente crítico, oncológico, con enfermedad de Crohn o con alergia a la proteína de la leche de vaca.'
+- Identificar las modas y los peligros de las nuevas dietas de alimentación.
+dirigidoA: Médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría
+sede: Terrassa (Barcelona)
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: 4 de noviembre
+  items:
+  - hora: null
+    titulo: Bienvenida
+    tipo: apertura
+    ponentes:
+    - Dra. Ruth Ga Romero
+    - Dr. Óscar Manrique
+    moderacion: []
+  - hora: null
+    titulo: 'Sesión inaugural: trastornos de la conducta alimentaria en la infancia'
+    tipo: ponencia
+    ponentes:
+    - Dra. Silvia Meavilla
+    moderacion: []
+  - hora: null
+    titulo: Mesa redonda
+    tipo: mesa
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Valoración del estado nutricional y cálculo de requerimientos en pediatría
+    tipo: ponencia
+    ponentes:
+    - Dra. Mercedes Murray
+    moderacion: []
+  - hora: null
+    titulo: Indicaciones de soporte nutricional, sistemas de administración y vías de acceso
+    tipo: ponencia
+    ponentes:
+    - Dr. Alejandro Rodríguez
+    moderacion: []
+  - hora: null
+    titulo: 'Soporte nutricional: tipos de soluciones nutricionales'
+    tipo: ponencia
+    ponentes:
+    - Dra. Josefa Barrio
+    moderacion: []
+  - hora: null
+    titulo: 'Taller práctico: valoración del estado nutricional y cálculo de requerimientos en la práctica clínica'
+    tipo: bloque
+    ponentes:
+    - Dra. Susana Redecillas
+    - Dr. Iñaki Irastorza
+    moderacion: []
+  - hora: null
+    titulo: 'Taller práctico: abordaje nutricional en la práctica clínica'
+    tipo: bloque
+    ponentes:
+    - Dr. Ignacio Ros
+    - Dr. Ricardo Torres
+    moderacion: []
+- seccion: 5 de noviembre
+  items:
+  - hora: null
+    titulo: 'Sesión monográfica: paciente con parálisis cerebral infantil, una visión de 360°'
+    tipo: ponencia
+    ponentes:
+    - Dra. Miriam Blanco
+    moderacion: []
+  - hora: null
+    titulo: Casos clínicos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Paciente lactante con cardiopatía
+    tipo: ponencia
+    ponentes:
+    - Dra. Inmaculada Vives
+    moderacion: []
+  - hora: null
+    titulo: Paciente crítico
+    tipo: ponencia
+    ponentes:
+    - Dr. Javier Blasco
+    moderacion: []
+  - hora: null
+    titulo: Paciente oncológico
+    tipo: ponencia
+    ponentes:
+    - Dr. Santiago Jiménez
+    moderacion: []
+  - hora: null
+    titulo: Paciente con enfermedad de Crohn
+    tipo: ponencia
+    ponentes:
+    - Dr. Daniel González Santana
+    moderacion: []
+  - hora: null
+    titulo: Paciente con alergia a la proteína de la leche de vaca
+    tipo: ponencia
+    ponentes:
+    - Dr. Gonzalo Botija
+    moderacion: []
+  - hora: null
+    titulo: 'Sesión de cierre: nuevas dietas de alimentación, modas y peligros'
+    tipo: ponencia
+    ponentes:
+    - Dr. Isidro Vitoria
+    moderacion: []
+  - hora: null
+    titulo: Conclusiones y clausura del curso
+    tipo: cierre
+    ponentes:
+    - Dra. Ruth Ga Romero
+    - Dr. Óscar Manrique
+    moderacion: []
 ---
 <p>El curso está dirigido a médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría que por su actividad diaria necesitan ampliar conocimientos en nutrición clínica y en el soporte nutricional enteral. Se adquirirán conocimientos tanto teóricos como prácticos en la nutrición clínica y en la nutrición enteral al detectar una necesidad de formación en este ámbito que no queda cubierta durante el periodo de formación y residencia de la especialidad en los centros hospitalarios.</p>
 

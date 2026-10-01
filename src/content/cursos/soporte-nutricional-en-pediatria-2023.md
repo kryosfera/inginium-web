@@ -1,6 +1,6 @@
 ---
 titulo: Soporte Nutricional en Pediatría
-resumen: El curso está dirigido a médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría que por su actividad diaria necesitan ampliar conocimientos en nutrición clínica y en el soporte nutricional enteral.
+resumen: 'Curso presencial para médicos adjuntos de Pediatría con 1-5 años de ejercicio: conceptos básicos de nutrición clínica y nutrición enteral, talleres de disfagia y cuidados de la sonda, y casos clínicos. La Mola, Terrassa (Barcelona), 25 y 26 de octubre de 2023; 9 horas y 1,7 créditos.'
 especialidades:
   - Pediatría
 modalidad: presencial
@@ -17,6 +17,199 @@ profesorado: []
 patrocinadores:
   - 616412272d64099da9d91dfa
 destacado: false
+aprenderas:
+- Diferenciar la nutrición del niño sano y la del niño enfermo.
+- Valorar el estado nutricional y calcular los requerimientos con casos de práctica clínica real.
+- Revisar las indicaciones, vías de administración, monitorización y complicaciones de la nutrición enteral, y las soluciones nutricionales.
+- Practicar el manejo de la disfagia (texturas y suplementos) y los cuidados de la sonda.
+- Conocer nuevas técnicas de valoración del estado nutricional.
+- 'Aplicar el soporte nutricional en casos clínicos: paciente crítico, con enfermedad de Crohn, crónico complejo, oncológico y lactante.'
+dirigidoA: Médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría
+sede: La Mola, Terrassa (Barcelona)
+coordinacion:
+- Dra. Ana Morais
+- Dr. Alejandro Rodríguez
+sociedades: []
+agenda:
+- seccion: 25 de octubre
+  items:
+  - hora: 11:45–12:00
+    titulo: Bienvenida
+    tipo: apertura
+    ponentes:
+    - Dra. Ana Morais
+    - Dr. Alejandro Rodríguez
+    moderacion: []
+    detalle: Coordinadores
+  - hora: 12:00–12:30
+    titulo: 'Sesión inaugural: nutrición en pediatría, el niño sano frente al niño enfermo'
+    tipo: ponencia
+    ponentes:
+    - Dra. Rosaura Leis
+    moderacion: []
+  - hora: 12:30–14:30
+    titulo: 'Mesa redonda: conceptos básicos de nutrición clínica'
+    tipo: mesa
+    ponentes: []
+    moderacion: []
+    detalle: 40 minutos por ponencia
+  - hora: null
+    titulo: Valoración del estado nutricional y cálculo de requerimientos
+    tipo: ponencia
+    ponentes:
+    - Dra. Elena Balmaseda
+    moderacion: []
+    detalle: Ilustrado con casos de práctica clínica real
+  - hora: null
+    titulo: Indicaciones y contraindicaciones de la NE. Vías y sistemas de administración de la NE. Monitorización y complicaciones de la NE
+    tipo: ponencia
+    ponentes:
+    - Dra. Camila Gª Volpe
+    moderacion: []
+    detalle: Ilustrado con casos de práctica clínica real
+  - hora: null
+    titulo: Soluciones nutricionales
+    tipo: ponencia
+    ponentes:
+    - Dra. Mar Tolín
+    moderacion: []
+    detalle: Ilustrado con casos de práctica clínica real
+  - hora: 14:30–16:00
+    titulo: Comida
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 16:00–17:00
+    titulo: Talleres prácticos simultáneos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: Cada taller cuenta con 2 versiones simultáneas; los alumnos se distribuyen en 4 grupos
+  - hora: null
+    titulo: 'Taller 1: taller de disfagia (texturas y suplementos)'
+    tipo: bloque
+    ponentes:
+    - D/N Natàlia Egea
+    - Log. Mayse Romea
+    - D/N Mª Ángeles Sánchez Olmos
+    - Log Encarnación López Ortega
+    moderacion: []
+  - hora: null
+    titulo: 'Taller 2: dispositivos y cuidados de la sonda'
+    tipo: bloque
+    ponentes:
+    - Esther Sánchez Muñoz
+    - Mª del Mar Rodrigo Hierro
+    - Yolanda Ramón Telo
+    - Hortensia Gimeno
+    moderacion: []
+  - hora: 17:00–17:30
+    titulo: Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 17:30–18:30
+    titulo: Talleres prácticos simultáneos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: Cada taller cuenta con 2 versiones simultáneas; los alumnos se distribuyen en 4 grupos
+  - hora: null
+    titulo: 'Taller 1: taller de disfagia (texturas y suplementos)'
+    tipo: bloque
+    ponentes:
+    - D/N Natàlia Egea
+    - Log. Mayse Romea
+    - D/N Mª Ángeles Sánchez Olmos
+    - Log Encarnación López Ortega
+    moderacion: []
+  - hora: null
+    titulo: 'Taller 2: dispositivos y cuidados de la sonda'
+    tipo: bloque
+    ponentes:
+    - Esther Sánchez Muñoz
+    - Mª del Mar Rodrigo Hierro
+    - Yolanda Ramón Telo
+    - Hortensia Gimeno
+    moderacion: []
+- seccion: 26 de octubre
+  items:
+  - hora: 09:00–09:45
+    titulo: 'Sesión Innovación: nuevas técnicas de valoración del estado nutricional'
+    tipo: ponencia
+    ponentes:
+    - Dra. Ana Bergua
+    moderacion: []
+  - hora: 09:45–10:45
+    titulo: Casos clínicos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: 30 minutos por caso clínico
+  - hora: null
+    titulo: Paciente crítico
+    tipo: ponencia
+    ponentes:
+    - Dr. Javier Blasco
+    moderacion: []
+  - hora: null
+    titulo: Paciente con enfermedad de Crohn
+    tipo: ponencia
+    ponentes:
+    - Dr. José Ramón Alberto
+    moderacion: []
+  - hora: 10:45–11:15
+    titulo: Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 11:15–12:45
+    titulo: Casos clínicos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: 30 minutos por caso clínico
+  - hora: null
+    titulo: Paciente crónico complejo
+    tipo: ponencia
+    ponentes:
+    - Dr. Carlos Tutau
+    moderacion: []
+  - hora: null
+    titulo: Paciente con patología oncológica
+    tipo: ponencia
+    ponentes:
+    - Dra. Elvira Cañedo
+    moderacion: []
+  - hora: null
+    titulo: Paciente lactante
+    tipo: ponencia
+    ponentes:
+    - Dr. Justo Valverde
+    moderacion: []
+  - hora: 12:45–13:15
+    titulo: 'Sesión de cierre: avances en nutrición clínica pediátrica, perspectivas actuales y futuras'
+    tipo: ponencia
+    ponentes:
+    - Dr. Rafael Galera
+    moderacion: []
+  - hora: 13:15–13:30
+    titulo: Conclusiones y cierre del curso
+    tipo: cierre
+    ponentes:
+    - Dra. Ana Morais
+    - Dr. Alejandro Rodríguez
+    moderacion: []
+  - hora: 13:30–14:00
+    titulo: Test de evaluación
+    tipo: cierre
+    ponentes: []
+    moderacion: []
+  - hora: 14:00–16:00
+    titulo: Comida y/o traslados
+    tipo: pausa
+    ponentes: []
+    moderacion: []
 ---
 <p>El curso está dirigido a médicos adjuntos de Pediatría con 1-5 años de ejercicio en la especialidad de Pediatría que por su actividad diaria necesitan ampliar conocimientos en nutrición clínica y en el soporte nutricional enteral. Se adquirirán conocimientos tanto teóricos como prácticos en la nutrición clínica y en la nutrición enteral al detectar una necesidad de formación en este ámbito que no queda cubierta durante el periodo de formación y residencia de la especialidad en los centros hospitalarios.</p>
 

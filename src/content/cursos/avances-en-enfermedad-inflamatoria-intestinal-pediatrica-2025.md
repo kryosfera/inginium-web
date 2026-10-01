@@ -1,6 +1,6 @@
 ---
 titulo: AVANCES EN ENFERMEDAD INFLAMATORIA INTESTINAL PEDIÁTRICA 2025
-resumen: Debate y consenso sobre los distintos aspectos de la Enfermedad Inflamatoria Intestinal Pediátrica.
+resumen: 'Jornada presencial sobre enfermedad inflamatoria intestinal pediátrica: retos de la EII en 2025, la edad temprana, terapias del paciente con EII, guías ECCO-ESPGHAN de colitis ulcerosa pediátrica y el adolescente. 7 de noviembre de 2025; 7 h 30 min y 1 crédito.'
 especialidades:
   - Pediatría
   - Cirugía
@@ -21,6 +21,193 @@ patrocinadores:
   - 64b55e67272717845adb2c91
   - 64b55e7b46aa4e6fd84cbda5
 destacado: false
+aprenderas:
+- 'Revisar los retos actuales en EII: primera línea de tratamiento, ensayos pediátricos y factores ambientales.'
+- Orientar la sospecha de inmunodeficiencia primaria y reconocer las características de la EII de inicio muy precoz.
+- Analizar el enfoque de género, la aféresis selectiva, las opciones para la enfermedad de Crohn perianal y la vacunación ante los nuevos tratamientos.
+- Actualizar las guías de consenso ECCO-ESPGHAN de colitis ulcerosa pediátrica.
+- 'Abordar al adolescente con EII: síntomas persistentes en remisión, alimentación y limitaciones laborales.'
+dirigidoA: null
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Programa
+  items:
+  - hora: 08:50–09:00
+    titulo: Presentación de la jornada
+    tipo: apertura
+    ponentes:
+    - Dr. Javier Martín de Carpi
+    - Dra. Yamile Zabana Abdo
+    moderacion: []
+  - hora: 09:00–10:15
+    titulo: Challenges to face in IBD world in 2025
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dr. Javier Martín de Carpi
+  - hora: 09:00–09:20
+    titulo: Which treatment would I use as first line therapy in the different clinical scenarios? (if I could choose...)
+    tipo: ponencia
+    ponentes:
+    - Dr. Raja Atreya
+    moderacion: []
+  - hora: 09:20–09:40
+    titulo: Challenges in pediatric IBD trials. Time to change?
+    tipo: ponencia
+    ponentes:
+    - Dr. Dan Turner
+    moderacion: []
+  - hora: 09:40–10:00
+    titulo: New directions in deciphering environmental factors involved in IBD
+    tipo: ponencia
+    ponentes:
+    - Dra. Manasi Agrawal
+    moderacion: []
+  - hora: 10:00–10:15
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 10:15–11:30
+    titulo: 'EII pediátrica en todo su espectro: la edad temprana'
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Gemma Pujol Muncunill
+  - hora: 10:15–10:35
+    titulo: ¿Cómo orientar la sospecha de una inmunodeficiencia primaria en un niño con una EII?
+    tipo: ponencia
+    ponentes:
+    - Dra. Laia Alsina Manrique de Lara
+    moderacion: []
+  - hora: 10:35–10:55
+    titulo: 'Características histopatológicas en pacientes con EII de inicio muy precoz: ¿un patrón diferente?'
+    tipo: ponencia
+    ponentes:
+    - Dra. Silvia Planas Román
+    moderacion: []
+  - hora: 10:55–11:15
+    titulo: Do young children with IBD need special dosing and administration of biologic drugs?
+    tipo: ponencia
+    ponentes:
+    - Dr. Dror Shouval
+    moderacion: []
+  - hora: 11:15–11:30
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 11:30–12:00
+    titulo: Pausa-café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 12:00–13:45
+    titulo: Retos y oportunidades en la terapia del paciente con EII
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Elena Ricart Gómez
+  - hora: 12:00–12:20
+    titulo: 'Enfoque de género en EII: presentación, evolución y respuesta al tratamiento'
+    tipo: ponencia
+    ponentes:
+    - Dra. Ingrid Ordás Jiménez
+    moderacion: []
+  - hora: 12:20–12:40
+    titulo: Evidencia de la aféresis selectiva de granulocitos-monocitos como terapia coadyuvante a tratamientos avanzados
+    tipo: ponencia
+    ponentes:
+    - Dr. Iago Rodríguez-Lago
+    moderacion: []
+  - hora: 12:40–13:00
+    titulo: ¿Disponemos de opciones farmacológicas efectivas más allá de los anti-TNF para la enfermedad de Crohn perianal?
+    tipo: ponencia
+    ponentes:
+    - Dra. Natalia Borruel Sainz
+    moderacion: []
+  - hora: 13:00–13:20
+    titulo: ¿Debemos revisar las recomendaciones de vacunación y de profilaxis infecciosa en relación con los nuevos tratamientos?
+    tipo: ponencia
+    ponentes:
+    - Dra. Yamile Zabana Abdo
+    moderacion: []
+  - hora: 13:20–13:45
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 13:45–14:30
+    titulo: Actualización de las guías de consenso ECCO-ESPGHAN de colitis ulcerosa pediátrica
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dr. Javier Martín de Carpi
+  - hora: 13:45–14:05
+    titulo: Colitis ulcerosa de manejo ambulatorio
+    tipo: ponencia
+    ponentes:
+    - Dra. Gemma Pujol Muncunill
+    moderacion: []
+  - hora: 14:05–14:30
+    titulo: Colitis ulcerosa aguda grave
+    tipo: ponencia
+    ponentes:
+    - Dra. Marta Velasco Rodríguez-Belvís
+    moderacion: []
+  - hora: 15:30–16:30
+    titulo: Mesa de casos clínicos
+    tipo: mesa
+    ponentes:
+    - Dra. Ingrid Ordás Jiménez
+    - Dr. Iago Rodríguez-Lago
+    - Dra. Marta Velasco Rodríguez-Belvís
+    - Dra. Ruth García Romero
+    moderacion:
+    - Dr. Javier Martín de Carpi
+    detalle: Panel de expertos
+  - hora: 16:30–17:45
+    titulo: 'EII pediátrica en todo su espectro: el adolescente'
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Marta Velasco Rodríguez-Belvís
+  - hora: 16:30–16:50
+    titulo: 'El desafío del paciente con datos objetivos de remisión y síntomas persistentes: ¿cómo abordarlo?'
+    tipo: ponencia
+    ponentes:
+    - Dra. Elizabeth Barba Orozco
+    moderacion: []
+  - hora: 16:50–17:10
+    titulo: Retos en la alimentación del paciente adolescente con enfermedad inflamatoria intestinal
+    tipo: ponencia
+    ponentes:
+    - Dra. Natalia Egea Castillo
+    moderacion: []
+  - hora: 17:10–17:30
+    titulo: 'Limitaciones laborales del paciente con EII: ¿momento de revisarlas?'
+    tipo: ponencia
+    ponentes:
+    - Dra. Ruth García Romero
+    moderacion: []
+  - hora: 17:30–17:45
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 17:45–18:15
+    titulo: 'Echando la vista atrás: ¿cómo ha cambiado la asistencia a la EII-P en los últimos 15 años?'
+    tipo: ponencia
+    ponentes:
+    - Dr. Javier Martín de Carpi
+    moderacion: []
+  - hora: '18:15'
+    titulo: Cierre de la jornada
+    tipo: cierre
+    ponentes: []
+    moderacion: []
 ---
 <p>El objetivo fundamental es mejorar el conocimiento sobre los diferentes aspectos de esta enfermedad en la especialidad de pediatría, destacando los aspectos que la hacen diferente respecto a la de los adultos. Al tratarse de una enfermedad con aumento de la incidencia infantil en las últimas décadas, para su diagnóstico y tratamiento es necesario un grado de experiencia y conocimientos importantes. Es una patología compleja crónica y de afectación multisistémica, por eso es necesario que los profesionales están actualizados en la materia.</p>
 

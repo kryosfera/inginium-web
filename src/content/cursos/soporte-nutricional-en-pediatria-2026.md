@@ -1,6 +1,6 @@
 ---
 titulo: Soporte Nutricional en Pediatría
-resumen: Se celebrará en el Campus La Mola Terrassa, Barcelona, el 16 y 17 de julio de 2026 con una duración de 8 horas lectivas.
+resumen: 'Curso presencial de soporte nutricional en pediatría: valoración nutricional clásica y morfofuncional, nutrición enteral, fórmulas de suplementación, talleres prácticos y casos clínicos interactivos. Terrassa, 16 y 17 de julio de 2026; 8 horas y 1,4 créditos.'
 especialidades:
   - Pediatría
 modalidad: presencial
@@ -17,6 +17,158 @@ profesorado: []
 patrocinadores:
   - 6a2ef6bcff6ee0eb74ff078f
 destacado: false
+aprenderas:
+- Pasar de la valoración nutricional clásica a la morfofuncional.
+- Revisar las indicaciones, vías y sistemas de administración, monitorización y complicaciones de la nutrición enteral.
+- Elegir fórmulas de suplementación oral y enteral.
+- Practicar la valoración morfofuncional con BIA, dinamometría y ecografía nutricional.
+- 'Abordar casos clínicos: paciente con PCI, con enfermedad de Crohn, oncológico, con ARFID y niño deportista de alto rendimiento.'
+- Conocer el papel de la IA en el abordaje de la nutrición clínica pediátrica.
+dirigidoA: null
+sede: Chateauform - Campus La Mola, Terrassa
+coordinacion:
+- Dra. Mercedes Murray
+- Dr. Pedro Cortés
+sociedades: []
+agenda:
+- seccion: Día 1 / 16 de julio
+  items:
+  - hora: 11:45–12:00
+    titulo: Bienvenida
+    tipo: apertura
+    ponentes:
+    - Dra. Mercedes Murray
+    - Dr. Pedro Cortés
+    moderacion: []
+  - hora: 12:00–12:30
+    titulo: 'Sesión inaugural: master class motivacional hacia la nutrición clínica'
+    tipo: ponencia
+    ponentes:
+    - Dra. Cecilia Martínez Costa
+    moderacion: []
+    detalle: H. U. Clínico de Valencia
+  - hora: 12:30–14:30
+    titulo: 'Mesa redonda: sentando las bases en nutrición clínica'
+    tipo: mesa
+    ponentes: []
+    moderacion: []
+    detalle: 30 minutos por ponencia y preguntas
+  - hora: null
+    titulo: 'De la valoración nutricional clásica a la morfofuncional: un nuevo paradigma'
+    tipo: ponencia
+    ponentes:
+    - Dr. Víctor Navas
+    moderacion: []
+  - hora: null
+    titulo: 'Nutrición enteral para dummies: indicaciones y contraindicaciones, vías y sistemas de administración, monitorización y complicaciones'
+    tipo: ponencia
+    ponentes:
+    - Dr. Alejandro Rodríguez
+    moderacion: []
+  - hora: null
+    titulo: Fórmulas de suplementación oral y enteral
+    tipo: ponencia
+    ponentes:
+    - Dr. Juanjo Díaz Martín
+    moderacion: []
+  - hora: 14:30–16:00
+    titulo: Comida
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 16:00–17:00
+    titulo: 'Talleres prácticos simultáneos: valoración morfofuncional (BIA, dinamometría y ecografía nutricional)'
+    tipo: bloque
+    ponentes:
+    - DN. Mª Ángeles Sánchez Olmos
+    - DN. Marta Herrador
+    - DN. Ana Muñoz
+    - DN. Dámaris Martínez
+    - Dra. Natalia Quirós
+    - Dr. Ignacio Ros
+    - Dra. Mercedes Murray
+    - Dr. Pedro Cortés
+    moderacion: []
+    detalle: Los alumnos se distribuyen en grupos
+  - hora: 17:00–17:30
+    titulo: Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 17:30–18:30
+    titulo: Talleres prácticos simultáneos (continuación)
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+- seccion: Día 2 / 17 de julio
+  items:
+  - hora: 09:00–09:45
+    titulo: 'Sesión Retos en nutrición pediátrica: nuevas tendencias y nuevas dietas en nutrición clínica'
+    tipo: ponencia
+    ponentes:
+    - Dra. Silvia Meavilla
+    moderacion: []
+  - hora: 09:45–10:45
+    titulo: Casos clínicos interactivos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: 30 minutos por caso clínico
+  - hora: null
+    titulo: Paciente PCI
+    tipo: ponencia
+    ponentes:
+    - Dra. Miriam Blanco
+    moderacion: []
+  - hora: null
+    titulo: Paciente Crohn
+    tipo: ponencia
+    ponentes:
+    - Dr. Daniel González Santana
+    moderacion: []
+  - hora: 10:45–11:15
+    titulo: Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 11:15–12:45
+    titulo: Casos clínicos interactivos
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+    detalle: 30 minutos por caso clínico
+  - hora: null
+    titulo: Paciente oncológico
+    tipo: ponencia
+    ponentes:
+    - Dra. Inma Vives
+    moderacion: []
+  - hora: null
+    titulo: Paciente ARFID
+    tipo: ponencia
+    ponentes:
+    - Dra. Marta Germán
+    moderacion: []
+  - hora: null
+    titulo: Niño deportista de alto rendimiento
+    tipo: ponencia
+    ponentes:
+    - Dra. Elena Saura
+    moderacion: []
+  - hora: 12:45–13:15
+    titulo: 'Sesión de cierre: la IA en el abordaje de la nutrición clínica pediátrica'
+    tipo: ponencia
+    ponentes:
+    - Dr. Emilio Soria
+    moderacion: []
+    detalle: Universidad de Valencia
+  - hora: 13:15–13:30
+    titulo: Conclusiones y cierre del curso
+    tipo: cierre
+    ponentes:
+    - Dra. Mercedes Murray
+    - Dr. Pedro Cortés
+    moderacion: []
 ---
 <p><strong>Chateauform - Campus La Mola, Terrassa</strong></p><p>16 y 17 de julio de 2026</p><p><strong>Coordinadores:</strong></p><p>Dra. Mercedes Murray<em>, H. U. de Canarias de Tenerife</em></p><p>Dr. Pedro Cortés<em>, H. U. Santa Lucía de Cartagena</em></p>
 

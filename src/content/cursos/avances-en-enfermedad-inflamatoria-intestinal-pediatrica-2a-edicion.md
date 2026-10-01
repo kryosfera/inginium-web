@@ -1,6 +1,6 @@
 ---
 titulo: AVANCES EN ENFERMEDAD INFLAMATORIA INTESTINAL PEDIÁTRICA
-resumen: Debate y consenso sobre los distintos aspectos de la Enfermedad Inflamatoria Intestinal Pediátrica.
+resumen: 'Jornada presencial sobre enfermedad inflamatoria intestinal pediátrica: personalización y predicción, escenarios terapéuticos complejos, desafíos quirúrgicos, escenarios futuros y tratamientos no farmacológicos. 8 de noviembre de 2024; 7,5 horas y 1,1 créditos.'
 especialidades:
   - Pediatría
   - Cirugía
@@ -21,6 +21,183 @@ patrocinadores:
   - 64b55e67272717845adb2c91
   - 64b55e7b46aa4e6fd84cbda5
 destacado: false
+aprenderas:
+- Valorar la predicción del pronóstico y el tratamiento personalizado según la estratificación de riesgo.
+- 'Abordar escenarios terapéuticos complejos: colangitis esclerosante primaria, paciente multirrefractario y EII de novo en trasplantados y pacientes oncológicos.'
+- 'Revisar los desafíos quirúrgicos y posquirúrgicos: técnica quirúrgica, enfermedad fistulizante tras reservorio e intestino corto.'
+- Actualizar el cribado de cáncer colorrectal y abordar la sexualidad, la vida reproductiva y la discapacidad en la EII.
+- Analizar el papel de la terapia dietética, los nutracéuticos y la modulación de la microbiota.
+dirigidoA: null
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Programa
+  items:
+  - hora: 08:50–09:00
+    titulo: Presentación de la jornada
+    tipo: apertura
+    ponentes:
+    - Dra. Yamile Zabana Abdo
+    - Dr. Javier Martín de Carpi
+    moderacion: []
+  - hora: 09:00–10:15
+    titulo: Personalización y predicción en la EII
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dr. Javier Martín de Carpi
+  - hora: 09:00
+    titulo: ¿Es posible predecir el pronóstico de la enfermedad en base al estudio multiómico?
+    tipo: ponencia
+    ponentes:
+    - Dra. Joana Torres
+    moderacion: []
+  - hora: 09:20
+    titulo: Podemos ofrecer un tratamiento personalizado basado en la estratificación de riesgo
+    tipo: ponencia
+    ponentes:
+    - Dra. Marla Dubinsky
+    moderacion: []
+  - hora: 09:40
+    titulo: Cómo obtener el mejor resultado de los tratamientos biológicos en la práctica clínica
+    tipo: ponencia
+    ponentes:
+    - Dr. Amit Assa
+    moderacion: []
+  - hora: '10:00'
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 10:15–11:30
+    titulo: Escenarios terapéuticos complejos
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dr. Víctor Navas López
+  - hora: '10:15'
+    titulo: 'La colangitis esclerosante primaria asociada a EII: ¿es realmente un tipo diferente de EII?'
+    tipo: ponencia
+    ponentes:
+    - Dr. Giuseppe Indolfi
+    moderacion: []
+  - hora: '10:35'
+    titulo: Abordaje del paciente multirrefractario en la práctica clínica
+    tipo: ponencia
+    ponentes:
+    - Dra. Elena Ricart Gómez
+    moderacion: []
+  - hora: '10:55'
+    titulo: 'EII de novo en el paciente trasplantado y el paciente oncológico pediátrico: ¿formas diferentes de tratarla?'
+    tipo: ponencia
+    ponentes:
+    - Dra. Gemma Pujol Muncunill
+    moderacion: []
+  - hora: '11:15'
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 12:00–13:15
+    titulo: Desafíos quirúrgicos y posquirúrgicos
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dr. Xavier Tarrado Castellarnau
+  - hora: '12:00'
+    titulo: ¿Modifica la técnica quirúrgica la evolución de la enfermedad?
+    tipo: ponencia
+    ponentes:
+    - Dra. Laura Saura García
+    moderacion: []
+  - hora: '12:20'
+    titulo: 'La enfermedad fistulizante de novo tras la creación de reservorio: ¿cuál es la mejor forma de abordarla?'
+    tipo: ponencia
+    ponentes:
+    - Dra. Sara Tavares
+    moderacion: []
+  - hora: '12:40'
+    titulo: Manejo del intestino corto poscirugía en el paciente con EII
+    tipo: ponencia
+    ponentes:
+    - Dra. Rosa Burgos Peláez
+    moderacion: []
+  - hora: '13:00'
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 13:15–14:30
+    titulo: Escenarios futuros en el paciente con EII pediátrica
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Gemma Pujol Muncunill
+  - hora: '13:15'
+    titulo: Actualización en el cribado de cáncer colorrectal en el paciente con EII
+    tipo: ponencia
+    ponentes:
+    - Dra. María Pellisé
+    moderacion: []
+  - hora: '13:35'
+    titulo: Sexualidad y vida reproductiva del paciente con EII
+    tipo: ponencia
+    ponentes:
+    - Dra. Marta Calvo Moya
+    moderacion: []
+  - hora: '13:55'
+    titulo: Discapacidad y problemática sociofamiliar en el paciente adulto con EII
+    tipo: ponencia
+    ponentes:
+    - Dr. Ignacio Marín Jiménez
+    moderacion: []
+  - hora: '14:15'
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 15:30–16:30
+    titulo: Mesa de casos clínicos
+    tipo: mesa
+    ponentes:
+    - Dr. Javier Martín de Carpi
+    moderacion: []
+  - hora: 16:30–17:45
+    titulo: Tratamientos no farmacológicos en la EII
+    tipo: bloque
+    ponentes: []
+    moderacion:
+    - Dra. Yamile Zabana Abdo
+  - hora: '16:30'
+    titulo: ¿Tiene un papel la terapia dietética en la colitis ulcerosa?
+    tipo: ponencia
+    ponentes:
+    - Dr. Víctor Navas López
+    moderacion: []
+  - hora: '16:50'
+    titulo: 'Tratamientos nutracéuticos: ¿terapia complementaria, alternativa?'
+    tipo: ponencia
+    ponentes:
+    - Dr. Eugeni Domènech
+    moderacion: []
+  - hora: '17:10'
+    titulo: ¿Estamos más cerca de usar el tratamiento modulador de la microbiota en la EII?
+    tipo: ponencia
+    ponentes:
+    - Dr. Jordi Guardiola Capon
+    moderacion: []
+  - hora: '17:30'
+    titulo: Mesa abierta a preguntas
+    tipo: debate
+    ponentes: []
+    moderacion: []
+  - hora: 17:45–18:00
+    titulo: Consideraciones finales y cierre de la jornada
+    tipo: cierre
+    ponentes:
+    - Dr. Javier Martín de Carpi
+    moderacion: []
 ---
 <p>El objetivo fundamental es mejorar el conocimiento sobre los diferentes aspectos de esta enfermedad en la especialidad de pediatría, destacando los aspectos que la hacen diferente respecto a la de los adultos. Al tratarse de una enfermedad con aumento de la incidencia infantil en las últimas décadas, para su diagnóstico y tratamiento es necesario un grado de experiencia y conocimientos importantes. Es una patología compleja crónica y de afectación multisistémica, por eso es necesario que los profesionales están actualizados en la materia.</p>
 
