@@ -1,8 +1,6 @@
 ---
 titulo: 'Metodología de la investigación en medicina: Fundamentos de Diseño y Estadística'
-resumen: |-
-  La Bioestadística y la Epidemiología, son conocimientos fuertemente interrelacionados y son necesarios para desarrollar estudios, y comprender en profundidad su interpretación y sus aplicaciones.
-  La orientación del curso sigue las directrices del Comité Internacional de Editores de Revistas Biomédicas.
+resumen: 'Curso presencial de bioestadística y epidemiología para la investigación en medicina, según las directrices del Comité Internacional de Editores de Revistas Biomédicas: estimación de parámetros, contraste de hipótesis y modelos de regresión. Barcelona, 4 y 11 de febrero de 2022; 1,2 créditos.'
 especialidades: []
 modalidad: presencial
 fechas: Este curso se celebró de forma presencial los días 4 y 11 de febrero de 2022 en Barcelona
@@ -18,6 +16,86 @@ profesorado: []
 patrocinadores:
   - 61cde57180bba0ed75026741
 destacado: false
+aprenderas:
+- 'Revisar los fundamentos de estadística: estimación de parámetros y comprobación de hipótesis.'
+- Utilizar intervalos de confianza en la comprobación de hipótesis.
+- Comprender el modelo de investigación científica.
+- Comparar las pruebas estadísticas clásicas con los modelos de regresión.
+- Aplicar modelos de regresión para controlar el sesgo de confusión, con un caso práctico de regresión logística.
+dirigidoA: null
+sede: Barcelona
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Viernes 4 de febrero de 2022
+  items:
+  - hora: 16:00–16:05
+    titulo: Presentación del curso
+    tipo: apertura
+    ponentes: []
+    moderacion: []
+  - hora: 16:05–17:00
+    titulo: Preliminares necesarios
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 17:00–17:30
+    titulo: 'Fundamentos de estadística: estimación de parámetros'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 17:30–18:30
+    titulo: 'Fundamentos de estadística: comprobación de hipótesis'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 18:30–18:45
+    titulo: Descanso. Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 18:45–19:00
+    titulo: Comprobación con intervalos de confianza (Neyman, 1934)
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 19:00–20:00
+    titulo: El modelo de investigación científica
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+- seccion: Viernes 11 de febrero de 2022
+  items:
+  - hora: 16:00–16:05
+    titulo: Resumen de la sesión anterior
+    tipo: apertura
+    ponentes: []
+    moderacion: []
+  - hora: 16:05–17:00
+    titulo: Pruebas estadísticas clásicas versus modelos de regresión para analizar la relación entre las variables exposición y respuesta
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 17:00–18:00
+    titulo: Clasificaciones
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 18:00–18:30
+    titulo: Descanso. Café
+    tipo: pausa
+    ponentes: []
+    moderacion: []
+  - hora: 18:45–19:00
+    titulo: 'Los modelos de regresión como técnica de ajuste estadístico: control del sesgo de confusión'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: 19:00–20:00
+    titulo: 'Regresión logística: caso práctico'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
 ---
 <p>Solicitada la acreditación al Consejo Catalán de Formación Continuada de las Profesiones Sanitarias (CCFCPS) – Sistema Nacional de Salud. </p><p>Para la obtención del diploma acreditativo será necesaria la asistencia a la totalidad del curso (2 sesiones).</p>
 

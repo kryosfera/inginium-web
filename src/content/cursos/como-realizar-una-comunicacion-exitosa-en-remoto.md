@@ -1,6 +1,6 @@
 ---
 titulo: La teleconsulta. Cómo realizar una comunicación exitosa en remoto
-resumen: La teleconsulta se está instaurando como una forma más de atender a las personas, conozcamos cómo comunicar con éxito en remoto.
+resumen: 'Curso online sobre comunicación en la teleconsulta: técnicas de comunicación en remoto, personalización y seguimiento según el perfil de cada persona, y claves para una comunicación exitosa. Del 15 de marzo al 31 de diciembre de 2021; 6 horas y 0,9 créditos.'
 especialidades: []
 modalidad: online
 fechas: Disponible del 15 de marzo al 31 de diciembre de 2021.
@@ -17,6 +17,73 @@ profesorado:
 patrocinadores:
   - 5fbcbf3a9d448a5e2ac29da3
 destacado: false
+aprenderas:
+- Aplicar técnicas de comunicación en remoto para generar confianza y manejar la información.
+- Escuchar la perspectiva del paciente y proporcionar información sencilla y relevante.
+- Prestar apoyo emocional al paciente a distancia.
+- Adaptar el seguimiento en remoto al perfil de cada persona y a la clasificación Target Disc.
+- Evitar falsas expectativas y terminar la teleconsulta de forma exitosa.
+dirigidoA: null
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Técnicas de la comunicación en remoto
+  items:
+  - hora: null
+    titulo: Técnicas de la comunicación en remoto
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Generar confianza y manejar la información
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Escuchar la perspectiva de la otra persona y atender sus inquietudes
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Proporcionar información sencilla y relevante
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+- seccion: Personalización, seguimiento y adaptación del lenguaje a cada persona
+  items:
+  - hora: null
+    titulo: Conocer, comprender y prestar apoyo emocional al paciente
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: El seguimiento en remoto de cada persona según su perfil
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: El seguimiento en remoto según la clasificación de Target Disc
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+- seccion: Consejos y elementos clave para una comunicación exitosa
+  items:
+  - hora: null
+    titulo: Consejos y elementos clave para una comunicación exitosa
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Evitar las falsas expectativas
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: Cómo terminar la teleconsulta de forma exitosa
+    tipo: bloque
+    ponentes: []
+    moderacion: []
 ---
 <p>Actualmente estamos viviendo una transformación digital que se ha acelerado por la pandemia de la COVID-19. Para afrontar la situación de demanda creciente, escenarios de movilidad restringida por parte de los ciudadanos y cambios de hábitos en referencia al consumo de servicios generales cada vez más en remoto, se están incorporando nuevos canales de atención no presencial en los centros de salud. Así es como la teleconsulta se está instaurando como una forma más de atender a las personas.</p>
 

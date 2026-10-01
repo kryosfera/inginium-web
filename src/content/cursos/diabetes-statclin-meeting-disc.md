@@ -1,6 +1,6 @@
 ---
 titulo: Diabetes StatClin Meeting (DISC)
-resumen: Evento internacional (Idioma Inglés). Este congreso anual pretende reunir a expertos del mundo de la bioestadística, la ingeniería y la clínica para debatir los últimos avances en bioestadística con aplicaciones en la investigación de la diabetes y la salud digital.
+resumen: Congreso internacional anual, online y en inglés, que reúne a bioestadísticos, ingenieros y clínicos para debatir los avances en bioestadística aplicados a la investigación en diabetes y la salud digital. Del 3 al 5 de abril de 2025; 12 horas y 45 minutos.
 especialidades:
   - Endocrinología
   - Investigación
@@ -23,6 +23,16 @@ patrocinadores:
   - 66a368e94f86813a95880424
   - 67aa0ec794be4c45e031a10d
 destacado: false
+aprenderas:
+- Revisar la monitorización continua de glucosa (CGM).
+- Conocer aplicaciones de la inteligencia artificial en la diabetes.
+- Analizar datos funcionales y causales.
+- Revisar la medicina digital y los ensayos clínicos.
+dirigidoA: Bioestadísticos, ingenieros y clínicos
+sede: null
+coordinacion: []
+sociedades: []
+agenda: []
 ---
 <p>Descubre los últimos avances en el manejo de la diabetes mediante el uso de <strong>biometría, inteligencia artificial y salud digital</strong> en el <strong>Diabetes StatClin Meeting (DISC)</strong>. Este congreso reúne a <strong>bioestadísticos, ingenieros y clínicos</strong> de todo el mundo para debatir sobre ensayos clínicos digitales, modelos predictivos personalizados y nuevas metodologías en el análisis de datos de salud.</p><p>🔹 <strong>Temas clave:</strong><br>✅ Monitoreo continuo de glucosa (CGM)<br>✅ Inteligencia artificial aplicada a la diabetes<br>✅ Análisis de datos funcionales y causales<br>✅ Medicina digital y ensayos clínicos</p>
 

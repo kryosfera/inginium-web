@@ -1,6 +1,6 @@
 ---
 titulo: Metodología de investigación clínica para el profesional sanitario
-resumen: Presentamos una formación transversal con el objetivo de proporcionar una preparación para complementar y enriquecer los conocimientos desde el inicio del proceso científico, pasando por la elaboración y creación de registros de pacientes hasta la publicación de los resultados en publicaciones u otros medios específicos.
+resumen: 'Formación online transversal en metodología de investigación clínica, desde el inicio del proceso científico hasta la publicación: búsquedas bibliográficas, lectura crítica, estadística, registros de pacientes y RWE, y redacción de artículos. Del 1 de marzo de 2022 al 28 de febrero de 2023; 8 horas y 1 crédito.'
 especialidades: []
 modalidad: online
 fechas: Disponible online del 1 de Marzo de 2022 al 28 de febrero de 2023
@@ -16,6 +16,49 @@ profesorado: []
 patrocinadores:
   - 6232f9fda76ac11657463a0e
 destacado: false
+aprenderas:
+- Realizar búsquedas bibliográficas eficientes.
+- Leer y analizar críticamente artículos científicos.
+- Aplicar la estadística a la investigación clínica.
+- Elaborar registros de pacientes y generar evidencia del mundo real (RWE).
+- Redactar y publicar artículos científicos.
+dirigidoA: Profesional sanitario
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Módulos
+  items:
+  - hora: null
+    titulo: 'Módulo I: Búsquedas bibliográficas inteligentes'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Módulo II: Lectura y análisis crítico de artículos científicos'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Módulo III: Estadística aplicada a la investigación clínica'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Módulo IV: Elaboración de registros y RWE'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Módulo V: Redacción de artículos científicos'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Módulo VI: Publicación de artículos científicos'
+    tipo: bloque
+    ponentes: []
+    moderacion: []
 ---
 <p>La investigación representa un pilar fundamental en la actividad médica y la mayor calidad asistencial surge de la integración de una práctica clínica y una actividad investigadora excelentes.</p><p><a href="http://scientificskills.ksf-learning.net/course/videocurso-onco"><strong><br></strong></a></p>
 

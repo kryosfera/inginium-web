@@ -1,6 +1,6 @@
 ---
 titulo: DIABETES, OBJETIVO MI PACIENTE
-resumen: Formación Enfermería de Atención Primaria sobre el manejo integral de pacientes con diabetes y prevención y tratamiento de sus complicaciones derivadas.
+resumen: Curso online para enfermería de Atención Primaria sobre el manejo integral del paciente con diabetes y la prevención y el tratamiento de sus complicaciones, a partir de cuatro casos clínicos. Disponible del 1 de agosto de 2025 al 31 de julio de 2026; 8 horas y 1,3 créditos.
 especialidades:
   - Enfermería
 modalidad: online
@@ -19,6 +19,42 @@ profesorado:
 patrocinadores:
   - 66a368e94f86813a95880424
 destacado: false
+aprenderas:
+- Gestionar al paciente con insuficiencia renal y diabetes.
+- Manejar al paciente con diabetes tipo 2 e hipoglucemias inadvertidas.
+- Abordar el mal control en el paciente tratado con antidiabéticos no insulínicos (ADNI).
+- Valorar al paciente con mal control y sintomatología cardinal.
+dirigidoA: Enfermería de Atención Primaria
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Casos
+  items:
+  - hora: null
+    titulo: 'Caso 1: Gestión del paciente con insuficiencia renal y diabetes'
+    tipo: ponencia
+    ponentes:
+    - Zoila Lifante Pedrola
+    moderacion: []
+  - hora: null
+    titulo: 'Caso 2: Manejo del paciente con diabetes tipo 2 e hipoglucemias inadvertidas'
+    tipo: ponencia
+    ponentes:
+    - Zoila Lifante Pedrola
+    moderacion: []
+  - hora: null
+    titulo: 'Caso 3: Manejo del paciente con antidiabéticos no insulínicos (ADNIs) y mal control'
+    tipo: ponencia
+    ponentes:
+    - Eva Sáez Torralba
+    moderacion: []
+  - hora: null
+    titulo: 'Caso 4: Paciente que presenta un mal control con sintomatología cardinal'
+    tipo: ponencia
+    ponentes:
+    - Eva Sáez Torralba
+    moderacion: []
 ---
 <p>Saber gestionar el seguimiento y la educación médica de los pacientes es vital para su calidad de vida. <strong>La gamificación ofrece una fuente de aprendizaje motivadora y efectiva para el alumnado</strong>, optimizando la eficacia y los resultados en a enseñanza, permitiendo establecer una relación con los contenidos de carácter lúdico. La implicación del alumno para que siga adelante en la actividad y llegue hasta el final, es lo más importante.</p>
 
