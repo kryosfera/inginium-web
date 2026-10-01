@@ -24,16 +24,42 @@ export function nombreDesdeFichero(url: string): string {
 }
 
 const esDelSitio = (u: string | null) => { try { return /^(www\.)?inginium-ksf\.com$/i.test(new URL(u ?? '').hostname); } catch { return false; } };
-const txt = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
+const INVISIBLES = /[\u200B-\u200D\uFEFF]/g;
+const txt = (v: unknown) => { const t = typeof v === 'string' ? v.replace(INVISIBLES, '').trim() : ''; return t || null; };
+
+function limpiarImg(tag: string): string {
+  const attrs = [...tag.matchAll(/([\w-]+)(?:="([^"]*)")?/g)].slice(1).map((m) => [m[1], m[2] ?? ''] as const);
+  const out = new Map<string, string>();
+  for (const [k, v] of attrs) if (v !== 'auto') out.set(k.toLowerCase(), v);
+  const alt = out.get('alt') ?? '';
+  out.set('alt', alt === '__wf_reserved_inherit' ? '' : alt);
+  out.set('loading', 'lazy');
+  return `<img ${[...out].map(([k, v]) => `${k}="${v}"`).join(' ')}>`;
+}
 
 export function limpiarHtml(html: string | null | undefined): string {
   if (!html) return '';
-  return html
+  let h = html
     .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/\s(id|on\w+)="[^"]*"/gi, '')
-    .replace(/<p>(\s|&nbsp;|\.)*<\/p>/gi, '')
-    .trim();
+    .replace(INVISIBLES, '')
+    .replace(/\s(id|on\w+|data-[\w-]+)="[^"]*"/gi, '')
+    .replace(/<img\b[^>]*>/gi, limpiarImg)
+    .replace(/[ \t]*\t[ \t]*|[ \t]{2,}/g, ' ');
+  // Etiquetas de texto vacías, también anidadas (<p><strong></strong></p>).
+  for (let prev = ''; prev !== h; ) {
+    prev = h;
+    h = h.replace(/<(strong|em|b|i|span)>(\s|&nbsp;)*<\/\1>/gi, '').replace(/<p>(\s|&nbsp;|\.|<br\s*\/?>)*<\/p>/gi, '');
+  }
+  return h.trim();
 }
+
+/** URLs remotas (CDN de Webflow) de las imágenes en línea, en orden de aparición. */
+export const imagenesDe = (html: string): string[] =>
+  [...html.matchAll(/<img\b[^>]*\ssrc="(https:\/\/cdn\.prod\.website-files\.com\/[^"]+)"/gi)].map((m) => m[1]);
+
+/** Sustituye el src de cada imagen cuyo URL esté en el mapa. */
+export const reescribirImagenes = (html: string, mapa: Map<string, string>): string =>
+  html.replace(/(<img\b[^>]*\ssrc=")([^"]+)(")/gi, (m, a, u, c) => (mapa.has(u) ? a + mapa.get(u) + c : m));
 
 export function patrocinadoresDe(f: Record<string, any>): { id: string; url: string }[] {
   const lista: CmsFile[] = [...(Array.isArray(f['patrocinadores-2']) ? f['patrocinadores-2'] : []), ...(f['logo-patrocinador']?.url ? [f['logo-patrocinador']] : [])];

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero, nombreDesdeFichero } from '../../src/lib/cms-import';
+import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero, nombreDesdeFichero, imagenesDe, reescribirImagenes } from '../../src/lib/cms-import';
 
 const docentes = new Map([['t1', 'dra-ana'], ['t2', 'dr-luis']]);
 const item = (f: Record<string, unknown>, extra: Record<string, unknown> = {}) =>
@@ -105,5 +105,41 @@ describe('enlaces al propio sitio', () => {
     const nuevo = mapCurso(item({}), { docentes, imagen: null, programa: null });
     expect(fusionarCurso(nuevo, { ...nuevo, url: 'https://www.inginium-ksf.com/contact-us', destacado: true })).toMatchObject({ url: null, destacado: false });
     expect(fusionarCurso(nuevo, { ...nuevo, url: 'https://otro.es/' }).url).toBe('https://otro.es/');
+  });
+});
+
+describe('limpiarHtml: residuos de Webflow', () => {
+  it('elimina párrafos con solo invisibles, br o etiquetas vacías anidadas', () => {
+    expect(limpiarHtml('<p>A</p><p>\u200D</p><p>\t\t<strong>\u200D</strong></p><p><br></p><p><strong></strong></p><p>\u200B\uFEFF&nbsp;</p>')).toBe('<p>A</p>');
+  });
+  it('elimina strong/em vacíos sueltos', () => {
+    expect(limpiarHtml('<p>A<strong></strong> b<em> </em></p>')).toBe('<p>A b</p>');
+  });
+  it('normaliza tabuladores y espacios repetidos', () => {
+    expect(limpiarHtml('<h3>\t\tTítulo   largo</h3>')).toBe('<h3> Título largo</h3>');
+  });
+  it('quita atributos data-*', () => {
+    expect(limpiarHtml('<p data-rt-type="x" class="a">A</p>')).toBe('<p class="a">A</p>');
+  });
+  it('imágenes: alt basura vacío, lazy y sin width/height auto', () => {
+    expect(limpiarHtml('<img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/a/b.png" width="auto" height="auto" data-rt-x="1">'))
+      .toBe('<img alt="" src="https://cdn.prod.website-files.com/a/b.png" loading="lazy">');
+    expect(limpiarHtml('<img src="https://cdn.prod.website-files.com/a/b.png" alt="Agenda">')).toBe('<img src="https://cdn.prod.website-files.com/a/b.png" alt="Agenda" loading="lazy">');
+  });
+});
+
+describe('imágenes en línea', () => {
+  const u = 'https://cdn.prod.website-files.com/a/b%201.png';
+  it('imagenesDe y reescribirImagenes', () => {
+    const h = `<p>x</p><img alt="" src="${u}" loading="lazy"><img alt="" src="https://otro.es/c.png">`;
+    expect(imagenesDe(h)).toEqual([u]);
+    expect(reescribirImagenes(h, new Map([[u, '/cursos-media/c-1.png']]))).toContain('src="/cursos-media/c-1.png"');
+    expect(reescribirImagenes(h, new Map())).toBe(h);
+  });
+});
+
+describe('mapDocente: invisibles en textos planos', () => {
+  it('los quita del resumen', () => {
+    expect(mapDocente({ fieldData: { name: 'A', slug: 'a', 'teacher-biography-summary': 'Hospital.\u200B' } }, null).resumen).toBe('Hospital.');
   });
 });

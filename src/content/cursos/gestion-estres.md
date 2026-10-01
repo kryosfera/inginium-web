@@ -18,4 +18,4 @@ destacado: false
 ---
 <p>Curso acerca de la identificación de las causas del estrés así como de técnicas de reducción del mismo y mejora de la eficiencia.</p>
 
-<p>1. ¿Que es el estrés?</p><p>2. Estrategias de gestión del estrés</p><p>3. La inteligencia emocional</p><p>4. Plan de gestión del estrés</p><p>‍</p>
+<p>1. ¿Que es el estrés?</p><p>2. Estrategias de gestión del estrés</p><p>3. La inteligencia emocional</p><p>4. Plan de gestión del estrés</p>

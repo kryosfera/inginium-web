@@ -19,6 +19,6 @@ destacado: false
 ---
 <p>La investigación representa un pilar fundamental en la actividad médica y la mayor calidad asistencial surge de la integración de una práctica clínica y una actividad investigadora excelentes.</p><p><a href="http://scientificskills.ksf-learning.net/course/videocurso-onco"><strong><br></strong></a></p>
 
-<p>MÓDULO I</p><p><strong>Búsquedas bibliográficas inteligentes</strong></p><p>‍</p><p>MÓDULO II</p><p><strong>Lectura y análisis crítico de artículos científicos</strong></p><p>‍</p><p>MÓDULO III</p><p><strong>Estadística aplicada a la investigación clínica</strong></p>
+<p>MÓDULO I</p><p><strong>Búsquedas bibliográficas inteligentes</strong></p><p>MÓDULO II</p><p><strong>Lectura y análisis crítico de artículos científicos</strong></p><p>MÓDULO III</p><p><strong>Estadística aplicada a la investigación clínica</strong></p>
 
-<p>MÓDULO IV</p><p><strong>Elaboración de registros y RWE</strong></p><p><a href="http://scientificskills.ksf-learning.net/courses/videocurso-onco/lessons/parte-1-3/"><br></a></p><p>MÓDULO V</p><p><strong>Redacción de artículos científicos</strong></p><p>‍</p><p>MÓDULO VI</p><p><strong>Publicación de artículos científicos</strong></p>
+<p>MÓDULO IV</p><p><strong>Elaboración de registros y RWE</strong></p><p><a href="http://scientificskills.ksf-learning.net/courses/videocurso-onco/lessons/parte-1-3/"><br></a></p><p>MÓDULO V</p><p><strong>Redacción de artículos científicos</strong></p><p>MÓDULO VI</p><p><strong>Publicación de artículos científicos</strong></p>

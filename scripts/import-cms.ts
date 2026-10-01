@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import yaml from 'js-yaml';
-import { nombreDesdeFichero, mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
+import { imagenesDe, reescribirImagenes, nombreDesdeFichero, mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
 
 const bk = process.argv[2];
 if (!bk) { console.error('Falta la ruta del backup de inginium-ksf'); process.exit(1); }
@@ -10,15 +10,15 @@ const leer = (n: string): CmsItem[] => { const d = JSON.parse(readFileSync(join(
 
 // Índice nombre de fichero → ruta local (descargar.sh conserva la ruta del CDN bajo assets/files).
 const indice = new Map<string, string>();
-const recorrer = (d: string) => { if (!existsSync(d)) return; for (const e of readdirSync(d)) { const p = join(d, e); statSync(p).isDirectory() ? recorrer(p) : indice.set(e, p); } };
+const recorrer = (d: string) => { if (!existsSync(d)) return; for (const e of readdirSync(d)) { const p = join(d, e); statSync(p).isDirectory() ? recorrer(p) : indice.set(e.normalize('NFC'), p); } };
 recorrer(join(bk, 'assets', 'files'));
-const local = (url: string | undefined | null) => { if (!url) return null; const n = nombreFichero(url); return indice.get(n) ?? indice.get(encodeURIComponent(n)) ?? null; };
+const local = (url: string | undefined | null) => { if (!url) return null; const n = nombreFichero(url).normalize('NFC'); return indice.get(n) ?? indice.get(encodeURIComponent(n).normalize('NFC')) ?? null; };
 const copiar = (src: string | null, dir: string, base: string) => { if (!src) return null; mkdirSync(dir, { recursive: true }); const n = `${base}${extname(src).toLowerCase()}`; copyFileSync(src, join(dir, n)); return n; };
 
 const faltan: string[] = [];
 // Docentes
 const docentesCms = leer('teachers');
-const docentes = new Map(docentesCms.map((t) => [t.id!, t.fieldData.slug as string]));
+const docentes = new Map(docentesCms.filter(isPublicado).map((t) => [t.id!, t.fieldData.slug as string]));
 const docentesOut = docentesCms.filter(isPublicado).map((t) => {
   const src = local(t.fieldData['teacher-profile-picture']?.url); if (t.fieldData['teacher-profile-picture']?.url && !src) faltan.push(t.fieldData['teacher-profile-picture'].url);
   return mapDocente(t, copiar(src, 'src/assets/profesorado', t.fieldData.slug));
@@ -49,6 +49,14 @@ for (const it of leer('courses').filter(isPublicado)) {
     patros.set(p.id, { id: p.id, nombre: prev?.nombre?.trim() || nombreDesdeFichero(p.url), logo: logo ?? prev?.logo ?? null });
   }
   const nuevo = mapCurso(it, { docentes, imagen: copiar(img, 'src/assets/cursos', f.slug), programa });
+  // Imágenes en línea del cuerpo: copia local si existe; si no, se deja el src remoto y se cuenta como no encontrada.
+  const mapaImg = new Map<string, string>();
+  imagenesDe(nuevo.cuerpo).forEach((u, i) => {
+    const src = local(u);
+    if (!src) { faltan.push(u); return; }
+    mapaImg.set(u, `/cursos-media/${copiar(src, 'public/cursos-media', `${f.slug}-${i + 1}`)}`);
+  });
+  nuevo.cuerpo = reescribirImagenes(nuevo.cuerpo, mapaImg);
   const ruta = `src/content/cursos/${f.slug}.md`;
   let existente: CursoImportado | null = null;
   if (existsSync(ruta)) { const [, fm, ...cuerpo] = readFileSync(ruta, 'utf8').split('---\n'); existente = { ...(yaml.load(fm) as any), id: f.slug, cuerpo: cuerpo.join('---\n').trim() }; }
