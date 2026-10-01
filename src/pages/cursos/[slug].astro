@@ -21,7 +21,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: c.da
   provider: { '@type': 'Organization', name: 'Inginium', url: 'https://inginium-ksf.com' } };
 ---
 <BaseLayout title={`${c.data.titulo} · Inginium`} description={descripcion} jsonLd={jsonLd}>
-  <SectionHero kicker={c.data.especialidades.join(' · ') || 'Curso'} titulo={c.data.titulo} entradilla={c.data.resumen} imagen={imagen}>
+  <SectionHero kicker={c.data.especialidades.join(' · ') || 'Curso'} titulo={c.data.titulo} entradilla={c.data.resumen} imagen={imagen} variante="cartel">
     {c.data.estado === 'finalizado' ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
   </SectionHero>
   <div class="wrap layout">

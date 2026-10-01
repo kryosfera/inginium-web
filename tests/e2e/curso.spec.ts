@@ -9,6 +9,7 @@ const activoSinEnlace = cursos.find((c) => c.estado === 'activo' && !c.url);
 // Estos casos dependen de los datos: si no hay ninguno se saltan. El marcador sin imagen se prueba además
 // sin depender de los datos en tests/unit/marcador.test.ts (Container API de Astro).
 const sinImagen = cursos.find((c) => !c.imagen);
+const conImagen = cursos.find((c) => c.imagen);
 
 test('curso activo: datos y botón de inscripción a la web del curso', async ({ page }) => {
   await page.goto(`/cursos/${activo.id}`);
@@ -33,6 +34,27 @@ test('curso sin imagen: marcador, sin imagen rota', async ({ page }) => {
   const rotas = await page.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0).length);
   expect(rotas).toBe(0);
   await expect(page.getByRole('link', { name: /^Programa/ })).toHaveCount(0);
+});
+
+test('ficha con imagen: cartel completo junto al título, sin solaparse ni recortarse', async ({ page, isMobile }) => {
+  test.skip(!conImagen, 'ningún curso con imagen en los datos');
+  await page.goto(`/cursos/${conImagen!.id}`);
+  const img = page.locator('.shero .cartel img');
+  await expect(img).toBeVisible();
+  await expect(img).toHaveAttribute('alt', new RegExp(`^Cartel del curso .*${conImagen!.titulo.slice(0, 20).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
+  const h = (await page.locator('.shero h1').boundingBox())!;
+  const c = (await img.boundingBox())!;
+  if (isMobile) expect(c.y).toBeGreaterThanOrEqual(h.y + h.height);
+  else {
+    const solapa = c.x < h.x + h.width && c.x + c.width > h.x && c.y < h.y + h.height && c.y + c.height > h.y;
+    expect(solapa).toBe(false);
+    expect(c.x).toBeGreaterThan(h.x);
+  }
+  // sin recortar: la caja conserva la proporción natural y respeta el alto máximo
+  const { nw, nh, maxH } = await img.evaluate((el: HTMLImageElement) => ({ nw: el.naturalWidth, nh: el.naturalHeight, maxH: parseFloat(getComputedStyle(el).maxHeight) }));
+  expect(c.height).toBeLessThanOrEqual(maxH + 1);
+  expect(Math.abs(c.width / c.height - nw / nh)).toBeLessThan(0.02);
+  expect(c.height).toBeGreaterThan(120);
 });
 
 test('móvil: barra inferior con la acción', async ({ page, isMobile }) => {

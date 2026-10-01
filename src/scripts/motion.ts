@@ -18,6 +18,8 @@ onPage(() => {
     // Bloques que suben al entrar
     ScrollTrigger.batch('[data-reveal]', { start: 'top 90%', once: true,
       onEnter: (els) => gsap.from(els, { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' }) });
+    // Cartel de la ficha de curso: entrada suave (sin JS o con movimiento reducido se ve tal cual)
+    document.querySelectorAll<HTMLElement>('[data-cartel]').forEach((el) => gsap.from(el, { y: 24, autoAlpha: 0, duration: 0.9, ease: 'power3.out' }));
     // Cifras fuera del hero
     document.querySelectorAll<HTMLElement>('[data-counters]:not([data-in-hero])').forEach((box) => {
       ScrollTrigger.create({ trigger: box, start: 'top 85%', once: true,

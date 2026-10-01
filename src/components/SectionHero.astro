@@ -1,13 +1,20 @@
 ---
+import { Picture } from 'astro:assets';
 import Pattern from './Pattern.astro';
 import { fuentesCabecera, SIZES_CABECERA } from '../lib/imagen-cabecera';
 // La cabecera es siempre escénica (modo oscuro con foto del proyecto), también en las páginas claras.
-interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata }
-const { titulo, kicker, entradilla, imagen } = Astro.props;
-const f = imagen ? await fuentesCabecera(imagen) : null;
+// variante 'cartel': la imagen es un cartel con texto; se muestra completa como tarjeta y, desenfocada, de fondo.
+interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata; variante?: 'fondo' | 'cartel' }
+const { titulo, kicker, entradilla, imagen, variante = 'fondo' } = Astro.props;
+const cartel = variante === 'cartel' && !!imagen;
+const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
 ---
-<section class="shero" data-mode="oscuro">
-  {f
+<section class:list={['shero', { 'es-cartel': cartel }]} data-mode="oscuro">
+  {cartel && imagen
+    ? <div class="bg bg-cartel" aria-hidden="true">
+        <Picture src={imagen} alt="" widths={[640, 960]} sizes="100vw" formats={['avif', 'webp']} quality={45} loading="eager" decoding="async" />
+      </div>
+    : f
     ? <div class="bg"><picture>
         <source type="image/avif" srcset={f.avif} sizes={SIZES_CABECERA} />
         <source type="image/webp" srcset={f.webp} sizes={SIZES_CABECERA} />
@@ -16,10 +23,16 @@ const f = imagen ? await fuentesCabecera(imagen) : null;
     : <div class="bg" aria-hidden="true"><Pattern /></div>}
   <div class="shade" aria-hidden="true"></div>
   <div class="wrap inner">
-    {kicker && <span class="eyebrow">{kicker}</span>}
-    <h1 data-split>{titulo}</h1>
-    {entradilla && <p class="lead">{entradilla}</p>}
-    <slot />
+    <div class="texto">
+      {kicker && <span class="eyebrow">{kicker}</span>}
+      <h1 data-split>{titulo}</h1>
+      {entradilla && <p class="lead">{entradilla}</p>}
+      <slot />
+    </div>
+    {cartel && imagen && <figure class="cartel" data-cartel>
+      <Picture src={imagen} alt={`Cartel del curso ${titulo}`} widths={[420, 840]} sizes="(max-width: 899px) min(78vw, 340px), 420px"
+        formats={['avif', 'webp']} quality={70} loading="eager" fetchpriority="high" decoding="async" />
+    </figure>}
   </div>
 </section>
 <style>
@@ -28,7 +41,20 @@ const f = imagen ? await fuentesCabecera(imagen) : null;
   .bg :global(img) { width: 100%; height: 100%; object-fit: cover; }
   .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 82%, transparent) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 40%, color-mix(in srgb, var(--bg) 35%, transparent) 100%), linear-gradient(180deg, color-mix(in srgb, var(--bg) 30%, transparent), var(--bg) 96%); }
   .inner { display: grid; gap: 16px; }
-  .inner > :global(.tag) { justify-self: start; }
+  .texto { display: grid; gap: 16px; align-content: center; min-width: 0; }
+  .texto > :global(.tag) { justify-self: start; }
   h1 { font-size: clamp(44px, 6.4vw, 96px); font-weight: 900; max-width: 14ch; }
   .lead { font-size: clamp(18px, 1.5vw, 21px); max-width: 52ch; color: var(--fg); opacity: .9; }
+</style>
+<style>
+  .bg-cartel :global(img) { filter: blur(28px) saturate(1.1); transform: scale(1.15); }
+  .es-cartel .shade { background: color-mix(in srgb, #0B0B2C 78%, transparent); }
+  .es-cartel h1 { font-size: clamp(36px, 4.6vw, 72px); }
+  .cartel { margin: 0; justify-self: center; border-radius: 14px; overflow: hidden; line-height: 0; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+  .cartel :global(img) { display: block; width: auto; height: auto; max-width: min(78vw, 340px); max-height: min(62vh, 560px); object-fit: contain; }
+  @media (min-width: 900px) {
+    .es-cartel .inner { grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 80px); align-items: center; }
+    .cartel { justify-self: end; }
+    .cartel :global(img) { max-width: 420px; }
+  }
 </style>
