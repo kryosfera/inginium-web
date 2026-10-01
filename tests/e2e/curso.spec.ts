@@ -36,7 +36,7 @@ test('curso sin imagen: marcador, sin imagen rota', async ({ page }) => {
   await expect(page.getByRole('link', { name: /^Programa/ })).toHaveCount(0);
 });
 
-test('ficha con imagen: cartel completo junto al título, sin solaparse ni recortarse', async ({ page, isMobile }) => {
+test('ficha con imagen: cartel completo junto al título (encima en móvil), sin solaparse ni recortarse', async ({ page, isMobile }) => {
   test.skip(!conImagen, 'ningún curso con imagen en los datos');
   await page.goto(`/cursos/${conImagen!.id}`);
   const img = page.locator('.shero .cartel img');
@@ -44,7 +44,7 @@ test('ficha con imagen: cartel completo junto al título, sin solaparse ni recor
   await expect(img).toHaveAttribute('alt', new RegExp(`^Cartel del curso .*${conImagen!.titulo.slice(0, 20).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
   const h = (await page.locator('.shero h1').boundingBox())!;
   const c = (await img.boundingBox())!;
-  if (isMobile) expect(c.y).toBeGreaterThanOrEqual(h.y + h.height);
+  if (isMobile) expect(c.y + c.height).toBeLessThanOrEqual(h.y);
   else {
     const solapa = c.x < h.x + h.width && c.x + c.width > h.x && c.y < h.y + h.height && c.y + c.height > h.y;
     expect(solapa).toBe(false);

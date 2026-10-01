@@ -1,22 +1,16 @@
 ---
-import { Picture } from 'astro:assets';
 import Pattern from './Pattern.astro';
 import { fuentesCabecera, SIZES_CABECERA } from '../lib/imagen-cabecera';
 // La cabecera es siempre escénica (modo oscuro con foto del proyecto), también en las páginas claras.
-// variante 'cartel': la imagen es un cartel con texto; se muestra completa como tarjeta y, desenfocada, de fondo.
-interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata; variante?: 'fondo' | 'cartel' }
-const { titulo, kicker, entradilla, imagen, variante = 'fondo' } = Astro.props;
-const cartel = variante === 'cartel' && !!imagen;
+// La ficha de curso tiene su propia cabecera (CursoHero).
+interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata }
+const { titulo, kicker, entradilla, imagen } = Astro.props;
 // Títulos con palabras muy largas («Neurogastroenterología»): cuerpo menor para que la palabra quepa entera en su columna.
 const largo = Math.max(...titulo.split(/\s+/).map((p) => p.length)) >= 16;
-const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
+const f = imagen ? await fuentesCabecera(imagen) : null;
 ---
-<section class:list={['shero', { 'es-cartel': cartel, 'titulo-largo': largo }]} data-mode="oscuro">
-  {cartel && imagen
-    ? <div class="bg bg-cartel" aria-hidden="true">
-        <Picture src={imagen} alt="" widths={[640, 960]} sizes="100vw" formats={['avif', 'webp']} quality={45} loading="eager" decoding="async" />
-      </div>
-    : f
+<section class:list={['shero', { 'titulo-largo': largo }]} data-mode="oscuro">
+  {f
     ? <div class="bg"><picture>
         <source type="image/avif" srcset={f.avif} sizes={SIZES_CABECERA} />
         <source type="image/webp" srcset={f.webp} sizes={SIZES_CABECERA} />
@@ -31,10 +25,6 @@ const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
       {entradilla && <p class="lead">{entradilla}</p>}
       <slot />
     </div>
-    {cartel && imagen && <figure class="cartel" data-cartel>
-      <Picture src={imagen} alt={`Cartel del curso ${titulo}`} widths={[420, 840]} sizes="(max-width: 899px) min(78vw, 340px), 420px"
-        formats={['avif', 'webp']} quality={70} loading="eager" fetchpriority="high" decoding="async" />
-    </figure>}
   </div>
 </section>
 <style>
@@ -49,15 +39,5 @@ const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
   .lead { font-size: clamp(18px, 1.5vw, 21px); max-width: 52ch; color: var(--fg); opacity: .9; }
 </style>
 <style>
-  .bg-cartel :global(img) { filter: blur(28px) saturate(1.1); transform: scale(1.15); }
-  .es-cartel .shade { background: color-mix(in srgb, #0B0B2C 78%, transparent); }
-  .es-cartel h1 { font-size: clamp(34px, 4.2vw, 64px); overflow-wrap: break-word; hyphens: auto; }
   .titulo-largo h1 { font-size: clamp(26px, 3.4vw, 48px); max-width: 20ch; }
-  .cartel { margin: 0; justify-self: center; border-radius: 14px; overflow: hidden; line-height: 0; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
-  .cartel :global(img) { display: block; width: auto; height: auto; max-width: min(78vw, 340px); max-height: min(62vh, 560px); object-fit: contain; }
-  @media (min-width: 900px) {
-    .es-cartel .inner { grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 80px); align-items: center; }
-    .cartel { justify-self: end; }
-    .cartel :global(img) { max-width: 420px; }
-  }
 </style>

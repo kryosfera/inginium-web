@@ -74,3 +74,23 @@ describe('fechaCorta', async () => {
     expect(fechaIso('13 de noviembre de 2026')).toBe('2026-11-13');
   });
 });
+
+describe('fechaDestacada y duracionCorta', async () => {
+  const { fechaDestacada, duracionCorta } = await import('../../src/lib/proximo');
+  it('día suelto, rango y solo año', () => {
+    expect(fechaDestacada('13 de noviembre de 2026', 2026)).toEqual({ grande: '13.11', anio: '2026', hasta: null });
+    expect(fechaDestacada('Disponible online entre los días 1 de septiembre de 2024 y 31 de julio de 2025', 2025))
+      .toEqual({ grande: '01.09', anio: '2024', hasta: '31 jul 2025' });
+    expect(fechaDestacada('los días 4 y 5 de noviembre de 2021 en Terrassa', 2021)).toEqual({ grande: '04.11', anio: '2021', hasta: '5 nov 2021' });
+    expect(fechaDestacada(null, 2020)).toEqual({ grande: '2020', anio: null, hasta: null });
+    expect(fechaDestacada('Curso finalizado.', null)).toBeNull();
+  });
+  it('duración', () => {
+    expect(duracionCorta('7hr')).toBe('7 h');
+    expect(duracionCorta('20 horas')).toBe('20 h');
+    expect(duracionCorta('12hr 45min')).toBe('12 h 45 min');
+    expect(duracionCorta('7,5 hrs')).toBe('7,5 h');
+    expect(duracionCorta('3 meses')).toBe('3 meses');
+    expect(duracionCorta(null)).toBeNull();
+  });
+});

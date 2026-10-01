@@ -123,3 +123,27 @@ export function fechaIso(fechas: string | null | undefined): string | null {
   const p = primerDia(fechas);
   return p ? `${p.y}-${String(p.m).padStart(2, '0')}-${String(p.d).padStart(2, '0')}` : null;
 }
+
+export interface FechaDestacada { grande: string; anio: string | null; hasta: string | null }
+
+/**
+ * Fecha de la cabecera de la ficha: el primer día en grande («13.11») con su año y, si hay rango, el último día («31 jul 2025»).
+ * Sin día reconocible, el año en grande; sin año, null.
+ */
+export function fechaDestacada(fechas: string | null | undefined, anio: number | null): FechaDestacada | null {
+  const p = primerDia(fechas);
+  if (!p) return anio ? { grande: String(anio), anio: null, hasta: null } : null;
+  const dd = (n: number) => String(n).padStart(2, '0');
+  const corta = fechaCorta(fechas, anio)!;
+  const fin = corta.split(/\s+–\s+|–/).at(-1)!;
+  const hasta = corta.includes('–') ? (/\d{4}$/.test(fin) ? fin : null) : null;
+  return { grande: `${dd(p.d)}.${dd(p.m)}`, anio: String(p.y), hasta };
+}
+
+/** Duración legible: «7hr» → «7 h», «12hr 45min» → «12 h 45 min», «15 horas» → «15 h»; el resto, tal cual. */
+export function duracionCorta(duracion: string | null | undefined): string | null {
+  const t = duracion?.trim();
+  if (!t) return null;
+  const m = /^(\d+(?:[.,]\d+)?)\s*(?:h|hr|hrs|hora|horas)\.?(?:\s*(\d+)\s*min\.?)?$/i.exec(t);
+  return m ? `${m[1]} h${m[2] ? ` ${m[2]} min` : ''}` : t;
+}

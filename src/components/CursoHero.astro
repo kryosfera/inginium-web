@@ -1,0 +1,92 @@
+---
+import { Picture } from 'astro:assets';
+import Pattern from './Pattern.astro';
+import Flecha from './Flecha.astro';
+import { fechaDestacada, duracionCorta, fechaIso } from '../lib/proximo';
+import { etiquetaModalidad } from '../lib/curso-vista';
+// Cabecera de la ficha de curso (pantalla partida): a la izquierda, en tinta, estado, título y la fecha en grande;
+// a la derecha, el cartel completo sobre sus propios colores desenfocados. En móvil el cartel va arriba.
+interface Props {
+  titulo: string; imagen?: ImageMetadata; estado: 'activo' | 'finalizado'; modalidad: 'presencial' | 'online';
+  especialidades: string[]; fechas: string | null; anio: number | null; duracion: string | null; sede?: string | null;
+  inscripcion?: { url: string; etiqueta: string } | null;
+}
+const { titulo, imagen, estado, modalidad, especialidades, fechas, anio, duracion, sede, inscripcion } = Astro.props;
+const fecha = fechaDestacada(fechas, anio);
+const iso = fechaIso(fechas);
+// Ciudad: último tramo de la sede sin el código postal («…, 08029 Barcelona» → «Barcelona»).
+const ciudad = sede?.split(',').at(-1)?.replace(/\d{5}/, '').trim() || null;
+const detalle = [fecha?.hasta && `hasta ${fecha.hasta}`, ciudad, duracionCorta(duracion)].filter(Boolean) as string[];
+const mayusculas = titulo === titulo.toUpperCase();
+const largo = Math.max(...titulo.split(/\s+/).map((p) => p.length)) >= 16;
+const pill = estado === 'finalizado' ? `Finalizado${anio ? ` · ${anio}` : ''}` : inscripcion ? 'Inscripción abierta' : 'Activo';
+---
+<section class:list={['shero', 'chero', { 'sin-imagen': !imagen, mayus: mayusculas, 'titulo-largo': largo }]} data-mode="oscuro">
+  <div class="texto">
+    <div class="top">
+      <span class:list={['pill', { fin: estado === 'finalizado' }]}>{estado === 'activo' && <span class="punto" aria-hidden="true"></span>}{pill}</span>
+      <span class="mono">{[...especialidades, etiquetaModalidad(modalidad)].join(' · ')}</span>
+    </div>
+    <h1 data-split>{titulo}</h1>
+    {fecha && <div class="fecha">
+      <time class="grande" datetime={iso ?? (fecha.anio ? undefined : fecha.grande)}>{fecha.grande}</time>
+      <span class="det">{fecha.anio && <span>{fecha.anio}</span>}{detalle.length > 0 && <span>{detalle.join(' · ')}</span>}</span>
+    </div>}
+    <div class="acc">
+      {inscripcion && <a class="btn btn-lima" href={inscripcion.url} target="_blank" rel="noopener noreferrer" data-magnetic>{inscripcion.etiqueta} <Flecha tipo="ext" /><span class="sr-only"> (abre en otra pestaña)</span></a>}
+      <a class="btn btn-ghost" href="#programa">Ver programa</a>
+    </div>
+  </div>
+  <div class="visual">
+    {imagen
+      ? <>
+          <div class="ambiente" aria-hidden="true">
+            <Picture src={imagen} alt="" widths={[480, 800]} sizes="50vw" formats={['avif', 'webp']} quality={40} loading="eager" decoding="async" />
+          </div>
+          <figure class="cartel" data-cartel>
+            <Picture src={imagen} alt={`Cartel del curso ${titulo}`} widths={[420, 840, 1200]} sizes="(max-width: 899px) 86vw, 44vw"
+              formats={['avif', 'webp']} quality={72} loading="eager" fetchpriority="high" decoding="async" />
+          </figure>
+        </>
+      : <div class="ambiente"><Pattern /></div>}
+  </div>
+</section>
+<style>
+  .chero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); min-height: clamp(600px, 90vh, 840px); background: var(--bg); color: var(--fg); }
+  .texto { padding: clamp(120px, 16vh, 168px) clamp(20px, 5vw, 80px) clamp(48px, 7vh, 72px) max(var(--gutter), calc((100vw - 1280px) / 2 + var(--gutter)));
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 26px; min-width: 0; }
+  .top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; font: 600 13px/1 var(--f-body);
+    color: var(--lima); background: color-mix(in srgb, var(--lima) 12%, transparent); border: 1px solid color-mix(in srgb, var(--lima) 38%, transparent); }
+  .pill.fin { color: var(--fg); background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .22); }
+  .punto { width: 7px; height: 7px; border-radius: 50%; background: var(--lima); }
+  .mono { font: 500 12px/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; opacity: .78; }
+  h1 { font: 800 clamp(36px, 4.4vw, 66px)/1.03 var(--f-display); letter-spacing: -.025em; max-width: 16ch; margin: 0; overflow-wrap: break-word; hyphens: auto; }
+  .mayus h1 { font-size: clamp(30px, 3.5vw, 52px); letter-spacing: -.01em; max-width: 20ch; }
+  .titulo-largo h1 { font-size: clamp(28px, 3.3vw, 50px); max-width: 21ch; }
+  .fecha { display: flex; align-items: flex-end; gap: 18px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .16); }
+  .grande { font: 800 clamp(60px, 6.6vw, 108px)/.8 var(--f-display); letter-spacing: -.045em; color: var(--lima); white-space: nowrap; }
+  .det { display: grid; gap: 4px; font: 500 13px/1.45 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+  .acc { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn-ghost { background: transparent; color: var(--fg); border: 1px solid rgba(255, 255, 255, .32); }
+  .btn-ghost:hover { border-color: var(--fg); }
+  .visual { position: relative; overflow: hidden; isolation: isolate; display: grid; place-items: center; padding: clamp(110px, 14vh, 140px) clamp(24px, 4vw, 64px) clamp(40px, 6vh, 64px); }
+  .ambiente { position: absolute; inset: 0; z-index: -2; }
+  .ambiente :global(img) { width: 100%; height: 100%; object-fit: cover; filter: blur(42px) saturate(1.3); transform: scale(1.25); }
+  /* Velo: funde con la columna de texto y oscurece arriba para que el menú se lea sobre carteles claros. */
+  .visual::after { content: ""; position: absolute; inset: 0; z-index: -1; background:
+    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 40%, transparent) 22%, transparent 55%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, transparent) 0, transparent 26%),
+    color-mix(in srgb, var(--bg) 18%, transparent); }
+  .cartel { margin: 0; line-height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .14); }
+  .cartel :global(img) { display: block; width: auto; height: auto; max-width: 100%; max-height: min(64vh, 620px); object-fit: contain; }
+  .sin-imagen .visual::after { background: linear-gradient(90deg, var(--bg), transparent 40%); }
+  @media (max-width: 899px) {
+    .chero { grid-template-columns: 1fr; min-height: 0; }
+    .visual { order: -1; padding: 96px var(--gutter) 28px; }
+    .sin-imagen .visual { min-height: 200px; }
+    .cartel :global(img) { max-height: 42vh; }
+    .texto { padding: 28px var(--gutter) 48px; gap: 22px; }
+    .visual::after { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, transparent) 0, transparent 30%, transparent 70%, var(--bg) 100%), color-mix(in srgb, var(--bg) 18%, transparent); }
+  }
+</style>

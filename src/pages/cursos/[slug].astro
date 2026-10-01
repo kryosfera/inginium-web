@@ -1,15 +1,13 @@
 ---
 import { getCollection, getEntries, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SectionHero from '../../components/SectionHero.astro';
+import CursoHero from '../../components/CursoHero.astro';
 import CourseFacts from '../../components/CourseFacts.astro';
 import FichaIndice from '../../components/FichaIndice.astro';
 import Agenda from '../../components/Agenda.astro';
 import TeacherCard from '../../components/TeacherCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
-import Flecha from '../../components/Flecha.astro';
 import { puedeInscribirse, etiquetaModalidad } from '../../lib/curso-vista';
-import { fechaCorta, fechaIso } from '../../lib/proximo';
 export async function getStaticPaths() {
   return (await getCollection('cursos')).map((c) => ({ params: { slug: c.id }, props: { c } }));
 }
@@ -26,7 +24,6 @@ const agenda = d.agenda?.length ? d.agenda : null;
 const descripcion = d.resumen || `Curso de ${d.especialidades.join(', ') || 'formación sanitaria'} en Inginium.`;
 const inscribir = puedeInscribirse(d);
 const etiqueta = d.modalidad === 'presencial' ? 'Inscribirme' : 'Acceder al curso';
-const fecha = fechaCorta(d.fechas, d.anio);
 const secciones = [
   d.resumen && { id: 'resumen', label: 'Resumen' },
   d.aprenderas?.length && { id: 'aprenderas', label: 'Qué aprenderás' },
@@ -39,15 +36,8 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: d.ti
   provider: { '@type': 'Organization', name: 'Inginium', url: 'https://inginium-ksf.com' } };
 ---
 <BaseLayout title={`${d.titulo} · Inginium`} description={descripcion} jsonLd={jsonLd}>
-  <SectionHero titulo={d.titulo} imagen={imagen} variante="cartel">
-    <div class="h-meta">
-      {d.estado === 'finalizado' ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
-      <span class="mono">{etiquetaModalidad(d.modalidad)}</span>
-      {fecha && <time class="mono" datetime={fechaIso(d.fechas) ?? undefined}>{fecha}</time>}
-    </div>
-    {d.especialidades.length > 0 && <ul class="h-esp" aria-label="Especialidades">{d.especialidades.map((e) => <li>{e}</li>)}</ul>}
-    {inscribir && <div class="h-acc"><a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer" data-magnetic>{etiqueta} <Flecha tipo="ext" /><span class="sr-only"> (abre en otra pestaña)</span></a></div>}
-  </SectionHero>
+  <CursoHero titulo={d.titulo} imagen={imagen} estado={d.estado} modalidad={d.modalidad} especialidades={d.especialidades}
+    fechas={d.fechas} anio={d.anio} duracion={d.duracion} sede={d.sede} inscripcion={inscribir ? { url: d.url!, etiqueta } : null} />
   <div class="wrap ficha-layout">
     <FichaIndice secciones={secciones} />
     <div class="cuerpo">
@@ -83,11 +73,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: d.ti
   <ContactCTA />
 </BaseLayout>
 <style>
-  .h-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px; color: var(--fg); }
-  .h-meta .mono { opacity: .9; }
-  .h-esp { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
-  .h-esp li { font: 600 13px/1 var(--f-body); padding: 7px 11px; border-radius: 999px; border: 1px solid var(--line); }
-  .h-acc { margin-top: 6px; }
 
   .ficha-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 64px; padding-block: 0 96px; }
   .cuerpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(56px, 6vw, 80px); padding-top: 40px; min-width: 0; }
