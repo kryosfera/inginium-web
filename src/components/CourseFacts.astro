@@ -1,44 +1,55 @@
 ---
+// «Ficha de la actividad»: lista de definición con todos los datos que constan del curso, inscripción y programa.
+// En móvil, además, la barra inferior con la acción (se oculta mientras esta ficha o el CTA final están en pantalla).
 import type { CollectionEntry } from 'astro:content';
+import Flecha from './Flecha.astro';
 import { puedeInscribirse, etiquetaModalidad, textoCreditos, tipoPrograma } from '../lib/curso-vista';
-interface Props { curso: CollectionEntry<'cursos'> }
-const { curso } = Astro.props;
+import { textoDuracion } from '../lib/proximo';
+interface Props { curso: CollectionEntry<'cursos'>; patrocinadores?: string[]; id?: string }
+const { curso, patrocinadores = [], id = 'ficha' } = Astro.props;
 const d = curso.data;
 const inscribir = puedeInscribirse(d);
 const etiqueta = d.modalidad === 'presencial' ? 'Inscribirme' : 'Acceder al curso';
 const tipo = d.programa ? tipoPrograma(d.programa) : null;
-const filas: [string, string | null][] = [
-  ['Especialidad', d.especialidades.join(', ') || null],
-  ['Fechas', d.fechas],
+const lista = (xs: string[] | undefined) => (xs && xs.length ? xs.join(', ') : null);
+const filas: [string, string | null, boolean?][] = [
   ['Modalidad', etiquetaModalidad(d.modalidad)],
-  ['Duración', d.duracion],
-  ['Créditos', textoCreditos(d.creditos)],
+  ['Fechas', d.fechas],
+  ['Sede', d.sede ?? null],
+  ['Duración', textoDuracion(d.duracion), true],
+  ['Créditos', textoCreditos(d.creditos), true],
+  ['Especialidad', lista(d.especialidades)],
+  ['Dirigido a', d.dirigidoA ?? null],
+  ['Coordinación', lista(d.coordinacion)],
+  ['Sociedades científicas', lista(d.sociedades)],
+  ['Patrocinio', lista(patrocinadores)],
 ];
 const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…` : d.titulo;
 ---
-<aside class="facts" aria-label="Datos del curso">
+<section class="facts" id={id} aria-labelledby={`${id}-h`} data-indice-sec>
+  <h2 id={`${id}-h`}>Ficha de la actividad</h2>
   <dl>
-    {filas.filter(([, v]) => v).map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+    {filas.filter(([, v]) => v).map(([k, v, mono]) => <div><dt>{k}</dt><dd class:list={{ mono, cfc: k === 'Créditos' }}>{v}</dd></div>)}
     <div><dt>Estado</dt><dd>{d.estado === 'activo' ? <span class="tag">Activo</span> : <span class="tag tag-fin">Finalizado</span>}</dd></div>
   </dl>
-  <div class="acciones">
+  {(inscribir || d.programa) && <div class="acciones">
     {inscribir && (
-      <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
+      <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer" data-magnetic>{etiqueta} <Flecha tipo="ext" /><span class="sr-only"> (abre en otra pestaña)</span></a>
     )}
     {d.programa && (tipo === 'pdf'
       ? <a class="btn btn-secondary" href={d.programa} download>Programa (PDF)</a>
       : <a class="btn btn-secondary" href={d.programa} target="_blank" rel="noopener noreferrer">Programa (imagen)<span class="sr-only"> (abre en otra pestaña)</span></a>)}
-  </div>
-</aside>
+  </div>}
+</section>
 <div class="facts-bar">
   <span class="bar-titulo">{abreviado}</span>
   {inscribir
-    ? <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
+    ? <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <Flecha tipo="ext" /><span class="sr-only"> (abre en otra pestaña)</span></a>
     : <span class:list={['tag', { 'tag-fin': d.estado === 'finalizado' }]}>{d.estado === 'activo' ? 'Activo' : 'Finalizado'}</span>}
 </div>
 <script>
   import { onPage } from '../scripts/lifecycle';
-  // La barra se oculta mientras el panel de datos o el CTA final están en pantalla. Sin JS queda visible y con espacio reservado.
+  // La barra se oculta mientras la ficha de datos o el CTA final están en pantalla. Sin JS queda visible y con espacio reservado.
   onPage(() => {
     const bar = document.querySelector<HTMLElement>('.facts-bar');
     if (!bar || !('IntersectionObserver' in window)) return;
@@ -47,26 +58,28 @@ const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…`
       es.forEach((e) => (e.isIntersecting ? vistos.add(e.target) : vistos.delete(e.target)));
       bar.classList.toggle('is-oculta', vistos.size > 0);
     });
-    document.querySelectorAll('.facts, .cta-final').forEach((el) => io.observe(el));
+    document.querySelectorAll('.facts .acciones, .cta-final').forEach((el) => io.observe(el));
     return () => io.disconnect();
   });
 </script>
 <style>
-  .facts { position: sticky; top: 96px; align-self: start; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 24px; }
-  dl { margin: 0; display: grid; gap: 14px; }
-  dl > div { display: grid; gap: 2px; }
-  dt { font: 500 11px/1.2 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-  dd { margin: 0; font-weight: 600; }
-  .acciones { display: grid; gap: 10px; }
-  .acciones .btn { justify-content: center; }
+  .facts { display: grid; gap: 24px; }
+  h2 { font-size: clamp(26px, 2.8vw, 36px); }
+  dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--line); }
+  dl > div { display: grid; grid-template-columns: minmax(120px, 200px) minmax(0, 1fr); gap: 4px 24px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+  dt { font: 500 12px/1.6 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  dd { margin: 0; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
+  dd.mono { font-weight: 500; }
+  dd.cfc { color: var(--accent-text); }
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
   .facts-bar { display: none; }
+  @media (max-width: 640px) { dl > div { grid-template-columns: minmax(0, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .facts-bar { transition: none; } }
   @media (max-width: 900px) {
-    .facts { position: static; }
     :global(html:has(.facts-bar)) { scroll-padding-bottom: 96px; }
     :global(body:has(.facts-bar)) { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
     .facts-bar.is-oculta { transform: translateY(100%); visibility: hidden; }
-    .facts-bar { position: fixed; inset: auto 0 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); transition: transform .2s, visibility .2s; }
+    .facts-bar { position: fixed; inset: auto 0 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -12px 28px -20px rgba(11, 11, 44, .4); transition: transform .25s cubic-bezier(.16, 1, .3, 1), visibility .25s; }
     .bar-titulo { font: 700 14px/1.25 var(--f-display); min-width: 0; }
     .facts-bar .btn { flex: none; padding: 14px 18px; }
   }

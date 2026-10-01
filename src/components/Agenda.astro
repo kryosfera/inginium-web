@@ -1,0 +1,107 @@
+---
+// Programa estructurado (`agenda`) como línea de tiempo vertical: secciones plegables (<details>, abiertas por defecto),
+// hora en mono, tipo de sesión, ponentes y moderación. scripts/agenda.ts ilumina la línea y el nodo según la lectura.
+import type { z } from 'astro/zod';
+import type { seccionAgendaSchema } from '../lib/schemas';
+type Seccion = z.infer<typeof seccionAgendaSchema>;
+interface Props { agenda: Seccion[] }
+const { agenda } = Astro.props;
+const ETIQUETA: Record<string, string | null> = { ponencia: null, bloque: 'Bloque', mesa: 'Mesa', debate: 'Debate', pausa: 'Pausa', apertura: 'Apertura', cierre: 'Cierre' };
+const rango = (s: Seccion) => {
+  const horas = s.items.map((i) => i.hora).filter(Boolean) as string[];
+  if (!horas.length) return null;
+  const ini = horas[0].split(/[–-]/)[0].trim();
+  const fin = horas.at(-1)!.split(/[–-]/).at(-1)!.trim();
+  return ini === fin ? ini : `${ini}–${fin}`;
+};
+const quitaHora = (h: string) => h.replace(/\s*[–-]\s*/, '–');
+---
+<div class="agenda" data-agenda>
+  {agenda.map((s, si) => {
+    const r = rango(s);
+    return (
+      <details class="sec" open>
+        <summary>
+          <h3>{s.seccion}</h3>
+          <span class="meta mono">{r && <span>{r}</span>}<span>{s.items.length} {s.items.length === 1 ? 'sesión' : 'sesiones'}</span></span>
+          <svg class="chev" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class:list={['tl', { 'sin-horas': !r }]} data-agenda-lista>
+          <span class="tl-linea" aria-hidden="true"><span class="tl-relleno" data-agenda-relleno></span></span>
+          <ol>
+          {s.items.map((it, ii) => (
+            <li class:list={['it', `t-${it.tipo}`]} data-agenda-item id={`sesion-${si + 1}-${ii + 1}`}>
+              <span class="nodo" aria-hidden="true"></span>
+              {it.hora && <span class="hora mono">{quitaHora(it.hora)}</span>}
+              <div class="cont">
+                {ETIQUETA[it.tipo] && <span class="tipo mono">{ETIQUETA[it.tipo]}</span>}
+                <p class="tit">{it.titulo}</p>
+                {it.ponentes.length > 0 && <p class="pers"><span class="sr-only">Ponentes: </span>{it.ponentes.join(' · ')}</p>}
+                {it.moderacion.length > 0 && <p class="mod"><span>Modera</span> {it.moderacion.join(' · ')}</p>}
+                {it.detalle && <p class="det">{it.detalle}</p>}
+              </div>
+            </li>
+          ))}
+          </ol>
+        </div>
+      </details>
+    );
+  })}
+</div>
+<script>import '../scripts/agenda';</script>
+<style>
+  .agenda { display: grid; gap: 16px; }
+  .sec { border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+  summary { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 18px 20px; cursor: pointer; border-radius: 18px; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+  summary:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+  summary h3 { font-size: clamp(20px, 2vw, 24px); }
+  .meta { display: flex; gap: 14px; font-size: 13px; color: var(--muted); margin-right: auto; }
+  .chev { color: var(--muted); transition: transform .25s cubic-bezier(.16, 1, .3, 1); }
+  .sec[open] .chev { transform: rotate(180deg); }
+
+  .tl { --x-nodo: 118px; position: relative; padding: 4px 20px 20px; }
+  .tl ol { list-style: none; margin: 0; padding: 0; display: grid; }
+  .sin-horas .it { grid-template-columns: 12px minmax(0, 1fr); }
+  .sin-horas .nodo { grid-column: 1; }
+  .sin-horas .cont { grid-column: 2; }
+  .sin-horas .tl-linea { left: 25px; }
+  .tl-linea { position: absolute; left: calc(20px + var(--x-nodo) + 18px + 5px); top: 24px; bottom: 34px; width: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .tl-relleno { position: absolute; inset: 0; background: var(--lima); transform-origin: top; transform: scaleY(var(--p, 0)); }
+  .it { position: relative; display: grid; grid-template-columns: var(--x-nodo) 12px minmax(0, 1fr); column-gap: 18px; padding-block: 14px; }
+  .nodo { grid-column: 2; grid-row: 1; width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: var(--card); border: 2px solid color-mix(in srgb, var(--fg) 35%, transparent); position: relative; z-index: 1; transition: background-color .3s, border-color .3s, box-shadow .3s; }
+  .hora { grid-column: 1; grid-row: 1; font-size: 13.5px; line-height: 1.7; color: var(--muted); text-align: right; white-space: nowrap; }
+  .cont { grid-column: 3; grid-row: 1; display: grid; gap: 4px; min-width: 0; }
+  .tipo { justify-self: start; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .tit { font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; text-wrap: pretty; max-width: 62ch; }
+  .pers { font-size: 15px; color: var(--fg); opacity: .8; }
+  .mod { font-size: 14px; color: var(--muted); }
+  .mod span { font: 500 11px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; margin-right: 4px; }
+  .det { font-size: 14px; color: var(--muted); font-style: italic; }
+
+  /* Tipos */
+  .t-bloque, .t-mesa { margin-top: 10px; }
+  .t-bloque .tit, .t-mesa .tit { font: 800 18px/1.3 var(--f-display); letter-spacing: -.01em; }
+  .t-bloque .nodo, .t-mesa .nodo { width: 16px; height: 16px; margin-top: 4px; margin-left: -2px; border-radius: 5px; }
+  .t-pausa .tit, .t-debate .tit { font-weight: 500; color: var(--muted); }
+  .t-pausa .nodo { border-style: dashed; }
+
+  /* Progreso de lectura */
+  .it.is-hecho .nodo { background: var(--lima); border-color: var(--lima); }
+  .it.is-activo .nodo { background: var(--lima); border-color: var(--tinta); box-shadow: 0 0 0 5px color-mix(in srgb, var(--lima) 45%, transparent); }
+  .it.is-activo .hora { color: var(--fg); }
+
+  @media (max-width: 640px) {
+    .tl { padding: 4px 16px 16px; }
+    .tl-linea, .sin-horas .tl-linea { left: 21px; }
+    .it { grid-template-columns: 12px minmax(0, 1fr); column-gap: 14px; }
+    .nodo { grid-column: 1; }
+    .hora { grid-column: 2; grid-row: 1; text-align: left; }
+    .cont { grid-column: 2; grid-row: 2; }
+    .sin-horas .it { grid-template-columns: 12px minmax(0, 1fr); column-gap: 14px; }
+    .sin-horas .cont { grid-row: 1; }
+    summary { padding: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nodo, .chev { transition: none; } }
+</style>
