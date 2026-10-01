@@ -37,3 +37,14 @@ export function aplicarFiltro<T extends CursoFiltrable>(cursos: T[], f: Filtro):
     && (!f.anio || c.anio === f.anio)
     && (!q || norm(`${c.titulo} ${c.resumen}`).includes(q))));
 }
+
+/** Vista de /cursos: rejilla (por defecto) o agrupada por años (?vista=anios). */
+export type Vista = 'rejilla' | 'anios';
+export const leerVista = (params: URLSearchParams): Vista => (params.get('vista') === 'anios' ? 'anios' : 'rejilla');
+
+/** Consulta completa de /cursos: filtro y, si no es la de por defecto, la vista. */
+export function escribirConsulta(f: Filtro, vista: Vista): string {
+  const p = new URLSearchParams(escribirFiltro(f));
+  if (vista === 'anios') p.set('vista', 'anios');
+  return p.toString();
+}

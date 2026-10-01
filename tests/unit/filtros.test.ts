@@ -43,3 +43,18 @@ describe('aplicarFiltro', () => {
   });
   it('combinado sin resultados', () => { expect(aplicarFiltro(C, { ...sin, especialidad: 'Pediatría', anio: 2025 })).toEqual([]); });
 });
+
+describe('vista de /cursos', () => {
+  it('lee ?vista=anios y cae a rejilla con cualquier otro valor', async () => {
+    const { leerVista } = await import('../../src/lib/filtros');
+    expect(leerVista(new URLSearchParams('vista=anios'))).toBe('anios');
+    expect(leerVista(new URLSearchParams('vista=xyz'))).toBe('rejilla');
+    expect(leerVista(new URLSearchParams(''))).toBe('rejilla');
+  });
+  it('escribe la vista solo si no es la de por defecto', async () => {
+    const { escribirConsulta } = await import('../../src/lib/filtros');
+    const sin = { especialidad: null, anio: null, q: '' };
+    expect(escribirConsulta(sin, 'rejilla')).toBe('');
+    expect(escribirConsulta({ ...sin, especialidad: 'Pediatría' }, 'anios')).toBe('especialidad=pediatria&vista=anios');
+  });
+});
