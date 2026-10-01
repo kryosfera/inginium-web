@@ -48,7 +48,7 @@ const patrocinadores = unicosPorNombre((await getCollection('patrocinadores')).m
       <span class="eyebrow">Inginium en cifras</span>
       <h2 id="cifras-h" class="sr-only">Inginium en cifras</h2>
       <StatCounters class="stats" items={cifrasItems} />
-      <SponsorStrip patrocinadores={patrocinadores} marquee />
+      <SponsorStrip patrocinadores={patrocinadores} marquee etiqueta="Patrocinadores de nuestros cursos" />
     </div>
   </section>
 

@@ -1,17 +1,18 @@
 ---
 // Franja de logos de patrocinadores. Con `marquee`, mismo mecanismo que ClientMarquee de ksf-web.
-interface Props { patrocinadores: { nombre: string; logo: string | null }[]; marquee?: boolean }
-const { patrocinadores, marquee = false } = Astro.props;
+// `etiqueta`: nombre accesible de la franja (en la home son los patrocinadores de todos los cursos).
+interface Props { patrocinadores: { nombre: string; logo: string | null }[]; marquee?: boolean; etiqueta?: string }
+const { patrocinadores, marquee = false, etiqueta = 'Patrocinadores del curso' } = Astro.props;
 const items = patrocinadores.filter((p) => p.logo) as { nombre: string; logo: string }[];
 const lista = marquee ? [...items, ...items] : items;
 ---
 {items.length > 0 && (
   <div class:list={['sp', { mq: marquee }]} data-marquee={marquee ? '' : undefined}>
-    <div class="strip" role="group" aria-label="Patrocinadores del curso">
+    <div class="strip" role="group" aria-label={etiqueta}>
       <ul class="track">
         {lista.map((p, i) => (
           <li aria-hidden={marquee && i >= items.length ? 'true' : undefined}>
-            <img src={p.logo} alt={p.nombre || 'Patrocinador del curso'} loading="lazy" width="120" height="40" />
+            <img src={p.logo} alt={p.nombre || 'Patrocinador'} loading="lazy" width="120" height="40" />
           </li>
         ))}
       </ul>
