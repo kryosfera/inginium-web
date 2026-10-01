@@ -1,13 +1,18 @@
 ---
-import { Picture } from 'astro:assets';
 import Pattern from './Pattern.astro';
+import { fuentesCabecera, SIZES_CABECERA } from '../lib/imagen-cabecera';
 // La cabecera es siempre escénica (modo oscuro con foto del proyecto), también en las páginas claras.
 interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata }
 const { titulo, kicker, entradilla, imagen } = Astro.props;
+const f = imagen ? await fuentesCabecera(imagen) : null;
 ---
 <section class="shero" data-mode="oscuro">
-  {imagen
-    ? <div class="bg"><Picture src={imagen} alt="" formats={['avif', 'webp']} fallbackFormat="webp" widths={[960, 1600, 2400]} sizes="100vw" quality={60} loading="eager" /></div>
+  {f
+    ? <div class="bg"><picture>
+        <source type="image/avif" srcset={f.avif} sizes={SIZES_CABECERA} />
+        <source type="image/webp" srcset={f.webp} sizes={SIZES_CABECERA} />
+        <img src={f.src} width={f.w} height={f.h} alt="" loading="eager" decoding="async" />
+      </picture></div>
     : <div class="bg" aria-hidden="true"><Pattern /></div>}
   <div class="shade" aria-hidden="true"></div>
   <div class="wrap inner">

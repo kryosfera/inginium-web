@@ -1,23 +1,14 @@
 ---
-import { getImage } from 'astro:assets';
 import sala from '../assets/hero/sala-curso.jpg';
 import grabacion from '../assets/hero/grabacion.jpg';
 import rodaje from '../assets/hero/rodaje.jpg';
 import organizacion from '../assets/hero/organizacion.jpg';
+import { fuentesCabecera, SIZES_CABECERA as SIZES } from '../lib/imagen-cabecera';
 
 // Cabecera de la home: cuatro fotos que rotan con fundido. Solo la primera se descarga al cargar;
 // las demás llevan data-src/data-srcset y las promueve home-hero.ts justo antes de mostrarlas.
-const WIDTHS = [960, 1600, 2400];
-const SIZES = '100vw';
 const fotos = [sala, grabacion, rodaje, organizacion];
-const capas = await Promise.all(fotos.map(async (src) => {
-  const srcset = async (format: 'avif' | 'webp') => (await Promise.all(WIDTHS.map(async (w) => {
-    const img = await getImage({ src, width: w, format, quality: 60 });
-    return `${img.src} ${w}w`;
-  }))).join(', ');
-  const base = await getImage({ src, width: 1600, format: 'webp', quality: 60 });
-  return { avif: await srcset('avif'), webp: await srcset('webp'), src: base.src, w: base.attributes.width, h: base.attributes.height };
-}));
+const capas = await Promise.all(fotos.map(fuentesCabecera));
 const miArea = import.meta.env.PUBLIC_MI_AREA_URL;
 ---
 <section class="hhero" data-mode="oscuro" data-home-hero>
