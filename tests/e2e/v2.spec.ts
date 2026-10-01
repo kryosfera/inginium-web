@@ -6,7 +6,7 @@ const cursos = readdirSync('src/content/cursos').filter((f) => f.endsWith('.md')
   id: f.slice(0, -3), ...(yaml.load(readFileSync(`src/content/cursos/${f}`, 'utf8').split('---')[1]) as any),
 }));
 const conAgenda = cursos.find((c) => c.agenda?.length && c.agenda.some((s: any) => s.items.some((i: any) => i.hora)))!;
-const sinAgenda = cursos.find((c) => !c.agenda?.length)!;
+const sinAgenda = cursos.find((c) => !c.agenda?.length);
 
 const escritorio = (info: { project: { name: string } }) => info.project.name === 'desktop';
 
@@ -186,11 +186,12 @@ test.describe('ficha: índice y agenda', () => {
   });
 
   test('sin agenda: el programa cae al cuerpo HTML', async ({ page }) => {
-    await page.goto(`/cursos/${sinAgenda.id}`);
+    test.skip(!sinAgenda, 'todos los cursos tienen agenda');
+    await page.goto(`/cursos/${sinAgenda!.id}`);
     await expect(page.locator('[data-agenda]')).toHaveCount(0);
     await expect(page.locator('#programa .prose')).not.toBeEmpty();
     await expect(page.getByRole('navigation', { name: 'En esta ficha' }).getByRole('link', { name: 'Programa' })).toBeVisible();
-    await expect(page.locator('#aprenderas')).toHaveCount(sinAgenda.aprenderas?.length ? 1 : 0);
+    await expect(page.locator('#aprenderas')).toHaveCount(sinAgenda!.aprenderas?.length ? 1 : 0);
   });
 
   test('ficha de la actividad con los datos que constan', async ({ page }) => {
