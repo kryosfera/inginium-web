@@ -1,0 +1,42 @@
+---
+import { slugEspecialidad } from '../lib/cursos';
+interface Props { especialidades: string[]; anios: number[] }
+const { especialidades, anios } = Astro.props;
+---
+<form class="filtros" role="search" action="/cursos" method="get" aria-label="Filtrar cursos">
+  <div class="fila">
+    <label class="campo">
+      <span>Buscar curso</span>
+      <input type="search" name="q" maxlength="80" autocomplete="off" placeholder="Título o tema" />
+    </label>
+    <label class="campo campo-anio">
+      <span>Año</span>
+      <select name="anio">
+        <option value="">Todos los años</option>
+        {anios.map((a) => <option value={a}>{a}</option>)}
+      </select>
+    </label>
+  </div>
+  {especialidades.length > 0 && (
+    <div class="chips" role="group" aria-label="Especialidad">
+      {especialidades.map((e) => <button type="button" class="chip" data-esp={slugEspecialidad(e)} aria-pressed="false">{e}</button>)}
+    </div>
+  )}
+  <p class="resultado" role="status" aria-live="polite"></p>
+</form>
+<style>
+  .filtros { display: grid; gap: 16px; padding-block: 32px 8px; }
+  .fila { display: flex; flex-wrap: wrap; gap: 16px; }
+  .campo { display: grid; gap: 6px; flex: 1 1 280px; }
+  .campo-anio { flex: 0 1 200px; }
+  .campo span { font: 500 12px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  input, select { font: 500 16px/1.2 var(--f-body); color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; min-height: 48px; }
+  input:hover, select:hover { border-color: var(--fg); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font: 600 14px/1 var(--f-body); color: var(--fg); background: transparent; border: 1.5px solid var(--line); border-radius: 999px; padding: 12px 16px; min-height: 44px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+  .chip:hover { border-color: var(--fg); }
+  .chip[aria-pressed="true"] { background: var(--lima); border-color: var(--lima); color: var(--tinta); }
+  .chip:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .resultado { margin: 0; min-height: 1.6em; font: 500 14px/1.6 var(--f-mono); color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .chip { transition: none; } }
+</style>

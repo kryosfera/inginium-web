@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHero from '../../components/SectionHero.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { ordenar } from '../../lib/filtros';
+import hero from '../../assets/hero/congreso.jpg';
+
+const todos = await getCollection('cursos');
+const orden = ordenar(todos.map((c) => ({ ...c.data, id: c.id, entry: c })));
+const activos = orden.filter((c) => c.estado === 'activo').map((c) => c.entry);
+const finalizados = orden.filter((c) => c.estado === 'finalizado').map((c) => c.entry);
+const especialidades = [...new Set(todos.flatMap((c) => c.data.especialidades))].sort((a, b) => a.localeCompare(b, 'es'));
+const anios = [...new Set(todos.map((c) => c.data.anio).filter((a): a is number => a !== null))].sort((a, b) => b - a);
+const entradilla = activos.length === 0 ? 'Consulta el archivo de cursos celebrados.'
+  : `${activos.length} ${activos.length === 1 ? 'curso activo' : 'cursos activos'} y un archivo con toda nuestra trayectoria.`;
+---
+<BaseLayout title="Cursos · Inginium" description="Catálogo de cursos de Inginium: formación acreditada para profesionales de la salud, con cursos activos y archivo de ediciones anteriores.">
+  <SectionHero kicker="Cursos" titulo="Formación acreditada, patrocinada por la industria de la salud" entradilla={entradilla} imagen={hero} />
+  <div class="wrap listado">
+    <FilterBar especialidades={especialidades} anios={anios} />
+    <section id="activos" aria-labelledby="activos-h">
+      <h2 id="activos-h">Cursos activos</h2>
+      {activos.length > 0
+        ? <div class="grid">{activos.map((c) => <CourseCard curso={c} />)}</div>
+        : <p class="vacio">Pronto anunciaremos nuevos cursos.</p>}
+    </section>
+    <section id="archivo" aria-labelledby="archivo-h">
+      <h2 id="archivo-h">Archivo</h2>
+      <p class="intro">Cursos ya celebrados, con su programa y profesorado.</p>
+      <div class="grid">{finalizados.map((c) => <CourseCard curso={c} />)}</div>
+    </section>
+  </div>
+  <ContactCTA />
+  <script type="application/json" id="filtro-datos" set:html={JSON.stringify({ especialidades, anios })} />
+  <script>import '../../scripts/filtros';</script>
+</BaseLayout>
+<style>
+  .listado { display: grid; gap: 56px; padding-block: 24px 80px; }
+  section { display: grid; gap: 20px; align-content: start; }
+  section[hidden] { display: none; }
+  h2 { font-size: clamp(24px, 2.6vw, 32px); }
+  .intro, .vacio { margin: 0; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .grid :global(.card[hidden]) { display: none; }
+</style>
