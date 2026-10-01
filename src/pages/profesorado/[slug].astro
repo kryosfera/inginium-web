@@ -1,0 +1,46 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHero from '../../components/SectionHero.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { iniciales } from '../../lib/format';
+import { ordenar } from '../../lib/filtros';
+export async function getStaticPaths() {
+  return (await getCollection('profesorado')).map((d) => ({ params: { slug: d.id }, props: { d } }));
+}
+const { d } = Astro.props as { d: CollectionEntry<'profesorado'> };
+const { nombre, cargo, resumen, biografia, foto } = d.data;
+const fotos = import.meta.glob<{ default: ImageMetadata }>('../../assets/profesorado/*', { eager: true });
+const img = foto ? fotos[`../../assets/profesorado/${foto}`]?.default : undefined;
+const cursos = ordenar((await getCollection('cursos')).filter((c) => c.data.profesorado.includes(d.id))
+  .map((c) => ({ ...c.data, id: c.id, entry: c }))).map((c) => c.entry);
+const descripcion = resumen || `${nombre}, ${cargo || 'profesorado'} de Inginium.`;
+---
+<BaseLayout title={`${nombre} · Inginium`} description={descripcion}>
+  <SectionHero kicker={cargo || 'Profesorado'} titulo={nombre} />
+  <div class="wrap ficha">
+    <div class="perfil">
+      <div class="foto">
+        {img ? <Image src={img} alt={nombre} width={480} height={480} /> : <span aria-hidden="true">{iniciales(nombre)}</span>}
+      </div>
+      <div class="bio" set:html={biografia} />
+    </div>
+    {cursos.length > 0 && <section aria-labelledby="cursos-h">
+      <h2 id="cursos-h">Cursos</h2>
+      <div class="grid">{cursos.map((c) => <CourseCard curso={c} />)}</div>
+    </section>}
+  </div>
+  <ContactCTA />
+</BaseLayout>
+<style>
+  .ficha { display: grid; gap: 56px; padding-block: 56px 80px; }
+  .perfil { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .foto { width: 240px; aspect-ratio: 1; border-radius: 24px; overflow: hidden; display: grid; place-items: center; background: var(--card); border: 1px solid var(--line); font: 800 80px/1 var(--f-display); color: var(--muted); }
+  .foto :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .bio :global(p) { margin-block: 0 1em; max-width: 68ch; }
+  h2 { font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  @media (max-width: 760px) { .perfil { grid-template-columns: minmax(0, 1fr); } .foto { width: 160px; font-size: 54px; } }
+</style>

@@ -5,7 +5,7 @@ test('cabecera, pie y marca', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('link', { name: 'Inginium, inicio' })).toBeVisible();
   await expect(page.getByText('Un proyecto de KSF Digital Healthcare')).toBeVisible();
-  await expect(page.locator('.shero')).toHaveAttribute('data-mode', 'oscuro');
+  await expect(page.locator('[data-home-hero]')).toHaveAttribute('data-mode', 'oscuro');
   await expect(page.locator('html')).toHaveAttribute('data-mode', 'claro');
 });
 

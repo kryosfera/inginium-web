@@ -10,10 +10,9 @@ const { items, inHero = false, class: cls } = Astro.props;
   ))}
 </div>
 <style>
-  .figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 28px); }
+  .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(12px, 2vw, 28px); }
   .figs > div { border-top: 1px solid var(--line); padding-top: 12px; min-width: 0; }
   .num { display: block; font: 900 clamp(32px, 3.6vw, 56px)/1.05 var(--f-display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
   .num { color: var(--accent-text); }
   small { display: block; font: 500 13px/1.35 var(--f-body); color: var(--muted); }
-  @media (max-width: 760px) { .figs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>

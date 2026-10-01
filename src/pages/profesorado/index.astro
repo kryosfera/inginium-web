@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHero from '../../components/SectionHero.astro';
+import TeacherCard from '../../components/TeacherCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { claveNombre } from '../../lib/format';
+import hero from '../../assets/hero/grabacion.jpg';
+
+const docentes = (await getCollection('profesorado'))
+  .sort((a, b) => claveNombre(a.data.nombre).localeCompare(claveNombre(b.data.nombre), 'es'));
+---
+<BaseLayout title="Profesorado · Inginium" description="Especialistas de referencia que diseñan e imparten los cursos de Inginium.">
+  <SectionHero kicker="Profesorado" titulo="Profesorado" entradilla="Especialistas de referencia que diseñan e imparten nuestros cursos." imagen={hero} />
+  <div class="wrap lista">
+    <div class="grid">{docentes.map((d) => <TeacherCard docente={d} />)}</div>
+  </div>
+  <ContactCTA />
+</BaseLayout>
+<style>
+  .lista { padding-block: 56px 80px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+</style>

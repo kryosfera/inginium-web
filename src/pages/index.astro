@@ -1,8 +1,81 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHero from '../components/SectionHero.astro';
-import sala from '../assets/hero/sala-curso.jpg';
+import HomeHero from '../components/HomeHero.astro';
+import CourseCard from '../components/CourseCard.astro';
+import StatCounters from '../components/StatCounters.astro';
+import SponsorStrip from '../components/SponsorStrip.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import cifras from '../data/cifras.json';
+import { ordenar } from '../lib/filtros';
+import { unicosPorNombre } from '../lib/patrocinadores';
+
+const todos = await getCollection('cursos');
+const orden = ordenar(todos.map((c) => ({ ...c.data, id: c.id, entry: c })));
+const destacados = orden.filter((c) => c.destacado).slice(0, 6).map((c) => c.entry);
+// Con menos de 3 destacados se completa con los finalizados más recientes (mejor que una sección casi vacía).
+const MIN = 3;
+const idsDestacados = new Set(destacados.map((c) => c.id));
+const recientes = destacados.length >= MIN ? [] : orden
+  .filter((c) => c.estado === 'finalizado' && !idsDestacados.has(c.id)).slice(0, MIN - destacados.length).map((c) => c.entry);
+
+const especialidades = new Set(todos.flatMap((c) => c.data.especialidades));
+const creditos = Math.round(todos.reduce((suma, c) => suma + (c.data.creditos ?? 0), 0));
+const cifrasItems = [
+  { valor: todos.length, etiqueta: 'cursos impartidos' },
+  { valor: especialidades.size, etiqueta: 'especialidades' },
+  { valor: creditos, etiqueta: 'créditos CFC acreditados' },
+  ...(cifras.profesionalesFormados !== null ? [{ valor: cifras.profesionalesFormados, etiqueta: 'profesionales formados' }] : []),
+];
+const patrocinadores = unicosPorNombre((await getCollection('patrocinadores')).map((p) => p.data));
 ---
 <BaseLayout title="Inginium · Formación continuada para profesionales sanitarios" description="Cursos acreditados para profesionales sanitarios, patrocinados por la industria de la salud.">
-  <SectionHero kicker="Inginium" titulo="Formación continuada para profesionales sanitarios" imagen={sala} />
+  <HomeHero />
+
+  <section id="destacados" class="wrap sec" aria-labelledby="dest-h">
+    <span class="eyebrow">{destacados.length > 0 ? 'Cursos activos' : 'Cursos'}</span>
+    <h2 id="dest-h" data-split>{destacados.length > 0 ? 'Próximas formaciones' : 'Últimas formaciones'}</h2>
+    <div class="grid">{(destacados.length > 0 ? destacados : recientes).map((c) => <CourseCard curso={c} />)}</div>
+    {destacados.length > 0 && recientes.length > 0 && <>
+      <h3 class="sub">Últimas formaciones</h3>
+      <div class="grid">{recientes.map((c) => <CourseCard curso={c} />)}</div>
+    </>}
+    <p class="todos"><a class="btn btn-primary" href="/cursos">Ver todos los cursos</a></p>
+  </section>
+
+  <section class="band" data-mode="oscuro" aria-labelledby="cifras-h">
+    <div class="wrap sec">
+      <span class="eyebrow">Inginium en cifras</span>
+      <h2 id="cifras-h" class="sr-only">Inginium en cifras</h2>
+      <StatCounters class="stats" items={cifrasItems} />
+      <SponsorStrip patrocinadores={patrocinadores} marquee />
+    </div>
+  </section>
+
+  <section id="acercade" class="wrap sec acerca" aria-labelledby="acerca-h">
+    <span class="eyebrow">Quiénes somos</span>
+    <h2 id="acerca-h" data-split>Acerca de Inginium</h2>
+    <p class="txt">Mediante el acuerdo entre Inginium y KSF Digital Healthcare podemos ofrecer una propuesta educativa de calidad y de máxima actualidad, con profesionales vinculados a la institución académica ESADE Business School.</p>
+    <p><a class="btn btn-secondary" href="/acerca">Saber más</a></p>
+  </section>
+
+  <section id="patrocinados" class="wrap sec acerca" aria-labelledby="pat-h">
+    <span class="eyebrow">Patrocinio</span>
+    <h2 id="pat-h" data-split>Cursos patrocinados</h2>
+    <p class="txt">La formación continuada es uno de los requisitos principales para que los profesionales sanitarios desempeñen su actividad con garantías de éxito. Para conseguir este objetivo, la industria farmacéutica y otras empresas relacionadas con el sector de la salud asumen el patrocinio de estas formaciones, colaborando así al desarrollo de los profesionales. Esto es fundamental y necesario pues repercute de forma directa en la mejora de la salud de los pacientes.</p>
+  </section>
+
+  <ContactCTA />
 </BaseLayout>
+<style>
+  .sec { display: grid; gap: 20px; padding-block: 80px; align-content: start; }
+  h2 { font-size: clamp(30px, 3.6vw, 52px); max-width: 20ch; }
+  .sub { font-size: clamp(22px, 2.4vw, 30px); margin-top: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .todos { margin-top: 8px; }
+  .band { background: var(--bg); color: var(--fg); border-block: 1px solid var(--line); }
+  .band .sec { padding-block: 64px; gap: 32px; }
+  .acerca { max-width: 880px; }
+  .txt { font-size: 19px; max-width: 62ch; }
+  @media (max-width: 760px) { .sec { padding-block: 56px; } }
+</style>

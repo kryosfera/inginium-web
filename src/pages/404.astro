@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+---
+<BaseLayout title="Página no encontrada · Inginium" description="La página que buscas no existe." noindex>
+  <SectionHero kicker="Error 404" titulo="Esta página no existe" entradilla="Puede que el enlace haya cambiado o que el curso ya no esté publicado.">
+    <div class="row">
+      <a class="btn btn-lima" href="/">Ir al inicio</a>
+      <a class="btn btn-secondary" href="/cursos">Ver cursos</a>
+    </div>
+  </SectionHero>
+</BaseLayout>
+<style>
+  .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+</style>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import hero from '../assets/hero/organizacion.jpg';
+const valores = ['Hacer accesible la educación', 'Ayudarte a crecer', 'Crear comunidad'];
+---
+<BaseLayout title="Acerca de Inginium" description="Inginium y KSF Digital Healthcare: la alianza para las actividades formativas online de profesionales de las ciencias de la salud.">
+  <SectionHero kicker="Acerca de" titulo="Inginium" entradilla="Inginium y KSF Digital Healthcare forman la alianza perfecta para las actividades formativas online de profesionales relacionados con las ciencias de la salud." imagen={hero} />
+  <div class="wrap cuerpo">
+    <section aria-labelledby="obj-h">
+      <h2 id="obj-h">Nuestros objetivos</h2>
+      <p>Desde este portal facilitamos formas de trabajo ágiles con el objetivo de que los profesionales perfeccionen sus actuaciones bajo los pilares de la transparencia y la adaptación, formándose de manera continuada a lo largo de su vida profesional.</p>
+      <p>Nuestro objetivo fundamental es conseguir la mejora de la actuación asistencial que conlleva, a su vez, un incremento generalizado del bienestar de las personas. De ahí que el profesorado de Inginium cumpla unos criterios de idoneidad y calidad para conseguir los resultados deseados en todos aquellos estudiantes que participen en sus propuestas formativas.</p>
+    </section>
+    <section aria-labelledby="val-h">
+      <h2 id="val-h">Nuestros valores</h2>
+      <ol class="valores">{valores.map((v, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{v}</h3></li>)}</ol>
+    </section>
+    <section aria-labelledby="pat-h">
+      <h2 id="pat-h">Cómo funciona el patrocinio</h2>
+      <p>La formación continuada es uno de los requisitos principales para que los profesionales sanitarios desempeñen su actividad con garantías de éxito. Para conseguir este objetivo, la industria farmacéutica y otras empresas relacionadas con el sector de la salud asumen el patrocinio de estas formaciones, colaborando así al desarrollo de los profesionales. Esto es fundamental y necesario pues repercute de forma directa en la mejora de la salud de los pacientes.</p>
+      <p><a class="btn btn-secondary" href="/cursos">Ver cursos</a></p>
+    </section>
+    <section aria-labelledby="ksf-h">
+      <h2 id="ksf-h">KSF Digital Healthcare</h2>
+      <p>Inginium y KSF Digital Healthcare ofrecen una propuesta educativa de calidad y de máxima actualidad, con profesionales vinculados a la institución académica ESADE Business School.</p>
+      <p><a class="btn btn-secondary" href="https://ksf.es" rel="noopener">Conocer KSF Digital Healthcare</a></p>
+    </section>
+    <section aria-labelledby="visita-h">
+      <h2 id="visita-h">Ven y visítanos</h2>
+      <div class="sedes">
+        <div><h3>Inginium</h3><address>Ronda del General Mitre, 126, 6º<br />08021 Barcelona</address></div>
+        <div><h3>KSF Digital Healthcare</h3><address>Nicaragua 106<br />08029 Barcelona</address></div>
+        <div><h3>Contacto</h3><address><a href="tel:+34610208652">+34 610 208 652</a><br /><a href="mailto:info@ksf-learning.net">info@ksf-learning.net</a></address></div>
+      </div>
+    </section>
+  </div>
+  <ContactCTA />
+</BaseLayout>
+<style>
+  .cuerpo { display: grid; gap: 64px; padding-block: 64px 88px; }
+  section { display: grid; gap: 16px; align-content: start; max-width: 76ch; }
+  section:has(.sedes), section:has(.valores) { max-width: none; }
+  h2 { font-size: clamp(26px, 3vw, 38px); }
+  p { max-width: 68ch; }
+  p:has(.btn) { margin-top: 8px; }
+  .valores { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .valores li { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 14px; }
+  .n { width: 36px; height: 36px; border-radius: 50%; background: var(--lima); color: var(--tinta); display: grid; place-items: center; font: 800 16px/1 var(--f-display); }
+  .valores h3 { font-size: 20px; }
+  .sedes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .sedes h3 { font-size: 18px; margin-bottom: 6px; }
+  address { font-style: normal; color: var(--muted); }
+  address a { color: var(--fg); text-underline-offset: 3px; }
+</style>

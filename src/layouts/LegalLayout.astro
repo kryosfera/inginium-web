@@ -16,5 +16,6 @@ const { title, description, updated } = Astro.props;
   .upd { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
   .legal :global(h2) { font-size: 22px; margin: 32px 0 10px; }
   .legal :global(p), .legal :global(li) { color: var(--fg); opacity: .9; margin-bottom: 12px; }
-  .legal :global(p a) { text-decoration: underline; text-underline-offset: 3px; }
+  .legal :global(ul) { list-style: disc; padding-left: 1.4em; margin: 0 0 12px; }
+  .legal :global(p a), .legal :global(li a) { text-decoration: underline; text-underline-offset: 3px; }
 </style>
