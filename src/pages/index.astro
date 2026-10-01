@@ -2,81 +2,165 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeHero from '../components/HomeHero.astro';
+import ProximoCurso from '../components/ProximoCurso.astro';
+import Trayectoria from '../components/Trayectoria.astro';
+import ExploraEspecialidad from '../components/ExploraEspecialidad.astro';
 import CourseCard from '../components/CourseCard.astro';
-import StatCounters from '../components/StatCounters.astro';
 import SponsorStrip from '../components/SponsorStrip.astro';
-import ContactCTA from '../components/ContactCTA.astro';
+import StatCounters from '../components/StatCounters.astro';
 import cifras from '../data/cifras.json';
 import { ordenar } from '../lib/filtros';
 import { unicosPorNombre } from '../lib/patrocinadores';
+import { proximoCurso, porAnio, recuentoEspecialidades } from '../lib/proximo';
+import { formatNumber } from '../lib/format';
+import Flecha from '../components/Flecha.astro';
 
 const todos = await getCollection('cursos');
 const orden = ordenar(todos.map((c) => ({ ...c.data, id: c.id, entry: c })));
-const destacados = orden.filter((c) => c.destacado).slice(0, 6).map((c) => c.entry);
-// Con menos de 3 destacados se completa con los finalizados más recientes (mejor que una sección casi vacía).
-const MIN = 3;
-const idsDestacados = new Set(destacados.map((c) => c.id));
-const recientes = destacados.length >= MIN ? [] : orden
-  .filter((c) => c.estado === 'finalizado' && !idsDestacados.has(c.id)).slice(0, MIN - destacados.length).map((c) => c.entry);
+// Primera vista: el curso activo con fecha futura más próxima (calculado en el build; la cuenta atrás se actualiza en el navegador).
+const proximo = proximoCurso(orden, Date.now());
+// Sin próximo curso: titular de marca y las últimas formaciones.
+const ultimas = proximo ? [] : orden.slice(0, 3).map((c) => c.entry);
 
-const especialidades = new Set(todos.flatMap((c) => c.data.especialidades));
-const creditos = Math.round(todos.reduce((suma, c) => suma + (c.data.creditos ?? 0), 0));
+const especialidades = recuentoEspecialidades(todos.map((c) => c.data));
+const creditos = Math.round(todos.reduce((suma, c) => suma + (c.data.creditos ?? 0), 0) * 10) / 10;
+const conCreditos = todos.filter((c) => c.data.creditos != null).length;
 const cifrasItems = [
   // Solo los ya celebrados: los activos aún no se han impartido.
   { valor: todos.filter((c) => c.data.estado === 'finalizado').length, etiqueta: 'cursos impartidos' },
-  { valor: especialidades.size, etiqueta: 'especialidades' },
-  { valor: creditos, etiqueta: 'créditos CFC acreditados' },
+  { valor: especialidades.length, etiqueta: 'especialidades' },
+  { valor: Math.round(creditos), etiqueta: 'créditos CFC acreditados' },
   ...(cifras.profesionalesFormados !== null ? [{ valor: cifras.profesionalesFormados, etiqueta: 'profesionales formados' }] : []),
 ];
+const grupos = porAnio(orden).map((g) => ({ anio: g.anio, cursos: g.cursos.map((c) => c.entry) }));
+// Sociedades científicas citadas en los cursos (campo `sociedades`); si no hay ninguna, el bloque no se muestra.
+const sociedades = [...new Set(todos.flatMap((c) => c.data.sociedades ?? []))].sort((a, b) => a.localeCompare(b, 'es'));
 const patrocinadores = unicosPorNombre((await getCollection('patrocinadores')).map((p) => p.data));
+const FICHA = [
+  ['Objetivos', '«Qué aprenderás», a partir de los temas del programa.'],
+  ['Destinatarios', 'Los profesionales a los que se dirige la actividad.'],
+  ['Programa', 'Sesiones con horario, ponentes y moderación.'],
+  ['Profesorado', 'Coordinación y docentes, con su ficha.'],
+  ['Datos de la actividad', 'Fechas, modalidad, sede, duración y créditos.'],
+  ['Patrocinio', 'Las empresas que patrocinan la actividad.'],
+];
 ---
 <BaseLayout title="Inginium · Formación continuada para profesionales sanitarios" description="Cursos acreditados para profesionales sanitarios, patrocinados por la industria de la salud.">
-  <HomeHero />
+  {proximo
+    ? <ProximoCurso curso={proximo.curso.entry} inicio={proximo.inicio} cifras={cifrasItems} />
+    : <HomeHero />}
 
-  <section id="destacados" class="wrap sec" aria-labelledby="dest-h">
-    <span class="eyebrow">{destacados.length > 0 ? 'Cursos activos' : 'Cursos'}</span>
-    <h2 id="dest-h" data-split>{destacados.length > 0 ? 'Próximas formaciones' : 'Últimas formaciones'}</h2>
-    <div class="grid">{(destacados.length > 0 ? destacados : recientes).map((c) => <CourseCard curso={c} />)}</div>
-    {destacados.length > 0 && recientes.length > 0 && <>
-      <h3 class="sub">Últimas formaciones</h3>
-      <div class="grid">{recientes.map((c) => <CourseCard curso={c} />)}</div>
-    </>}
-    <p class="todos"><a class="btn btn-primary" href="/cursos">Ver todos los cursos</a></p>
+  {!proximo && (
+    <section class="band" data-mode="oscuro" aria-label="Inginium en cifras">
+      <div class="wrap"><StatCounters class="stats" items={cifrasItems} /></div>
+    </section>
+  )}
+
+  {!proximo && ultimas.length > 0 && (
+    <section class="wrap sec" aria-labelledby="ult-h">
+      <h2 id="ult-h" data-split>Últimas formaciones</h2>
+      <div class="grid">{ultimas.map((c) => <CourseCard curso={c} />)}</div>
+    </section>
+  )}
+
+  <Trayectoria grupos={grupos} total={todos.length} />
+
+  <ExploraEspecialidad cursos={orden.map((c) => c.entry)} especialidades={especialidades} />
+
+  <section class="aval" aria-labelledby="aval-h">
+    <div class="wrap aval-in">
+      <div class="aval-txt">
+        <h2 id="aval-h" data-split>Aval y acreditación</h2>
+        <p class="cfc"><span class="cfc-n mono" data-counters><span class="num" data-to={creditos} data-pre="">{formatNumber(creditos)}</span></span> <span>créditos CFC acreditados en {conCreditos} cursos.</span></p>
+        <p class="txt">Las actividades se acreditan ante la Comisión de Formación Continuada; los créditos de cada curso constan en su ficha. Inginium y KSF Digital Healthcare las producen con profesionales vinculados a ESADE Business School.</p>
+        {sociedades.length > 0 && (
+          <div class="soc">
+            <h3>Sociedades científicas citadas en los cursos</h3>
+            <ul>{sociedades.map((s) => <li class="mono">{s}</li>)}</ul>
+          </div>
+        )}
+      </div>
+      <div class="ficha-info">
+        <h3>Actividades acreditadas</h3>
+        <p>Cada ficha de curso reúne, cuando consta, lo que necesitan profesionales y evaluadores:</p>
+        <dl>
+          {FICHA.map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}
+        </dl>
+      </div>
+    </div>
   </section>
 
-  <section class="band" data-mode="oscuro" aria-labelledby="cifras-h">
-    <div class="wrap sec">
-      <span class="eyebrow">Inginium en cifras</span>
-      <h2 id="cifras-h" class="sr-only">Inginium en cifras</h2>
-      <StatCounters class="stats" items={cifrasItems} />
+  <section class="patro" data-mode="oscuro" aria-labelledby="pat-h">
+    <div class="wrap patro-in">
+      <div class="patro-txt">
+        <h2 id="pat-h" data-split>Patrocinio transparente</h2>
+        <p>La industria farmacéutica y otras empresas del sector de la salud patrocinan estas formaciones y contribuyen así al desarrollo de los profesionales. Cada ficha indica quién patrocina la actividad.</p>
+      </div>
       <SponsorStrip patrocinadores={patrocinadores} marquee etiqueta="Patrocinadores de nuestros cursos" />
     </div>
   </section>
 
-  <section id="acercade" class="wrap sec acerca" aria-labelledby="acerca-h">
-    <span class="eyebrow">Quiénes somos</span>
-    <h2 id="acerca-h" data-split>Acerca de Inginium</h2>
-    <p class="txt">Mediante el acuerdo entre Inginium y KSF Digital Healthcare podemos ofrecer una propuesta educativa de calidad y de máxima actualidad, con profesionales vinculados a la institución académica ESADE Business School.</p>
-    <p><a class="btn btn-secondary" href="/acerca">Saber más</a></p>
+  <section class="caminos" data-mode="oscuro" aria-labelledby="cam-h">
+    <div class="wrap">
+      <h2 id="cam-h" class="sr-only">¿Qué buscas?</h2>
+      <div class="cam-grid">
+        <a class="camino" href="/cursos">
+          <span class="cam-t">Busco un curso</span>
+          <span class="cam-d">Cursos activos y archivo, por especialidad y año.</span>
+          <span class="cam-f"><Flecha size={22} /></span>
+        </a>
+        <a class="camino camino-lima" href="/contacto?motivo=patrocinar">
+          <span class="cam-t">Quiero patrocinar</span>
+          <span class="cam-d">Cuéntanos tu proyecto de formación.</span>
+          <span class="cam-f"><Flecha size={22} /></span>
+        </a>
+      </div>
+    </div>
   </section>
-
-  <section id="patrocinados" class="wrap sec acerca" aria-labelledby="pat-h">
-    <span class="eyebrow">Patrocinio</span>
-    <h2 id="pat-h" data-split>Cursos patrocinados</h2>
-    <p class="txt">La formación continuada es uno de los requisitos principales para que los profesionales sanitarios desempeñen su actividad con garantías de éxito. Para conseguir este objetivo, la industria farmacéutica y otras empresas relacionadas con el sector de la salud asumen el patrocinio de estas formaciones, colaborando así al desarrollo de los profesionales. Esto es fundamental y necesario pues repercute de forma directa en la mejora de la salud de los pacientes.</p>
-  </section>
-
-  <ContactCTA />
 </BaseLayout>
 <style>
-  .sec { display: grid; gap: 20px; padding-block: 80px; align-content: start; }
-  h2 { font-size: clamp(30px, 3.6vw, 52px); max-width: 20ch; }
-  .sub { font-size: clamp(22px, 2.4vw, 30px); margin-top: 24px; }
+  .band { padding-block: 40px 48px; background: var(--bg); color: var(--fg); }
+  .sec { display: grid; gap: 24px; padding-block: 88px; }
+  .sec h2 { font-size: clamp(30px, 3.6vw, 52px); }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .todos { margin-top: 8px; }
-  .band { background: var(--bg); color: var(--fg); border-block: 1px solid var(--line); }
-  .band .sec { padding-block: 64px; gap: 32px; }
-  .acerca { max-width: 880px; }
-  .txt { font-size: 19px; max-width: 62ch; }
-  @media (max-width: 760px) { .sec { padding-block: 56px; } }
+
+  .aval { padding-block: clamp(80px, 9vw, 128px); border-top: 1px solid var(--line); }
+  .aval-in { display: grid; gap: clamp(40px, 6vw, 96px); grid-template-columns: minmax(0, 1fr); }
+  .aval-txt { display: grid; gap: 22px; align-content: start; }
+  .aval h2 { font-size: clamp(32px, 4vw, 60px); font-weight: 900; }
+  .cfc { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; font-size: 19px; max-width: 34ch; }
+  .cfc-n { font: 500 clamp(56px, 7vw, 104px)/.9 var(--f-mono); letter-spacing: -.05em; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+  .txt { font-size: 17px; max-width: 58ch; color: var(--fg); }
+  .soc h3 { font-size: 15px; font-family: var(--f-body); letter-spacing: 0; margin-bottom: 10px; }
+  .soc ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .soc li { font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; }
+  .ficha-info { display: grid; gap: 14px; align-content: start; padding: clamp(24px, 3vw, 36px); background: var(--card); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 24px 48px -36px rgba(11, 11, 44, .35); }
+  .ficha-info h3 { font-size: 24px; }
+  .ficha-info > p { color: var(--muted); max-width: 48ch; }
+  .ficha-info dl { margin: 6px 0 0; display: grid; }
+  .ficha-info dl > div { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 12px; padding-block: 12px; border-top: 1px solid var(--line); }
+  .ficha-info dl > div::before { content: ''; grid-row: span 2; width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; border: 2px solid var(--accent-text); }
+  .ficha-info dt { font-weight: 700; }
+  .ficha-info dd { margin: 0; color: var(--muted); font-size: 15px; }
+  @media (min-width: 960px) { .aval-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
+
+  .patro { padding-block: clamp(72px, 8vw, 112px); background: var(--bg); color: var(--fg); }
+  .patro-in { display: grid; gap: 36px; }
+  .patro-txt { display: grid; gap: 14px; max-width: 760px; }
+  .patro h2 { font-size: clamp(30px, 3.6vw, 52px); font-weight: 900; }
+  .patro-txt p { font-size: 18px; color: var(--fg); opacity: .9; max-width: 60ch; }
+
+  .caminos { padding-block: 0 clamp(72px, 8vw, 112px); background: var(--bg); color: var(--fg); }
+  .cam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+  .camino { position: relative; display: grid; gap: 10px; align-content: end; min-height: clamp(200px, 22vw, 280px); padding: clamp(24px, 3vw, 40px); border: 1px solid var(--line); border-radius: 22px; text-decoration: none; color: var(--fg); background: var(--card); overflow: hidden;
+    transition: border-color .25s, background-color .3s, box-shadow .35s cubic-bezier(.16, 1, .3, 1); }
+  .camino:hover { border-color: color-mix(in srgb, var(--fg) 45%, transparent); box-shadow: 0 30px 60px -36px rgba(0, 0, 0, .8); }
+  .camino-lima { background: var(--lima); color: var(--tinta); border-color: var(--lima); }
+  .camino-lima:hover { border-color: var(--lima); filter: brightness(1.04); }
+  .cam-t { font: 900 clamp(30px, 3.4vw, 50px)/1 var(--f-display); letter-spacing: -.02em; }
+  .cam-d { font-size: 16px; opacity: .85; max-width: 34ch; }
+  .cam-f { position: absolute; top: clamp(20px, 2.6vw, 34px); right: clamp(20px, 2.6vw, 34px); width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid currentColor; font-size: 22px; transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+  .camino:hover .cam-f { transform: translateX(6px) rotate(-45deg); }
+  .camino:focus-visible { outline: 2px solid var(--lima); outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { .camino, .cam-f { transition: none; } .camino:hover .cam-f { transform: none; } }
 </style>

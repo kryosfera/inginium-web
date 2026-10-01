@@ -1,0 +1,103 @@
+---
+// Trayectoria por años. Por defecto (sin JS, móvil, movimiento reducido): lista vertical por años.
+// En escritorio con movimiento, scripts/trayectoria.ts la convierte en una pista horizontal fijada (pin + scrub).
+import type { CollectionEntry } from 'astro:content';
+import CartelMedia from './CartelMedia.astro';
+import { fechaCorta } from '../lib/proximo';
+interface Props { grupos: { anio: number; cursos: CollectionEntry<'cursos'>[] }[]; total: number }
+const { grupos, total } = Astro.props;
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/cursos/*', { eager: true });
+const img = (c: CollectionEntry<'cursos'>) => (c.data.imagen ? imgs[`../assets/cursos/${c.data.imagen}`]?.default : undefined);
+const desde = grupos.at(-1)?.anio, hasta = grupos[0]?.anio;
+---
+<section class="tray" data-mode="oscuro" data-trayectoria aria-labelledby="tray-h">
+  <div class="wrap cab">
+    <div>
+      <h2 id="tray-h" data-split>Trayectoria</h2>
+      <p class="sub">{total} cursos{desde && hasta && desde !== hasta ? ` entre ${desde} y ${hasta}` : ''}, del más reciente al primero.</p>
+    </div>
+    <div class="progreso" aria-hidden="true"><span data-tray-barra></span></div>
+  </div>
+  <div class="vp" data-tray-vp>
+    <ol class="pista" data-tray-pista>
+      {grupos.map((g) => (
+        <li class="anio" data-tray-anio>
+          <h3 class="num mono"><span>{g.anio}</span><small>{g.cursos.length} {g.cursos.length === 1 ? 'curso' : 'cursos'}</small></h3>
+          <ul class="cursos">
+            {g.cursos.map((c) => (
+              <li>
+                <a class="tc" href={`/cursos/${c.id}`}>
+                  <CartelMedia class="tc-media" imagen={img(c)} widths={[280, 560]} sizes="(max-width: 1023px) 96px, 280px" />
+                  <span class="tc-txt">
+                    <span class="tc-tit">{c.data.titulo}</span>
+                    <span class="tc-fecha mono">{fechaCorta(c.data.fechas, c.data.anio)}{c.data.estado === 'activo' && <span class="tc-activo"> · Activo</span>}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<script>import '../scripts/trayectoria';</script>
+<style>
+  .tray { position: relative; overflow: hidden; padding-block: clamp(72px, 10vw, 120px); background: var(--bg); color: var(--fg); }
+  .cab { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px 40px; margin-bottom: clamp(32px, 4vw, 56px); }
+  h2 { font-size: clamp(36px, 5vw, 76px); font-weight: 900; }
+  .sub { margin-top: 10px; color: var(--muted); font-size: 17px; }
+  .progreso { display: none; }
+
+  /* Lista vertical (por defecto) */
+  .vp { padding-inline: var(--gutter); max-width: 1280px; margin-inline: auto; }
+  .pista { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(40px, 5vw, 64px); }
+  .anio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .num { display: flex; align-items: baseline; gap: 14px; font-weight: 500; }
+  .num span { font-size: clamp(44px, 7vw, 96px); line-height: .9; letter-spacing: -.05em; color: var(--fg); }
+  .num small { font: 500 12px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .cursos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .tc { display: grid; grid-template-rows: auto 1fr; height: 100%; text-decoration: none; color: inherit; border-radius: 14px; overflow: hidden; background: var(--card); border: 1px solid var(--line);
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .25s, box-shadow .35s; }
+  .tc:hover, .tc:focus-visible { transform: translateY(-4px); border-color: rgba(193, 227, 19, .55); box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .7); }
+  .tc:focus-visible { outline: 2px solid var(--lima); outline-offset: 3px; }
+  .tc :global(.tc-media) { aspect-ratio: 16 / 10; }
+  .tc:hover :global(.cm-cartel), .tc:focus-visible :global(.cm-cartel) { transform: rotate(-1.8deg) scale(1.04); }
+  .tc-txt { display: grid; gap: 8px; align-content: start; padding: 14px 16px 16px; }
+  .tc-tit { font: 700 15px/1.25 var(--f-display); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .tc-fecha { font-size: 12.5px; color: var(--muted); }
+  .tc-activo { color: var(--lima); }
+
+  /* Móvil: filas compactas con miniatura */
+  @media (max-width: 1023px) {
+    .anio { grid-template-columns: minmax(0, 1fr); }
+    .cursos { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .tc { grid-template-columns: 96px minmax(0, 1fr); grid-template-rows: auto; align-items: center; }
+    .tc :global(.tc-media) { aspect-ratio: 1; height: 100%; }
+    .tc-txt { padding: 12px 14px; }
+  }
+  @media (min-width: 1024px) {
+    .anio { grid-template-columns: 220px minmax(0, 1fr); }
+    .num { flex-direction: column; align-items: start; position: sticky; top: 96px; align-self: start; }
+  }
+
+  /* Pista horizontal fijada (la activa trayectoria.ts en escritorio con movimiento) */
+  .tray.is-horizontal { height: 100vh; min-height: 640px; padding-block: clamp(84px, 11vh, 112px) 0; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
+  .is-horizontal .cab { margin-bottom: clamp(20px, 3vh, 40px); }
+  .is-horizontal .progreso { display: block; width: min(320px, 30vw); height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .is-horizontal .progreso span { display: block; height: 100%; background: var(--lima); transform-origin: left; transform: scaleX(0); }
+  .is-horizontal .vp { max-width: none; width: 100%; min-width: 0; padding: 0; overflow: visible; align-self: center; }
+  .is-horizontal .pista { display: flex; flex-wrap: nowrap; gap: clamp(48px, 5vw, 96px); width: max-content; padding-inline: var(--gutter) 30vw; will-change: transform; }
+  .is-horizontal .anio { display: flex; gap: 28px; align-items: stretch; }
+  .is-horizontal .num { position: static; justify-content: space-between; width: auto; padding-right: 8px; border-right: 1px solid var(--line); }
+  .is-horizontal .num span { font-size: clamp(88px, 11vw, 168px); writing-mode: vertical-rl; transform: rotate(180deg); color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--fg) 45%, transparent); transition: color .5s, -webkit-text-stroke-color .5s; }
+  .is-horizontal .anio.is-actual .num span { color: var(--lima); -webkit-text-stroke-color: var(--lima); }
+  .is-horizontal .cursos { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: clamp(220px, 17vw, 260px); gap: 16px; }
+  .is-horizontal .tc-tit { -webkit-line-clamp: 2; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tc, .tc :global(.cm-cartel) { transition: none; }
+    .tc:hover, .tc:focus-visible { transform: none; }
+    .tc:hover :global(.cm-cartel), .tc:focus-visible :global(.cm-cartel) { transform: none; }
+  }
+</style>

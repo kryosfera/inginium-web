@@ -1,0 +1,110 @@
+---
+// Primera vista de la home: el próximo curso activo como objeto (cartel con sombra e inclinación), su fondo desenfocado,
+// cuenta atrás (sin JS: la fecha) y la tira de cifras. La lógica de la cuenta atrás está en scripts/cuenta-atras.ts.
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { puedeInscribirse, textoCreditos, etiquetaModalidad } from '../lib/curso-vista';
+import { fechaCorta, fechaIso, textoDuracion } from '../lib/proximo';
+import { formatNumber } from '../lib/format';
+import Flecha from './Flecha.astro';
+interface Props { curso: CollectionEntry<'cursos'>; inicio: number; cifras: { valor: number; etiqueta: string }[] }
+const { curso, inicio, cifras } = Astro.props;
+const d = curso.data;
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/cursos/*', { eager: true });
+const imagen = d.imagen ? imgs[`../assets/cursos/${d.imagen}`]?.default : undefined;
+const inscribir = puedeInscribirse(d);
+const etiqueta = d.modalidad === 'presencial' ? 'Inscribirme' : 'Acceder al curso';
+const creditos = textoCreditos(d.creditos);
+const lugar = d.sede ?? (d.modalidad === 'online' ? etiquetaModalidad(d.modalidad) : null);
+---
+<section class="pc" data-mode="oscuro" data-home-hero data-proximo aria-labelledby="pc-curso">
+  {imagen && <div class="bg" aria-hidden="true">
+    <Picture src={imagen} alt="" widths={[480]} sizes="100vw" formats={['avif', 'webp']} quality={40} loading="eager" decoding="async" />
+  </div>}
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="texto">
+      <h1 class="marca">Formación continuada para profesionales sanitarios</h1>
+      <p class="estado"><span class="punto" aria-hidden="true"></span>Próximo curso<span aria-hidden="true">·</span><time class="mono" datetime={fechaIso(d.fechas) ?? undefined}>{fechaCorta(d.fechas, d.anio)}</time></p>
+      <h2 id="pc-curso" class="titulo" data-split>{d.titulo}</h2>
+      <div class="cuenta" data-cuenta data-inicio={new Date(inicio).toISOString()}>
+        <p class="cuenta-fecha">Empieza el <time datetime={new Date(inicio).toISOString()}>{d.fechas}</time></p>
+        <p class="cuenta-js mono" aria-hidden="true" hidden>
+          <span><b data-cuenta-d>0</b><small>días</small></span>
+          <span><b data-cuenta-h>0</b><small>horas</small></span>
+          <span><b data-cuenta-m>0</b><small>min</small></span>
+        </p>
+        <p class="sr-only" data-cuenta-frase></p>
+      </div>
+      <ul class="meta">
+        {lugar && <li><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.5" r="1.8" fill="currentColor"/></svg>{lugar}</li>}
+        {creditos && <li class="mono cfc">{creditos}</li>}
+        {d.duracion && <li class="mono">{textoDuracion(d.duracion)}</li>}
+      </ul>
+      <div class="acciones">
+        {inscribir && <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer" data-magnetic>{etiqueta} <Flecha tipo="ext" /><span class="sr-only"> (abre en otra pestaña)</span></a>}
+        <a class="btn btn-secondary" href={`/cursos/${curso.id}`}>Ver ficha<span class="sr-only"> del curso</span></a>
+      </div>
+    </div>
+    {imagen && <div class="objeto" data-tilt>
+      <a class="cartel" href={`/cursos/${curso.id}`} tabindex="-1" aria-hidden="true" data-tilt-cartel>
+        <Picture src={imagen} alt="" widths={[520, 1040]} sizes="(max-width: 899px) 86vw, 520px" formats={['avif', 'webp']} quality={72} loading="eager" fetchpriority="high" decoding="async" />
+        <span class="brillo" data-tilt-brillo></span>
+      </a>
+    </div>}
+  </div>
+  <div class="wrap cifras stats" data-counters data-in-hero>
+    {cifras.map((c) => <p><span class="num mono" data-to={c.valor} data-pre="">{formatNumber(c.valor)}</span> <span class="et">{c.etiqueta}</span></p>)}
+  </div>
+</section>
+<script>import '../scripts/cuenta-atras';</script>
+<style>
+  .pc { position: relative; overflow: hidden; isolation: isolate; min-height: min(100svh, 980px); display: grid; grid-template-rows: 1fr auto; padding-top: clamp(96px, 13vh, 132px); background: var(--bg); color: var(--fg); }
+  .bg { position: absolute; inset: 0; z-index: -2; }
+  .bg :global(img) { width: 100%; height: 100%; object-fit: cover; filter: blur(42px) saturate(1.25); transform: scale(1.2); }
+  .shade { position: absolute; inset: 0; z-index: -1; background:
+    radial-gradient(120% 90% at 78% 40%, color-mix(in srgb, #0B0B2C 40%, transparent), color-mix(in srgb, #0B0B2C 82%, transparent) 70%),
+    linear-gradient(180deg, transparent 60%, #0B0B2C); }
+  .inner { display: grid; gap: clamp(28px, 4vw, 64px); align-items: center; padding-bottom: clamp(32px, 5vh, 56px); }
+  .texto { display: grid; gap: 18px; align-content: center; min-width: 0; }
+  .marca { font: 700 clamp(16px, 1.25vw, 19px)/1.3 var(--f-display); letter-spacing: 0; color: var(--muted); max-width: 32ch; }
+  .estado { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-self: start; margin-top: 6px; padding: 8px 14px 8px 12px; border: 1px solid rgba(193, 227, 19, .4); border-radius: 999px; font: 600 14px/1 var(--f-body); background: rgba(193, 227, 19, .08); }
+  .estado time { font-size: 13px; color: var(--lima); }
+  .punto { width: 8px; height: 8px; border-radius: 50%; background: var(--lima); box-shadow: 0 0 0 0 rgba(193, 227, 19, .6); animation: latido 2.4s cubic-bezier(.16, 1, .3, 1) infinite; }
+  @keyframes latido { 0% { box-shadow: 0 0 0 0 rgba(193, 227, 19, .55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(193, 227, 19, 0); } }
+  .titulo { font-size: clamp(30px, 3.7vw, 58px); font-weight: 900; line-height: 1.02; letter-spacing: -.02em; max-width: 18ch; text-wrap: balance; overflow-wrap: anywhere; }
+  .cuenta { min-height: 64px; }
+  .cuenta-fecha { font: 500 17px/1.4 var(--f-mono); color: var(--lima); }
+  .cuenta-js[hidden] { display: none; }
+  .cuenta-js { display: flex; gap: clamp(16px, 2.4vw, 32px); margin: 0; color: var(--lima); }
+  .cuenta-js span { display: grid; gap: 4px; }
+  .cuenta-js b { font: 500 clamp(40px, 4.6vw, 68px)/.95 var(--f-mono); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .cuenta-js small { font: 500 12px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .cuenta.is-js .cuenta-fecha { display: none; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; margin: 0; padding: 0; font-size: 15px; color: var(--fg); opacity: .92; }
+  .meta li { display: inline-flex; align-items: center; gap: 8px; }
+  .meta .mono { font-size: 14px; }
+  .meta .cfc { color: var(--lima); }
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+  .objeto { perspective: 1200px; justify-self: center; width: min(100%, 560px); }
+  .cartel { position: relative; display: block; border-radius: 16px; overflow: hidden; line-height: 0; transform: rotateY(-7deg) rotateX(3deg) rotateZ(.6deg); transform-style: preserve-3d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2), 0 30px 60px -12px rgba(0, 0, 0, .55), 0 60px 120px -40px rgba(0, 0, 0, .5); outline: 1px solid rgba(255, 255, 255, .14); outline-offset: -1px; }
+  .cartel :global(img) { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; }
+  .brillo { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(60% 60% at var(--bx, 30%) var(--by, 20%), rgba(255, 255, 255, .28), transparent 60%); mix-blend-mode: soft-light; transition: opacity .4s; }
+  .objeto.is-activo .brillo { opacity: 1; }
+  .cifras { display: flex; flex-wrap: wrap; gap: 10px clamp(24px, 4vw, 56px); padding-block: 22px 26px; border-top: 1px solid var(--line); width: 100%; }
+  .cifras p { display: flex; align-items: baseline; gap: 10px; margin: 0; }
+  .cifras .num { font-size: clamp(22px, 2vw, 28px); font-weight: 500; color: var(--lima); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .cifras .et { font-size: 14px; color: var(--muted); }
+  @media (min-width: 900px) {
+    .inner { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+  }
+  @media (max-width: 899px) {
+    .cartel { transform: rotate(-1.2deg); }
+    .cartel :global(img) { max-height: 46vh; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .punto { animation: none; }
+    .brillo { transition: none; }
+  }
+</style>

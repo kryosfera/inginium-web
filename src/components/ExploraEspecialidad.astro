@@ -1,0 +1,53 @@
+---
+// «Explora por especialidad»: chips con recuento que filtran una vista previa (máx. 6) con Flip.
+// Sin JS: enlaces a /cursos?especialidad=… y la vista previa de los 6 primeros.
+import type { CollectionEntry } from 'astro:content';
+import CourseCard from './CourseCard.astro';
+import { slugEspecialidad } from '../lib/cursos';
+import Flecha from './Flecha.astro';
+interface Props { cursos: CollectionEntry<'cursos'>[]; especialidades: { nombre: string; n: number }[]; max?: number }
+const { cursos, especialidades, max = 6 } = Astro.props;
+---
+<section class="wrap exp" data-explora data-max={max} aria-labelledby="exp-h">
+  <div class="cab">
+    <h2 id="exp-h" data-split>Explora por especialidad</h2>
+    <p class="sub">{especialidades.length} especialidades. Elige una para ver sus cursos.</p>
+  </div>
+  <ul class="enlaces" data-exp-enlaces>
+    {especialidades.map((e) => <li><a href={`/cursos?especialidad=${slugEspecialidad(e.nombre)}`}>{e.nombre} <span class="n mono">{e.n}</span></a></li>)}
+  </ul>
+  <div class="chips" role="group" aria-label="Especialidad" hidden data-exp-chips>
+    <button type="button" class="chip" data-exp="" data-nombre="" aria-pressed="true">Todas<span class="n mono"><span class="sr-only">, </span>{cursos.length}<span class="sr-only"> cursos</span></span></button>
+    {especialidades.map((e) => (
+      <button type="button" class="chip" data-exp={slugEspecialidad(e.nombre)} data-nombre={e.nombre} aria-pressed="false">
+        {e.nombre}<span class="n mono"><span class="sr-only">, </span>{e.n}<span class="sr-only"> {e.n === 1 ? 'curso' : 'cursos'}</span></span>
+      </button>
+    ))}
+  </div>
+  <div id="destacados" class="grid" data-exp-grid>
+    {cursos.map((c, i) => <div class="item" data-exp-item data-especialidades={c.data.especialidades.map(slugEspecialidad).join(' ')} hidden={i >= max}><CourseCard curso={c} reveal={false} /></div>)}
+  </div>
+  <p class="estado sr-only" role="status" data-exp-estado></p>
+  <p class="todos"><a class="btn btn-primary" href="/cursos" data-exp-todos><span data-exp-todos-txt>Ver todos los cursos</span> <Flecha /></a></p>
+</section>
+<script>import '../scripts/explora';</script>
+<style>
+  .exp { display: grid; gap: 24px; padding-block: clamp(80px, 9vw, 128px); }
+  .cab { display: grid; gap: 10px; }
+  h2 { font-size: clamp(32px, 4vw, 60px); font-weight: 900; max-width: 18ch; }
+  .sub { color: var(--muted); font-size: 17px; }
+  .enlaces { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .enlaces[hidden], .chips[hidden] { display: none; }
+  .enlaces a, .chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 12px 10px 16px; border: 1.5px solid var(--line); border-radius: 999px; font: 600 14px/1 var(--f-body); color: var(--fg); background: transparent; text-decoration: none; cursor: pointer; transition: border-color .2s, background-color .2s; }
+  .enlaces a:hover, .chip:hover { border-color: var(--fg); }
+  .n { font-size: 12px; font-weight: 500; min-width: 1.9em; padding: 4px 6px; border-radius: 999px; text-align: center; background: color-mix(in srgb, var(--fg) 7%, transparent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: #F5F7FA; }
+  .chip[aria-pressed="true"] .n { background: var(--lima); color: var(--tinta); }
+  .chip:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px 20px; margin-top: 8px; }
+  .item { display: grid; }
+  .item[hidden] { display: none; }
+  .todos { margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) { .chip, .enlaces a { transition: none; } }
+</style>
