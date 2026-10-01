@@ -16,3 +16,6 @@ export function iniciales(nombre: string): string {
 export function claveNombre(nombre: string): string {
   return nombre.split(/\s+/).filter((p) => !TITULO.test(p)).join(' ');
 }
+
+/** JSON para incrustar en un <script> (ld+json o datos): «<» escapado, un «</script>» no puede cerrar la etiqueta. */
+export const jsonEnScript = (o: unknown): string => JSON.stringify(o).replace(/</g, '\\u003c');

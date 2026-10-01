@@ -6,6 +6,7 @@ import FilterBar from '../../components/FilterBar.astro';
 import CourseCard from '../../components/CourseCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import { ordenar } from '../../lib/filtros';
+import { jsonEnScript } from '../../lib/format';
 import hero from '../../assets/hero/congreso.jpg';
 
 const todos = await getCollection('cursos');
@@ -33,7 +34,7 @@ const entradilla = activos.length === 0 ? 'Consulta el archivo de cursos celebra
     </section>
   </div>
   <ContactCTA />
-  <script type="application/json" id="filtro-datos" set:html={JSON.stringify({ especialidades, anios }).replace(/</g, '\\u003c')} />
+  <script type="application/json" id="filtro-datos" set:html={jsonEnScript({ especialidades, anios })} />
   <script>import '../../scripts/filtros';</script>
 </BaseLayout>
 <style>

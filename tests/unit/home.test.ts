@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { unicosPorNombre } from '../../src/lib/patrocinadores';
-import { iniciales, claveNombre } from '../../src/lib/format';
+import { iniciales, claveNombre, jsonEnScript } from '../../src/lib/format';
 
 describe('unicosPorNombre', () => {
   it('deja una entrada por nombre, prefiriendo la que tiene logo', () => {
@@ -24,5 +24,13 @@ describe('nombres de docentes', () => {
   it('claveNombre quita Dr./Dra. para ordenar', () => {
     expect(claveNombre('Dra. Ana Pérez')).toBe('Ana Pérez');
     expect(claveNombre('Beatriz Gil')).toBe('Beatriz Gil');
+  });
+});
+
+describe('jsonEnScript', () => {
+  it('escapa «<» para que un título no cierre el <script> del JSON-LD', () => {
+    const s = jsonEnScript({ name: 'a</script><b>' });
+    expect(s).not.toContain('<');
+    expect(JSON.parse(s)).toEqual({ name: 'a</script><b>' });
   });
 });

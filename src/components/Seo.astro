@@ -1,5 +1,6 @@
 ---
 import { EMAIL_CONTACTO } from '../lib/contacto-info';
+import { jsonEnScript as ld } from '../lib/format';
 interface Props { title: string; description: string; jsonLd?: object; noindex?: boolean; image?: string }
 const { title, description, jsonLd, noindex = false, image = '/og.png' } = Astro.props;
 // Con build.format 'file' el pathname acaba en .html: se normaliza a la URL pública del sitemap.
@@ -24,5 +25,5 @@ const org = { '@context': 'https://schema.org', '@type': 'Organization', name: '
 <meta property="og:image" content={imagen} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content={imagen} />
-<script type="application/ld+json" set:html={JSON.stringify(org)} />
-{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+<script type="application/ld+json" set:html={ld(org)} />
+{jsonLd && <script type="application/ld+json" set:html={ld(jsonLd)} />}
