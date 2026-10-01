@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { docente: CollectionEntry<'profesorado'>; compacta?: boolean }
+const { docente, compacta = false } = Astro.props;
+const { nombre, cargo, resumen, foto } = docente.data;
+const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/profesorado/*', { eager: true });
+const img = foto ? fotos[`../assets/profesorado/${foto}`]?.default : undefined;
+const size = compacta ? 56 : 96;
+const iniciales = nombre.split(/\s+/).filter((p) => /^\p{L}/u.test(p) && !/^(dr|dra)\.?$/i.test(p)).slice(0, 2).map((p) => p[0].toUpperCase()).join('');
+---
+<article class:list={['teacher', { compacta }]} style={`--s:${size}px`}>
+  <div class="avatar">
+    {img ? <Image src={img} alt="" width={size * 2} height={size * 2} loading="lazy" /> : <span aria-hidden="true">{iniciales}</span>}
+  </div>
+  <div class="txt">
+    <h3><a href={`/profesorado/${docente.id}`}>{nombre}</a></h3>
+    {cargo && <p class="cargo">{cargo}</p>}
+    {!compacta && resumen && <p class="resumen">{resumen}</p>}
+  </div>
+</article>
+<style>
+  .teacher { display: flex; gap: 16px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .avatar { flex: none; width: var(--s); height: var(--s); border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: var(--card); border: 1px solid var(--line); font: 800 calc(var(--s) * .34)/1 var(--f-display); color: var(--muted); }
+  .avatar :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  h3 { font-size: 17px; letter-spacing: -.01em; line-height: 1.2; }
+  h3 a { color: inherit; text-decoration: none; }
+  h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cargo { margin: 4px 0 0; font-size: 14px; color: var(--muted); line-height: 1.4; }
+  .resumen { margin: 8px 0 0; font-size: 14px; line-height: 1.5; }
+</style>

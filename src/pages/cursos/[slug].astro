@@ -1,0 +1,45 @@
+---
+import { getCollection, getEntries, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHero from '../../components/SectionHero.astro';
+import CourseFacts from '../../components/CourseFacts.astro';
+import TeacherCard from '../../components/TeacherCard.astro';
+import SponsorStrip from '../../components/SponsorStrip.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+export async function getStaticPaths() {
+  return (await getCollection('cursos')).map((c) => ({ params: { slug: c.id }, props: { c } }));
+}
+const { c } = Astro.props as { c: CollectionEntry<'cursos'> };
+const { Content } = await render(c);
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../../assets/cursos/*', { eager: true });
+const imagen = c.data.imagen ? imgs[`../../assets/cursos/${c.data.imagen}`]?.default : undefined;
+const docentes = (await getEntries(c.data.profesorado.map((id) => ({ collection: 'profesorado' as const, id })))).filter(Boolean) as CollectionEntry<'profesorado'>[];
+const patros = (await getEntries(c.data.patrocinadores.map((id) => ({ collection: 'patrocinadores' as const, id }))))
+  .filter((p) => p?.data.logo).map((p) => ({ nombre: p!.data.nombre, logo: p!.data.logo! }));
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: c.data.titulo, description: c.data.resumen,
+  provider: { '@type': 'Organization', name: 'Inginium', url: 'https://inginium-ksf.com' } };
+---
+<BaseLayout title={`${c.data.titulo} · Inginium`} description={c.data.resumen || `Curso de ${c.data.especialidades.join(', ') || 'formación sanitaria'} en Inginium.`} jsonLd={jsonLd}>
+  <SectionHero kicker={c.data.especialidades.join(' · ') || 'Curso'} titulo={c.data.titulo} entradilla={c.data.resumen} imagen={imagen}>
+    {c.data.estado === 'finalizado' ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
+  </SectionHero>
+  <div class="wrap layout">
+    <div class="body">
+      <section class="prose" aria-label="Descripción y programa"><Content /></section>
+      {docentes.length > 0 && <section aria-labelledby="prof-h"><h2 id="prof-h">Profesorado</h2>
+        <div class="teachers">{docentes.map((d) => <TeacherCard docente={d} compacta />)}</div></section>}
+      {patros.length > 0 && <section aria-labelledby="pat-h"><h2 id="pat-h">Con el patrocinio de</h2><SponsorStrip patrocinadores={patros} marquee={patros.length > 4} /></section>}
+    </div>
+    <CourseFacts curso={c} />
+  </div>
+  <ContactCTA />
+</BaseLayout>
+<style>
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; padding-block: 56px; }
+  .body { display: grid; gap: 48px; }
+  .prose :global(p) { margin-block: 0 1em; max-width: 68ch; }
+  .prose :global(strong) { font-weight: 700; }
+  h2 { font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 20px; }
+  .teachers { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding-bottom: 120px; } }
+</style>

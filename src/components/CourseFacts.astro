@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { puedeInscribirse, etiquetaModalidad, textoCreditos, tipoPrograma } from '../lib/curso-vista';
+interface Props { curso: CollectionEntry<'cursos'> }
+const { curso } = Astro.props;
+const d = curso.data;
+const inscribir = puedeInscribirse(d);
+const etiqueta = d.modalidad === 'presencial' ? 'Inscribirme' : 'Acceder al curso';
+const tipo = d.programa ? tipoPrograma(d.programa) : null;
+const filas: [string, string | null][] = [
+  ['Especialidad', d.especialidades.join(', ') || null],
+  ['Fechas', d.fechas],
+  ['Modalidad', etiquetaModalidad(d.modalidad)],
+  ['Duración', d.duracion],
+  ['Créditos', textoCreditos(d.creditos)],
+];
+const abreviado = d.titulo.length > 44 ? `${d.titulo.slice(0, 42).trimEnd()}…` : d.titulo;
+---
+<aside class="facts" aria-label="Datos del curso">
+  <dl>
+    {filas.filter(([, v]) => v).map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+    <div><dt>Estado</dt><dd>{d.estado === 'activo' ? <span class="tag">Activo</span> : <span class="tag tag-fin">Finalizado</span>}</dd></div>
+  </dl>
+  <div class="acciones">
+    {inscribir && (
+      <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
+    )}
+    {d.programa && (tipo === 'pdf'
+      ? <a class="btn btn-secondary" href={d.programa} download>Programa<span class="sr-only"> (PDF)</span></a>
+      : <a class="btn btn-secondary" href={d.programa} target="_blank" rel="noopener noreferrer">Programa<span class="sr-only"> (imagen, abre en otra pestaña)</span></a>)}
+  </div>
+</aside>
+<div class="facts-bar">
+  <span class="bar-titulo">{abreviado}</span>
+  {inscribir
+    ? <a class="btn btn-lima" href={d.url!} target="_blank" rel="noopener noreferrer">{etiqueta} <span aria-hidden="true">↗</span><span class="sr-only"> (abre en otra pestaña)</span></a>
+    : <span class:list={['tag', { 'tag-fin': d.estado === 'finalizado' }]}>{d.estado === 'activo' ? 'Activo' : 'Finalizado'}</span>}
+</div>
+<style>
+  .facts { position: sticky; top: 96px; align-self: start; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 24px; }
+  dl { margin: 0; display: grid; gap: 14px; }
+  dl > div { display: grid; gap: 2px; }
+  dt { font: 500 11px/1.2 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  dd { margin: 0; font-weight: 600; }
+  .acciones { display: grid; gap: 10px; }
+  .acciones .btn { justify-content: center; }
+  .facts-bar { display: none; }
+  @media (max-width: 900px) {
+    .facts { position: static; }
+    .facts-bar { position: fixed; inset: auto 0 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); }
+    .bar-titulo { font: 700 14px/1.25 var(--f-display); min-width: 0; }
+    .facts-bar .btn { flex: none; padding: 14px 18px; }
+  }
+</style>

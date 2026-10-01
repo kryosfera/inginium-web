@@ -1,0 +1,53 @@
+---
+// Franja de logos de patrocinadores. Con `marquee`, mismo mecanismo que ClientMarquee de ksf-web.
+interface Props { patrocinadores: { nombre: string; logo: string | null }[]; marquee?: boolean }
+const { patrocinadores, marquee = false } = Astro.props;
+const items = patrocinadores.filter((p) => p.logo) as { nombre: string; logo: string }[];
+const lista = marquee ? [...items, ...items] : items;
+---
+{items.length > 0 && (
+  <div class:list={['sp', { mq: marquee }]} data-marquee={marquee ? '' : undefined}>
+    <div class="strip" role="group" aria-label="Patrocinadores del curso">
+      <ul class="track">
+        {lista.map((p, i) => (
+          <li aria-hidden={marquee && i >= items.length ? 'true' : undefined}>
+            <img src={p.logo} alt={p.nombre || 'Patrocinador del curso'} loading="lazy" height="40" />
+          </li>
+        ))}
+      </ul>
+    </div>
+    {marquee && <button class="mq-pause" type="button" data-marquee-pause aria-pressed="false"><span aria-hidden="true" data-marquee-glyph>❚❚</span> Pausar logos</button>}
+  </div>
+)}
+<script>
+  // Delegado en document: sobrevive a los cambios de página del ClientRouter sin volver a registrarse.
+  document.addEventListener('click', (e) => {
+    const b = (e.target as Element | null)?.closest<HTMLButtonElement>('[data-marquee-pause]');
+    if (!b) return;
+    const paused = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', String(paused));
+    b.closest('[data-marquee]')?.classList.toggle('is-paused', paused);
+    const g = b.querySelector('[data-marquee-glyph]'); if (g) g.textContent = paused ? '▶' : '❚❚';
+  });
+</script>
+<style>
+  .sp { display: grid; gap: 6px; }
+  .track { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 48px; list-style: none; margin: 0; padding: 12px 0; }
+  li { display: flex; align-items: center; height: 48px; }
+  img { height: 40px; width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1); opacity: .85; }
+  .mq .strip { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .mq .track { flex-wrap: nowrap; width: max-content; gap: 0; animation: marquee 60s linear infinite; }
+  .mq li { white-space: nowrap; padding-right: 56px; }
+  /* Sin :focus-within: el botón conserva el foco tras pulsarlo y la pista debe poder reanudarse. */
+  .mq .strip:hover .track, .mq.is-paused .track { animation-play-state: paused; }
+  .mq-pause { justify-self: end; border: 1px solid var(--line); background: none; color: var(--muted); border-radius: 999px; padding: 6px 11px; font: 600 12px/1 var(--f-body); cursor: pointer; }
+  .mq-pause:hover, .mq-pause:focus-visible { color: var(--fg); }
+  .mq-pause[aria-pressed="true"] { border-color: currentColor; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .mq .strip { -webkit-mask-image: none; mask-image: none; }
+    .mq .track { animation: none; flex-wrap: wrap; width: auto; row-gap: 12px; }
+    .mq li[aria-hidden] { display: none; }
+    .mq-pause { display: none; }
+  }
+</style>
