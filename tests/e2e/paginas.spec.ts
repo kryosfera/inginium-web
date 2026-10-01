@@ -23,9 +23,11 @@ test('home: cursos destacados, cifras y enlace al catálogo', async ({ page }) =
   await expect(page.getByRole('link', { name: 'Ver todos los cursos' })).toHaveAttribute('href', '/cursos');
 });
 
+// La cabecera de fotos rotatorias solo sale sin próximo curso (si lo hay, la home abre con su cartel: tests/e2e/v2.spec.ts).
 test('home: con movimiento reducido solo la primera foto está cargada y visible', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
+  test.skip(await page.locator('[data-proximo]').count() > 0, 'la home abre con el próximo curso');
   const capas = page.locator('[data-hero-layer]');
   expect(await capas.count()).toBe(4);
   await expect(capas.first()).toBeVisible();
@@ -37,6 +39,7 @@ test('home: la rotación promueve la foto siguiente antes de mostrarla', async (
   test.setTimeout(40_000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
+  test.skip(await page.locator('[data-proximo]').count() > 0, 'la home abre con el próximo curso');
   await expect(page.locator('[data-hero-layer].is-on')).toHaveCount(1);
   await expect.poll(async () => page.locator('[data-hero-layer] img[data-src]').count(), { timeout: 12_000 }).toBeLessThan(3);
   // Tras el primer periodo la segunda foto ya tiene src real y es la visible.
