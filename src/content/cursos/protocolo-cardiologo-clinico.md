@@ -1,5 +1,5 @@
 ---
-titulo: La teleconsulta. Protocolo de actuación para el cardiólogo clínico.
+titulo: La teleconsulta. Protocolo de actuación para el cardiólogo clínico
 resumen: 'Módulo online que establece un protocolo de teleconsulta claro y específico para el cardiólogo clínico: ventajas e inconvenientes, barreras y cómo superarlas, y estructura de la entrevista en la enfermedad cardiovascular. Del 15 de abril al 31 de diciembre de 2021; 8 horas y 0,6 créditos.'
 especialidades: []
 modalidad: online

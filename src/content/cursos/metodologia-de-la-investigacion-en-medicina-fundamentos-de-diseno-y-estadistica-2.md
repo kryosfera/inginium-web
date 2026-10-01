@@ -1,5 +1,5 @@
 ---
-titulo: Metodología de la investigación en Medicina Fundamentos de Diseño y Estadística
+titulo: 'Metodología de la investigación en medicina: fundamentos de diseño y estadística'
 resumen: 'Curso presencial de bioestadística y epidemiología para la investigación en medicina, según las directrices del Comité Internacional de Editores de Revistas Biomédicas, con casos prácticos en Stata: estimación, contraste de hipótesis, diseños, confusión y regresión. Madrid, 26 de junio de 2025; 7 horas y 1,3 créditos.'
 especialidades:
   - Cirugía cardiovascular

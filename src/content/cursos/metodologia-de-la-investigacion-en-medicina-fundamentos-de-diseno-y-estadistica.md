@@ -1,5 +1,5 @@
 ---
-titulo: 'Metodología de la investigación en medicina: Fundamentos de Diseño y Estadística'
+titulo: 'Metodología de la investigación en medicina: fundamentos de diseño y estadística'
 resumen: 'Curso presencial de bioestadística y epidemiología para la investigación en medicina, según las directrices del Comité Internacional de Editores de Revistas Biomédicas: estimación de parámetros, contraste de hipótesis y modelos de regresión. Barcelona, 4 y 11 de febrero de 2022; 1,2 créditos.'
 especialidades: []
 modalidad: presencial

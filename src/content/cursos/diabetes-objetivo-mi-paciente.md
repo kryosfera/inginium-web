@@ -1,5 +1,5 @@
 ---
-titulo: DIABETES, OBJETIVO MI PACIENTE
+titulo: Diabetes, objetivo mi paciente
 resumen: Curso online para enfermería de Atención Primaria sobre el manejo integral del paciente con diabetes y la prevención y el tratamiento de sus complicaciones, a partir de cuatro casos clínicos. Disponible del 1 de septiembre de 2024 al 31 de julio de 2025; 8 horas y 1,3 créditos.
 especialidades:
   - Enfermería

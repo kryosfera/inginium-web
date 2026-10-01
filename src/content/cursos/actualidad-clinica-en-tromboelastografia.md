@@ -1,5 +1,5 @@
 ---
-titulo: ACTUALIDAD CLÍNICA EN TROMBOELASTOGRAFÍA
+titulo: Actualidad clínica en tromboelastografía
 resumen: 'Casos clínicos interactivos online sobre tromboelastografía para especialistas en Anestesiología y Medicina Intensiva: hemostasia y hemorragia en cirugía cardiovascular, transfusión guiada en la disección de aorta y uso del tromboelastograma en cirugía cardíaca. Disponible del 25 de abril al 31 de diciembre de 2022.'
 especialidades:
   - Cardiología

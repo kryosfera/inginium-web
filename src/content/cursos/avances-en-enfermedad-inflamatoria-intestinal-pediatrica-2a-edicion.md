@@ -1,5 +1,5 @@
 ---
-titulo: AVANCES EN ENFERMEDAD INFLAMATORIA INTESTINAL PEDIÁTRICA
+titulo: Avances en enfermedad inflamatoria intestinal pediátrica
 resumen: 'Jornada presencial sobre enfermedad inflamatoria intestinal pediátrica: personalización y predicción, escenarios terapéuticos complejos, desafíos quirúrgicos, escenarios futuros y tratamientos no farmacológicos. 8 de noviembre de 2024; 7,5 horas y 1,1 créditos.'
 especialidades:
   - Pediatría

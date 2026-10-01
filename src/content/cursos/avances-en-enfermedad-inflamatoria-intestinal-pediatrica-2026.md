@@ -1,5 +1,5 @@
 ---
-titulo: AVANCES EN ENFERMEDAD INFLAMATORIA INTESTINAL PEDIÁTRICA
+titulo: Avances en enfermedad inflamatoria intestinal pediátrica
 resumen: 'Jornada presencial sobre enfermedad inflamatoria intestinal pediátrica para pediatras, cirujanos generales y especialistas de aparato digestivo: tratamientos convencionales y nuevas terapias, abordaje médico-quirúrgico del Crohn ileocecal y seguimiento. Barcelona, 13 de noviembre de 2026; 7 horas lectivas.'
 especialidades:
   - Pediatría

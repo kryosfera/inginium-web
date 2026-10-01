@@ -1,5 +1,5 @@
 ---
-titulo: Actualización en Neurogastroenterología y Motilidad Pediátrica
+titulo: Actualización en neurogastroenterología y motilidad pediátrica
 resumen: 'Jornada presencial de neurogastroenterología y motilidad pediátrica, presentada por los presidentes de la SEGHNP y de ASENEM: atresia esofágica, trastornos del eje intestino-cerebro en la adolescencia y radiología de la motilidad. Valencia, 12 de marzo de 2026; 5 h 30 min y 0,7 créditos.'
 especialidades:
   - Pediatría

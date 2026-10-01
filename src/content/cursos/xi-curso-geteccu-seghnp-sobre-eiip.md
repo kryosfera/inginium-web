@@ -1,5 +1,5 @@
 ---
-titulo: XI Curso GETECCU-SEGHNP sobre EIIP
+titulo: XI curso GETECCU-SEGHNP sobre EIIP
 resumen: 'Jornada presencial GETECCU-SEGHNP sobre enfermedad inflamatoria intestinal pediátrica: salud global del paciente, obesidad, trastornos funcionales asociados y abordaje psicológico del paciente y la familia. 12 de noviembre de 2021; 8 horas y 0,7 créditos (Consejo Vasco de Formación Continuada).'
 especialidades:
   - Pediatría

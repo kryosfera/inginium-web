@@ -1,5 +1,5 @@
 ---
-titulo: AVANCES EN ENFERMEDAD INFLAMATORIA INTESTINAL PEDIÁTRICA 2025
+titulo: Avances en enfermedad inflamatoria intestinal pediátrica 2025
 resumen: 'Jornada presencial sobre enfermedad inflamatoria intestinal pediátrica: retos de la EII en 2025, la edad temprana, terapias del paciente con EII, guías ECCO-ESPGHAN de colitis ulcerosa pediátrica y el adolescente. 7 de noviembre de 2025; 7 h 30 min y 1 crédito.'
 especialidades:
   - Pediatría

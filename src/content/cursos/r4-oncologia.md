@@ -1,5 +1,5 @@
 ---
-titulo: Video Curso para Residentes de 4º año de Oncología
+titulo: Video curso para residentes de 4º año de oncología
 resumen: 'Videocurso online para residentes de 4.º año de Oncología sobre las salidas profesionales al terminar la residencia: doctorado, búsqueda de trabajo, entrevistas, industria farmacéutica, extranjero e investigación, y situación actual de la especialidad según SEOR y SEOM. 10 horas.'
 especialidades: []
 modalidad: online

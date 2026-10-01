@@ -1,5 +1,5 @@
 ---
-titulo: Soporte Nutricional en Pediatría
+titulo: Soporte nutricional en pediatría
 resumen: 'Curso presencial de soporte nutricional en pediatría: valoración nutricional clásica y morfofuncional, nutrición enteral, fórmulas de suplementación, talleres prácticos y casos clínicos interactivos. Terrassa, 16 y 17 de julio de 2026; 8 horas y 1,4 créditos.'
 especialidades:
   - Pediatría

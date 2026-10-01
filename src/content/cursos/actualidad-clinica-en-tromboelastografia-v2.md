@@ -1,5 +1,5 @@
 ---
-titulo: ACTUALIDAD CLÍNICA EN TROMBOELASTOGRAFÍA.
+titulo: Actualidad clínica en tromboelastografía
 resumen: 'Casos clínicos interactivos online sobre tromboelastografía para especialistas en Anestesiología y Medicina Intensiva: cirugía cardiovascular, disección de aorta, politrauma y cirugía no hepática en el paciente cirrótico. Del 15 de noviembre de 2023 al 30 de septiembre de 2024; 9 horas y 1,6 créditos.'
 especialidades:
   - Anestesiología

@@ -1,5 +1,5 @@
 ---
-titulo: 'Desafíos en Patología Valvular: Planificación'
+titulo: 'Desafíos en patología valvular: planificación'
 resumen: 'Programa modular presencial (Programa Jóvenes Valores) para adjuntos de Cirugía Cardíaca en sus primeros años de ejercicio: desafíos en el Heart Team, empleo de tecnología en la planificación y habilidades de comunicación. 28 de mayo de 2026; 7 horas y 1,4 créditos.'
 especialidades:
   - Cirugía cardiovascular

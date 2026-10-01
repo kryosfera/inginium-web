@@ -1,5 +1,5 @@
 ---
-titulo: Video Curso para Residentes de 4º año de Oncología (2a Edición)
+titulo: Video curso para residentes de 4º año de oncología (2ª edición)
 resumen: 'Videocurso online para residentes de 4.º año de Oncología Radioterápica y Oncología Médica que finalizan su formación: orientación profesional (doctorado, empleo, industria, extranjero e investigación) y situación actual de ambas especialidades en España. Del 15 de febrero al 15 de mayo de 2022.'
 especialidades: []
 modalidad: online

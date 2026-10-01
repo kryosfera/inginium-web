@@ -1,5 +1,5 @@
 ---
-titulo: Video Curso de Formación para Residentes de 2º y 3er Año Oncología Radioterápica y Oncología Médica
+titulo: Video curso de formación para residentes de 2º y 3er año de oncología radioterápica y oncología médica
 resumen: 'Videocurso online para residentes de 2.º y 3.º año de Oncología Radioterápica y Oncología Médica: comunicación, razonamiento clínico y atención al paciente oncológico, investigación y rotaciones en el extranjero, urgencias y cuidados continuos. Del 15 de enero al 15 de marzo de 2023.'
 especialidades:
   - Oncología

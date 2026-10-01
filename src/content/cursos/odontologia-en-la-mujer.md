@@ -1,5 +1,5 @@
 ---
-titulo: ODONTOLOGÍA EN LA MUJER. Influencia de la Menopausia en la Salud Oral
+titulo: Odontología en la mujer. Influencia de la menopausia en la salud oral
 resumen: 'Curso online para higienistas dentales sobre los efectos de los cambios hormonales de la menopausia en la salud bucodental: condiciones orales, diagnóstico, prevención y tratamiento, terapia hormonal sustitutiva y huesos maxilares. Del 20 de mayo al 20 de diciembre de 2025; 1,5 créditos.'
 especialidades:
   - Odontología

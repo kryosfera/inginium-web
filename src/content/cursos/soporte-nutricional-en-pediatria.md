@@ -1,5 +1,5 @@
 ---
-titulo: Soporte Nutricional en Pediatría
+titulo: Soporte nutricional en pediatría
 resumen: 'Curso presencial para médicos adjuntos de Pediatría con 1-5 años de ejercicio: valoración nutricional y requerimientos, indicaciones y tipos de soporte nutricional, talleres prácticos y casos clínicos. Terrassa (Barcelona), 4 y 5 de noviembre de 2021; 10 horas y 1,4 créditos.'
 especialidades: []
 modalidad: presencial

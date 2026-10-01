@@ -1,5 +1,5 @@
 ---
-titulo: Soporte Nutricional en Pediatría
+titulo: Soporte nutricional en pediatría
 resumen: 'Curso presencial para médicos adjuntos de Pediatría con 1-5 años de ejercicio: conceptos básicos de nutrición clínica y nutrición enteral, talleres de disfagia y cuidados de la sonda, y casos clínicos. La Mola, Terrassa (Barcelona), 25 y 26 de octubre de 2023; 9 horas y 1,7 créditos.'
 especialidades:
   - Pediatría
