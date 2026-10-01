@@ -1,12 +1,11 @@
 ---
-import logo from '../assets/inginium-logo.svg?raw';
+import logo from '../assets/inginium-logo-lema.svg?raw';
 const year = new Date().getFullYear();
 ---
 <footer data-mode="oscuro" class="site-footer">
   <div class="wrap grid">
     <div class="brandcol">
       <div class="logo"><Fragment set:html={logo} /></div>
-      <p class="claim">Improving your future</p>
       <p class="addr">Formación continuada acreditada para profesionales sanitarios, patrocinada por la industria de la salud.</p>
     </div>
     <nav aria-label="Cursos"><p class="eyebrow">Cursos</p>
@@ -23,9 +22,8 @@ const year = new Date().getFullYear();
   .site-footer { padding-block: 64px 28px; border-top: 1px solid var(--line); }
   .grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 32px; }
   .logo { display: inline-block; color: var(--fg); }
-  .logo :global(svg) { height: 40px; width: auto; display: block; }
-  .claim { font: 900 22px/1.1 var(--f-display); margin-top: 18px; }
-  .addr { color: var(--muted); font-size: 15px; margin-top: 10px; max-width: 38ch; }
+  .logo :global(svg) { height: 72px; width: auto; display: block; }
+  .addr { color: var(--muted); font-size: 15px; margin-top: 20px; max-width: 38ch; }
   ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
   nav a { text-decoration: none; color: var(--fg); opacity: .85; } nav a:hover { opacity: 1; }
   .firma { font: 500 14px/1.4 var(--f-body); margin-top: 48px; }
