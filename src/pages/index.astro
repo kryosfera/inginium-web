@@ -1,1 +1,8 @@
-<html lang="es"><head><meta charset="utf-8" /><title>Inginium</title></head><body><h1>Inginium</h1></body></html>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import sala from '../assets/hero/sala-curso.jpg';
+---
+<BaseLayout title="Inginium · Formación continuada para profesionales sanitarios" description="Cursos acreditados para profesionales sanitarios, patrocinados por la industria de la salud.">
+  <SectionHero kicker="Inginium" titulo="Formación continuada para profesionales sanitarios" imagen={sala} />
+</BaseLayout>

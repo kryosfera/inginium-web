@@ -1,0 +1,41 @@
+---
+import logo from '../assets/inginium-logo.svg?raw';
+const links = [
+  { href: '/cursos', label: 'Cursos' }, { href: '/profesorado', label: 'Profesorado' },
+  { href: '/acerca', label: 'Acerca de' }, { href: '/contacto', label: 'Contacto' },
+];
+// «Mi área» solo aparece cuando la fase 2 defina la URL.
+const miArea = import.meta.env.PUBLIC_MI_AREA_URL;
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Inginium, inicio"><Fragment set:html={logo} /></a>
+  <nav aria-label="Principal" class="desk">
+    {links.map((l) => <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    {miArea && <a class="btn btn-secondary" href={miArea}>Mi área</a>}
+    <a class="btn btn-lima cta" href="/cursos" data-magnetic>Ver cursos</a>
+  </nav>
+  <details class="mob">
+    <summary aria-label="Abrir menú">Menú</summary>
+    <nav aria-label="Principal móvil">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      {miArea && <a class="btn btn-secondary" href={miArea}>Mi área</a>}
+      <a class="btn btn-lima" href="/cursos">Ver cursos</a>
+    </nav>
+  </details>
+</header>
+<style>
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px var(--gutter); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .brand { display: block; text-decoration: none; color: var(--fg); }
+  .brand :global(svg) { height: 30px; width: auto; display: block; }
+  .desk { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); font: 600 15px/1 var(--f-body); }
+  .desk > a:not(.btn) { text-decoration: none; opacity: .85; }
+  .desk > a[aria-current="page"], .desk > a:hover { opacity: 1; }
+  .desk .btn { padding: 11px 18px; }
+  .mob { display: none; position: relative; }
+  .mob summary { list-style: none; cursor: pointer; font: 600 15px/1 var(--f-body); padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 999px; }
+  .mob summary::-webkit-details-marker { display: none; }
+  .mob nav { position: absolute; right: 0; top: calc(100% + 8px); display: grid; gap: 14px; min-width: 220px; padding: 18px; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 14px; }
+  .mob nav a:not(.btn) { text-decoration: none; font-weight: 600; }
+  @media (max-width: 900px) { .desk { display: none; } .mob { display: block; } }
+</style>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+interface Props { title: string; description: string; updated: string }
+const { title, description, updated } = Astro.props;
+---
+<BaseLayout title={`${title} · Inginium`} description={description} mode="claro">
+  <SectionHero titulo={title} kicker="Legal" />
+  <article class="wrap legal">
+    <p class="upd">Última actualización: {updated}</p>
+    <slot />
+  </article>
+</BaseLayout>
+<style>
+  .legal { max-width: 820px; padding-block: 56px 110px; }
+  .upd { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
+  .legal :global(h2) { font-size: 22px; margin: 32px 0 10px; }
+  .legal :global(p), .legal :global(li) { color: var(--fg); opacity: .9; margin-bottom: 12px; }
+  .legal :global(p a) { text-decoration: underline; text-underline-offset: 3px; }
+</style>

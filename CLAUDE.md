@@ -19,3 +19,4 @@ Catálogo de formación Inginium (KSF Digital Healthcare con ESADE Business Scho
 
 ## Estado y siguientes pasos
 - 01/10/2026: andamiaje hecho (Astro 5, Tailwind 4, Vitest, Playwright, Worker). Página de inicio provisional.
+- 01/10/2026: Tarea 4 hecha: sistema visual (lima/tinta sobre KSF v9), BaseLayout/LegalLayout, cabecera, pie, `SectionHero` escénico, `Pattern`, `StatCounters`, `ContactCTA`, logo SVG (glifos de Red Hat Display 900 convertidos a path) y fotos de cabecera en `src/assets/hero/`. Falta `public/og.png` (Seo lo referencia por defecto).
