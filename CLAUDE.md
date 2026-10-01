@@ -26,16 +26,18 @@ El nombre del archivo es el slug (la URL `/cursos/<slug>`). Frontmatter:
 - `modalidad`: `presencial` | `online`. `fechas`: texto libre. `anio`: número (filtro por año). `duracion`, `creditos`: opcionales.
 - `estado`: `activo` | `finalizado`. Un curso activo muestra el botón de inscripción solo si tiene `url`; un finalizado muestra la etiqueta «Finalizado» y nunca el botón.
 - `url`: enlace de inscripción/acceso (o `null`). `encuesta`: enlace a la encuesta (o `null`).
-- `imagen`: nombre de fichero en `src/assets/cursos/`. `programa`: fichero del programa (puede ser imagen, no solo PDF). Sin ellos la ficha usa un marcador de patrón.
+- `imagen`: **solo el nombre del fichero**, que va en `src/assets/cursos/` (Astro lo optimiza). Ejemplo: `imagen: soporte-nutricional-en-pediatria-2026.jpg` → `src/assets/cursos/soporte-nutricional-en-pediatria-2026.jpg`.
+- `programa`: **ruta pública con `/` inicial**; el fichero va en `public/programas/` (puede ser imagen, no solo PDF). Ejemplo: `programa: /programas/soporte-nutricional-en-pediatria-2026.pdf` → `public/programas/soporte-nutricional-en-pediatria-2026.pdf`. Sin la `/` el enlace sería relativo a `/cursos` (404); el test de enlaces lo rechaza.
+- Sin `imagen` la ficha y la tarjeta usan un marcador de patrón; sin `programa` no sale el botón de programa.
 - `profesorado`: ids de `src/data/profesorado.json`. `patrocinadores`: ids de `src/data/patrocinadores.json`.
 - `destacado`: `true` para que salga en la home. Con menos de 3 destacados la home se completa con «Últimas formaciones».
 - El cuerpo del archivo es HTML (programa y descripción).
 
 ### Profesorado
-`src/data/profesorado.json` (`id`, `nombre`, `cargo`, `resumen`, `biografia`, `foto`). La foto va en `src/assets/profesorado/` y `foto` lleva solo el nombre del fichero.
+`src/data/profesorado.json` (`id`, `nombre`, `cargo`, `resumen`, `biografia`, `foto`). La foto va en `src/assets/profesorado/` y `foto` lleva **solo el nombre del fichero**. Ejemplo: `"foto": "dra-ana-perez.jpg"` → `src/assets/profesorado/dra-ana-perez.jpg`.
 
 ### Patrocinadores
-`src/data/patrocinadores.json` (`id`, `nombre`, `logo`). Los logos van en `public/patrocinadores/`. El `nombre` se derivó del fichero del logo: es editable y conviene corregirlo a mano (alt del logo y deduplicación en la home).
+`src/data/patrocinadores.json` (`id`, `nombre`, `logo`). Los logos van en `public/patrocinadores/` y `logo` lleva la **ruta pública con `/` inicial** (no solo el nombre, al contrario que `imagen` y `foto`). Ejemplo: `"logo": "/patrocinadores/6a71c06f7c7b8870797bfdf3.png"` → `public/patrocinadores/6a71c06f7c7b8870797bfdf3.png`. `null` = sin logo (no se muestra). El `nombre` se derivó del fichero del logo: es editable y conviene corregirlo a mano (alt del logo y deduplicación en la home).
 
 ### Cifras
 `src/data/cifras.json`: `profesionalesFormados` (número; con `null` el contador no se muestra).

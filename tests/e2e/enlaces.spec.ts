@@ -68,9 +68,12 @@ test('imagen, programa, profesorado y patrocinadores de cada curso existen', () 
   for (const c of cursos) {
     // Los binarios del CDN solo existen tras descargar.sh: se exige el fichero si hay nombre local, no si es una URL.
     if (c.imagen && !/^https?:\/\//.test(c.imagen) && !existsSync(join('src/assets/cursos', c.imagen))) rotos.push(`${c.id}: imagen ${c.imagen}`);
-    if (c.programa && !/^https?:\/\//.test(c.programa) && !existsSync(join('public', c.programa))) rotos.push(`${c.id}: programa ${c.programa}`);
+    // programa es una ruta pública (/programas/<slug>.pdf), no un nombre de fichero: sin «/» inicial el enlace sería relativo a /cursos.
+    if (c.programa && (!c.programa.startsWith('/') || !existsSync(join('public', c.programa)))) rotos.push(`${c.id}: programa ${c.programa}`);
     for (const d of c.profesorado) if (!ids.docentes.has(d)) rotos.push(`${c.id}: docente ${d}`);
     for (const p of c.patrocinadores) if (!ids.patrocinadores.has(p)) rotos.push(`${c.id}: patrocinador ${p}`);
   }
+  // logo es una ruta pública (/patrocinadores/<id>.<ext>).
+  for (const p of patrocinadores) if (p.logo && (!p.logo.startsWith('/') || !existsSync(join('public', p.logo)))) rotos.push(`patrocinador ${p.id}: logo ${p.logo}`);
   expect(rotos).toEqual([]);
 });
