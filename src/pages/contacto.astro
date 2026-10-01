@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHero from '../components/SectionHero.astro';
 import ContactForm from '../components/ContactForm.astro';
 import hero from '../assets/hero/congreso.jpg';
+import { EMAIL_CONTACTO } from '../lib/contacto-info';
 ---
 <BaseLayout title="Contacto · Inginium" description="Contacta con Inginium: patrocina un curso, propón una formación o resuelve tus dudas sobre una inscripción.">
   <SectionHero kicker="Contacto" titulo="Hablemos" entradilla="¿Quieres patrocinar un curso, proponer una formación o tienes dudas sobre una inscripción?" imagen={hero} />
@@ -10,7 +11,7 @@ import hero from '../assets/hero/congreso.jpg';
     <div class="datos">
       <h2>Datos de contacto</h2>
       <dl>
-        <dt>Email</dt><dd><a href="mailto:info@ksf.es">info@ksf.es</a></dd>
+        <dt>Email</dt><dd><a href={`mailto:${EMAIL_CONTACTO}`}>{EMAIL_CONTACTO}</a></dd>
         <dt>Dirección</dt><dd>KSF Digital Healthcare<br />Nicaragua 106, 08029 Barcelona</dd>
       </dl>
     </div>

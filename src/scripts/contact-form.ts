@@ -1,5 +1,6 @@
 import { onPage } from './lifecycle';
 import { MOTIVO_IDS } from '../lib/motivos';
+import { EMAIL_CONTACTO } from '../lib/contacto-info';
 
 interface TurnstileApi { render: (el: HTMLElement, o: { sitekey: string; language?: string }) => string; remove: (id: string) => void; reset: (id?: string) => void }
 const w = window as unknown as { turnstile?: TurnstileApi };
@@ -54,16 +55,16 @@ onPage(() => {
         status.setAttribute('role', 'alert');
         // errors.form: el servidor no pudo leer el envío; no hay ningún campo que marcar.
         const formMsg = (body.errors as Record<string, string>).form;
-        status.textContent = formMsg ? `${formMsg} Inténtalo de nuevo o escríbenos a info@ksf.es.` : 'Revisa los campos marcados.';
+        status.textContent = formMsg ? `${formMsg} Inténtalo de nuevo o escríbenos a ${EMAIL_CONTACTO}.` : 'Revisa los campos marcados.';
         const first = [...form.querySelectorAll<HTMLElement>('[aria-invalid="true"]')][0];
         first?.focus();
       } else {
         status.setAttribute('role', 'alert');
-        status.textContent = 'No hemos podido enviar tu mensaje. Inténtalo de nuevo o escríbenos a info@ksf.es.';
+        status.textContent = `No hemos podido enviar tu mensaje. Inténtalo de nuevo o escríbenos a ${EMAIL_CONTACTO}.`;
       }
     } catch {
       status.setAttribute('role', 'alert');
-      status.textContent = 'No hemos podido enviar tu mensaje. Inténtalo de nuevo o escríbenos a info@ksf.es.';
+      status.textContent = `No hemos podido enviar tu mensaje. Inténtalo de nuevo o escríbenos a ${EMAIL_CONTACTO}.`;
     } finally {
       sending = false; btn.disabled = false; btn.textContent = 'Enviar mensaje';
       if (widgetId) w.turnstile?.reset(widgetId);

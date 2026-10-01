@@ -55,7 +55,7 @@ Desde un Mac: ejecutar `descargar.sh` en `ksf-workspace/backups/webflow-2026/ing
   - Revisar nombres de patrocinadores (algunos toscos: «Palex en», «Ferrer New Print CMYK», «gileadRecurso 2@3x», uno vacío) y marcas repetidas.
   - Cifra de profesionales formados (`src/data/cifras.json`).
   - Revisar legales: titulares (Kryosfera Solutions vs INGINIUM CONSULTORES / www.inginium.es), que exista info@inginium.es y la fecha «Última actualización».
-  - Confirmar el email del JSON-LD de `Seo` (info@ksf.es) y el contacto de `/acerca` (info@ksf-learning.net y teléfono de Marta).
+  - Email de contacto: la interfaz (formulario, `/contacto` y JSON-LD de `Seo`) usa una sola constante, `EMAIL_CONTACTO` en `src/lib/contacto-info.ts` (hoy `info@ksf.es`); confirmar el valor. Quedan fuera, pendientes de revisar con Joaquín: los textos legales (`src/pages/legal/privacidad.astro`, `info@inginium.es`) y `/acerca` (`info@ksf-learning.net` y teléfono de Marta).
   - Valorar los títulos en mayúsculas que vienen del CMS.
 - **Publicación (pasos externos, guiados):**
   1. Worker `inginium-web` en Cloudflare conectado al repo (build `npm run build`, deploy `npx wrangler deploy`).

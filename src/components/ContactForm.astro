@@ -1,12 +1,13 @@
 ---
 import { MOTIVOS } from '../lib/motivos';
+import { EMAIL_CONTACTO } from '../lib/contacto-info';
 const envKey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY;
 // 1x0000…AA es el sitekey de prueba de Cloudflare: en producción hay que definir PUBLIC_TURNSTILE_SITEKEY.
 if (!envKey && import.meta.env.PROD) console.warn('[contacto] AVISO: falta PUBLIC_TURNSTILE_SITEKEY; el build usa el sitekey de PRUEBA de Turnstile y el formulario no funcionará en producción.');
 const sitekey = envKey ?? '1x00000000000000000000AA';
 ---
 <form class="cform" data-contact-form action="/api/contacto" method="post" novalidate>
-  <noscript><p class="nojs">Este formulario necesita JavaScript activado. Si lo prefieres, escríbenos directamente a <a href="mailto:info@ksf.es">info@ksf.es</a>.</p></noscript>
+  <noscript><p class="nojs">Este formulario necesita JavaScript activado. Si lo prefieres, escríbenos directamente a <a href={`mailto:${EMAIL_CONTACTO}`}>{EMAIL_CONTACTO}</a>.</p></noscript>
   <div class="grid">
     <div class="field"><label for="nombre">Nombre *<input id="nombre" name="nombre" required autocomplete="name" aria-describedby="nombre-error" /></label><p class="err" role="alert" id="nombre-error"></p></div>
     <div class="field"><label for="empresa">Centro o empresa (opcional)<input id="empresa" name="empresa" autocomplete="organization" aria-describedby="empresa-error" /></label><p class="err" role="alert" id="empresa-error"></p></div>
