@@ -13,7 +13,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "import:cms": "tsx scripts/import-cms.ts",
-    "og": "tsx scripts/og.ts"
+    "og": "tsx scripts/og.ts",
+    "verificar:programa": "tsx scripts/verificar-programa.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

@@ -1,6 +1,6 @@
 ---
 titulo: ACTUALIDAD CLÍNICA EN TROMBOELASTOGRAFÍA
-resumen: El objetivo general es la mejora de los conocimientos y habilidades clínicas mediante el planteamiento y la resolución de casos prácticos.
+resumen: 'Casos clínicos interactivos online sobre tromboelastografía para especialistas en Anestesiología y Medicina Intensiva: hemostasia y hemorragia en cirugía cardiovascular, transfusión guiada en la disección de aorta y uso del tromboelastograma en cirugía cardíaca. Disponible del 25 de abril al 31 de diciembre de 2022.'
 especialidades:
   - Cardiología
 modalidad: online
@@ -18,6 +18,32 @@ profesorado:
 patrocinadores:
   - 5fbcbee8ddd21b4d340022c4
 destacado: false
+aprenderas:
+- Aplicar la tromboelastografía al manejo de la hemostasia y la hemorragia en cirugía cardiovascular.
+- Guiar la transfusión mediante tromboelastografía en el sangrado masivo por disección de aorta.
+- Valorar cuándo es necesario el tromboelastograma en cirugía cardíaca.
+dirigidoA: Especialistas en Anestesiología y Medicina Intensiva
+sede: null
+coordinacion: []
+sociedades: []
+agenda:
+- seccion: Casos
+  items:
+  - hora: null
+    titulo: 'Caso 1: Utilidad de la tromboelastografía en el manejo de la hemostasia y la hemorragia en cirugía cardiovascular'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Caso 2: Sangrado masivo en disección de aorta. Transfusión guiada por tromboelastografía'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
+  - hora: null
+    titulo: 'Caso 3: Tromboelastograma en cirugía cardíaca: ¿es siempre necesario?'
+    tipo: ponencia
+    ponentes: []
+    moderacion: []
 ---
 <p>Formación mediante casos clínicos interactivos de ACTUALIDAD CLÍNICA EN TROMBOELASTOGRAFÍA para especialistas en <strong>Anestesiología y Medicina Intensiva</strong>.<strong><br></strong></p>
 
