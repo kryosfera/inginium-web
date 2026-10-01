@@ -8,12 +8,13 @@ Catálogo de formación Inginium (KSF Digital Healthcare con ESADE Business Scho
 - `src/lib/`: lógica pura con tests (`tests/unit`), incluidas las redirecciones (`redirects.ts`; `_redirects` se genera en el build).
 - `src/pages/`: páginas Astro.
 - `scripts/`: importación del CMS de Webflow (`import:cms`) y OG (`og`).
-- `worker/index.ts` + `wrangler.jsonc`: Worker de Cloudflare que sirve `dist/` como assets (y atenderá `/api/contacto`).
+- `worker/index.ts` + `wrangler.jsonc`: Worker de Cloudflare que sirve `dist/` como assets y atiende `/api/contacto` (`run_worker_first` para `/api/*`). Wrangler 4 está en `devDependencies`.
 - `tests/unit` (Vitest) y `tests/e2e` (Playwright, proyectos `desktop` y `mobile`).
 
 ## Cómo se trabaja
 - El contenido se edita en `src/content/cursos` y `src/data`; la importación (`npm run import:cms`) fusiona con lo editado a mano. Publicar = merge a `main` (Cloudflare Workers Builds: build `npm run build`, deploy `npx wrangler deploy`).
 - Antes de cada PR: `npm test && npm run build && npm run test:e2e`.
+- El build imprime avisos `Duplicate id "<slug>" found in …` del glob-loader (uno por curso): son benignos. Salen porque `astro check` y `astro build` sincronizan el contenido dos veces en el mismo proceso de `npm run build`; no indican ficheros duplicados. Cualquier otro aviso sí hay que mirarlo.
 - Fuente de datos: `ksf-workspace/backups/webflow-2026/inginium-ksf`. Los binarios del CDN solo existen tras `descargar.sh`; el sitio debe compilar sin ellos.
 - Sin cookies ni Google Analytics (Cloudflare Web Analytics desde el panel). Todo movimiento respeta `prefers-reduced-motion` y funciona sin JavaScript.
 
@@ -43,7 +44,7 @@ El nombre del archivo es el slug (la URL `/cursos/<slug>`). Frontmatter:
 `src/data/cifras.json`: `profesionalesFormados` (número; con `null` el contador no se muestra).
 
 ### Reimportar tras descargar.sh
-Desde un Mac: ejecutar `descargar.sh` en `ksf-workspace/backups/webflow-2026/inginium-ksf` y después `npm run import:cms -- <ruta del backup>`. La importación fusiona con lo editado a mano (no lo pisa), copia los binarios a `src/assets/` y `public/` y muestra cuántos faltan.
+Desde un Mac: ejecutar `descargar.sh` en `ksf-workspace/backups/webflow-2026/inginium-ksf` y después `npm run import:cms -- <ruta del backup>`. La importación fusiona con lo editado a mano (no lo pisa), copia los binarios a `src/assets/` y `public/` (también las imágenes en línea del cuerpo, aunque se conserve el cuerpo editado) y muestra cuántos faltan. Después hay que **commitear** `src/content/cursos`, `src/data`, `src/assets/cursos`, `src/assets/profesorado` y `public/{patrocinadores,programas,cursos-media}`: Workers Builds compila desde git.
 
 ## Estado y siguientes pasos
 
