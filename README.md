@@ -11,6 +11,10 @@ npm run build                        # comprueba tipos y genera dist/
 npm run import:cms -- <ruta $BK>     # importa el backup de Webflow (ksf-workspace/backups/webflow-2026/inginium-ksf)
 ```
 
+## Contenido
+
+Cómo editar cursos, profesorado, patrocinadores y cifras, y el estado del proyecto: ver `CLAUDE.md`.
+
 ## Variables de entorno
 
 | Variable | Tipo | Dónde |
