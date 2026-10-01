@@ -28,7 +28,7 @@ Formación patrocinada por la industria de la salud, con programas diseñados ju
 - Textos: se pueden reescribir resúmenes y estructurar programas **solo con información ya presente** en cada ficha (no se inventan objetivos, avales, cifras ni ponentes).
 
 ## Brand Commitments
-- Logo Inginium oficial (vector del .ai: texto gris #3a3a3a, cuadrado lima #b5dc10 con muesca) y lema «improving your future»; verde lima #C1E313 como acento de interfaz; tinta #0B0B2C.
+- Logo Inginium oficial (vector del .ai: texto gris #3a3a3a, cuadrado lima #b5dc10 con muesca) y lema «improving your future»; el mismo lima #b5dc10 como acento de interfaz; tinta #0B0B2C.
 - Familia visual con ksf.es (catálogo KSF v9): tipografías Red Hat Display y Manrope; firma «Un proyecto de KSF Digital Healthcare · con ESADE Business School».
 - Idioma: español.
 

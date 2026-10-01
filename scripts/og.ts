@@ -17,7 +17,7 @@ body{width:1200px;height:630px;background:#0B0B2C;position:relative;overflow:hid
 .logo{position:absolute;left:80px;top:64px;color:#fff}
 .logo svg{height:64px;width:auto;display:block}
 h1{position:absolute;left:80px;top:210px;width:900px;font:900 72px/1.12 'Red Hat Display';letter-spacing:-.01em}
-h1 span{color:#C1E313}
+h1 span{color:#b5dc10}
 p.f{position:absolute;left:80px;top:530px;font:700 26px/1 'Manrope';color:#A9B0C8}
 </style></head><body>
 <div class="logo">${logo}</div>

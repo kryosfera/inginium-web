@@ -5,7 +5,7 @@
 @import "@fontsource/ibm-plex-mono/500.css";
 
 :root {
-  --lima: #C1E313; --tinta: #0B0B2C;
+  --lima: #b5dc10; --tinta: #0B0B2C;
   --mint: #89F4B4; --aqua: #7BD9EF;
   --grad: linear-gradient(90deg, var(--mint), var(--aqua));
   --f-display: "Red Hat Display Variable", system-ui, sans-serif;
@@ -15,7 +15,7 @@
 }
 [data-mode="oscuro"] {
   --bg: #0B0B2C; --fg: #F2F4FA; --muted: #A9AECB; --line: rgba(242,244,250,.14); --card: #15153A;
-  --accent-text: #C1E313; --btn-bg: #C1E313; --btn-fg: #0B0B2C; color-scheme: dark;
+  --accent-text: #b5dc10; --btn-bg: #b5dc10; --btn-fg: #0B0B2C; color-scheme: dark;
 }
 [data-mode="claro"] {
   --bg: #F5F7FA; --fg: #0B0B2C; --muted: #565A78; --line: #DCE0EA; --card: #FFFFFF;
@@ -23,7 +23,7 @@
 }
 @theme inline {
   --color-bg: var(--bg); --color-fg: var(--fg); --color-muted: var(--muted); --color-line: var(--line);
-  --color-card: var(--card); --color-accent: var(--accent-text); --color-lima: #C1E313; --color-tinta: #0B0B2C; --color-mint: #89F4B4; --color-aqua: #7BD9EF;
+  --color-card: var(--card); --color-accent: var(--accent-text); --color-lima: #b5dc10; --color-tinta: #0B0B2C; --color-mint: #89F4B4; --color-aqua: #7BD9EF;
   --font-display: var(--f-display); --font-body: var(--f-body); --font-mono: var(--f-mono);
 }
 
@@ -52,7 +52,7 @@ a { color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .sr-only:focus-visible { position: fixed; top: 8px; left: 8px; width: auto; height: auto; overflow: visible; clip: auto; padding: 10px 16px; background: var(--btn-bg); color: var(--btn-fg); border-radius: 8px; z-index: 100; text-decoration: none; font: 700 15px/1 var(--f-body); }
 .btn-lima { background: var(--lima); color: var(--tinta); }
-.btn-lima:hover { filter: brightness(1.05); box-shadow: 0 10px 24px -12px rgba(193, 227, 19, .7); }
+.btn-lima:hover { filter: brightness(1.05); box-shadow: 0 10px 24px -12px rgba(181, 220, 16, .7); }
 .btn-primary:hover { box-shadow: 0 10px 24px -14px rgba(11, 11, 44, .6); }
 .tag { display: inline-block; font: 600 11px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: var(--lima); color: var(--tinta); }
 .tag-fin { background: transparent; color: var(--muted); border: 1px solid var(--line); }

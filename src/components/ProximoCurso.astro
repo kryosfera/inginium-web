@@ -69,10 +69,10 @@ const lugar = d.sede ?? (d.modalidad === 'online' ? etiquetaModalidad(d.modalida
   .inner { width: 100%; display: grid; gap: clamp(28px, 4vw, 64px); align-items: center; padding-bottom: clamp(32px, 5vh, 56px); }
   .texto { display: grid; gap: 18px; align-content: center; min-width: 0; }
   .marca { font: 700 clamp(16px, 1.25vw, 19px)/1.3 var(--f-display); letter-spacing: 0; color: var(--muted); max-width: 44ch; }
-  .estado { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-self: start; margin-top: 6px; padding: 8px 14px 8px 12px; border: 1px solid rgba(193, 227, 19, .4); border-radius: 999px; font: 600 14px/1 var(--f-body); background: rgba(193, 227, 19, .08); }
+  .estado { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-self: start; margin-top: 6px; padding: 8px 14px 8px 12px; border: 1px solid rgba(181, 220, 16, .4); border-radius: 999px; font: 600 14px/1 var(--f-body); background: rgba(181, 220, 16, .08); }
   .estado time { font-size: 13px; color: var(--lima); }
-  .punto { width: 8px; height: 8px; border-radius: 50%; background: var(--lima); box-shadow: 0 0 0 0 rgba(193, 227, 19, .6); animation: latido 2.4s cubic-bezier(.16, 1, .3, 1) infinite; }
-  @keyframes latido { 0% { box-shadow: 0 0 0 0 rgba(193, 227, 19, .55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(193, 227, 19, 0); } }
+  .punto { width: 8px; height: 8px; border-radius: 50%; background: var(--lima); box-shadow: 0 0 0 0 rgba(181, 220, 16, .6); animation: latido 2.4s cubic-bezier(.16, 1, .3, 1) infinite; }
+  @keyframes latido { 0% { box-shadow: 0 0 0 0 rgba(181, 220, 16, .55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(181, 220, 16, 0); } }
   .titulo { font-size: clamp(30px, 3.7vw, 58px); font-weight: 900; line-height: 1.02; letter-spacing: -.02em; max-width: 18ch; text-wrap: balance; overflow-wrap: anywhere; }
   .cuenta { min-height: 64px; }
   .cuenta-fecha { font: 500 17px/1.4 var(--f-mono); color: var(--lima); }

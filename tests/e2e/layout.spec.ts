@@ -35,7 +35,7 @@ test('el lima nunca es color de texto sobre fondo claro', async ({ page }) => {
     const malos: string[] = [];
     document.querySelectorAll<HTMLElement>('body *').forEach((el) => {
       if (!el.textContent?.trim() || el.closest('[data-mode="oscuro"]')) return;
-      if (getComputedStyle(el).color === 'rgb(193, 227, 19)') malos.push(el.tagName + '.' + el.className);
+      if (getComputedStyle(el).color === 'rgb(181, 220, 16)') malos.push(el.tagName + '.' + el.className);
     });
     return malos;
   });
