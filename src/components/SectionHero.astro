@@ -7,9 +7,11 @@ import { fuentesCabecera, SIZES_CABECERA } from '../lib/imagen-cabecera';
 interface Props { titulo: string; kicker?: string; entradilla?: string; imagen?: ImageMetadata; variante?: 'fondo' | 'cartel' }
 const { titulo, kicker, entradilla, imagen, variante = 'fondo' } = Astro.props;
 const cartel = variante === 'cartel' && !!imagen;
+// Títulos con palabras muy largas («Neurogastroenterología»): cuerpo menor para que la palabra quepa entera en su columna.
+const largo = Math.max(...titulo.split(/\s+/).map((p) => p.length)) >= 16;
 const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
 ---
-<section class:list={['shero', { 'es-cartel': cartel }]} data-mode="oscuro">
+<section class:list={['shero', { 'es-cartel': cartel, 'titulo-largo': largo }]} data-mode="oscuro">
   {cartel && imagen
     ? <div class="bg bg-cartel" aria-hidden="true">
         <Picture src={imagen} alt="" widths={[640, 960]} sizes="100vw" formats={['avif', 'webp']} quality={45} loading="eager" decoding="async" />
@@ -49,7 +51,8 @@ const f = imagen && !cartel ? await fuentesCabecera(imagen) : null;
 <style>
   .bg-cartel :global(img) { filter: blur(28px) saturate(1.1); transform: scale(1.15); }
   .es-cartel .shade { background: color-mix(in srgb, #0B0B2C 78%, transparent); }
-  .es-cartel h1 { font-size: clamp(36px, 4.6vw, 72px); }
+  .es-cartel h1 { font-size: clamp(34px, 4.2vw, 64px); overflow-wrap: break-word; hyphens: auto; }
+  .titulo-largo h1 { font-size: clamp(26px, 3.4vw, 48px); max-width: 20ch; }
   .cartel { margin: 0; justify-self: center; border-radius: 14px; overflow: hidden; line-height: 0; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
   .cartel :global(img) { display: block; width: auto; height: auto; max-width: min(78vw, 340px); max-height: min(62vh, 560px); object-fit: contain; }
   @media (min-width: 900px) {

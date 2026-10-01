@@ -95,9 +95,8 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Course', name: d.ti
   h2 { font-size: clamp(26px, 2.8vw, 36px); }
   .entradilla { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.55; max-width: 60ch; text-wrap: pretty; }
   .aprender { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; counter-reset: ap; }
-  .aprender li { counter-increment: ap; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; padding-block: 14px; border-top: 1px solid var(--line); max-width: 68ch; }
+  .aprender li { counter-increment: ap; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; padding-block: 16px 14px; border-top: 1px solid var(--line); max-width: 68ch; line-height: 1.5; }
   .aprender li::before { content: counter(ap, decimal-leading-zero); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--lima); color: var(--tinta); font: 500 14px/1 var(--f-mono); }
-  .aprender li { line-height: 1.5; padding-top: 16px; }
 
   .prose { overflow-wrap: anywhere; max-width: 72ch; font-size: 17px; }
   .prose :global(p) { margin-block: 0 .9em; }

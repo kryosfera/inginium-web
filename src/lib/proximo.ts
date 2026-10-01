@@ -83,7 +83,9 @@ export function fraseRestante(r: { dias: number; horas: number; min: number }): 
 /** Duración legible: «7hr» → «7 h»; el resto, tal cual. */
 export function textoDuracion(d: string | null | undefined): string | null {
   if (!d) return null;
-  return d.trim().replace(/^(\d+(?:[.,]\d+)?)\s*(?:hr?s?|horas?)\.?$/i, (_, n: string) => `${n.replace('.', ',')} h`);
+  return d.trim()
+    .replace(/(\d+(?:[.,]\d+)?)\s*(?:hrs?|horas?|h)\b\.?/gi, (_, n: string) => `${n.replace('.', ',')} h`)
+    .replace(/(\d+)\s*(?:min|minutos?)\b\.?/gi, '$1 min');
 }
 
 /** Agrupa por año descendente (los cursos sin año se omiten). Conserva el orden de entrada dentro de cada año. */

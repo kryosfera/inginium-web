@@ -50,6 +50,7 @@ describe('utilidades de presentación', () => {
     expect(textoDuracion('7hr')).toBe('7 h');
     expect(textoDuracion('8 horas')).toBe('8 h');
     expect(textoDuracion('2 días')).toBe('2 días');
+    expect(textoDuracion('5hr 30min')).toBe('5 h 30 min');
     expect(textoDuracion(null)).toBeNull();
   });
   it('porAnio: años descendentes, sin los que no tienen año', () => {
