@@ -7,6 +7,7 @@ import CourseCard from '../../components/CourseCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import { ordenar } from '../../lib/filtros';
 import { jsonEnScript } from '../../lib/format';
+import { porAnio, recuentoEspecialidades } from '../../lib/proximo';
 import hero from '../../assets/hero/congreso.jpg';
 
 const todos = await getCollection('cursos');
@@ -14,36 +15,52 @@ const orden = ordenar(todos.map((c) => ({ ...c.data, id: c.id, entry: c })));
 const activos = orden.filter((c) => c.estado === 'activo').map((c) => c.entry);
 const finalizados = orden.filter((c) => c.estado === 'finalizado').map((c) => c.entry);
 const especialidades = [...new Set(todos.flatMap((c) => c.data.especialidades))].sort((a, b) => a.localeCompare(b, 'es'));
+const recuento = Object.fromEntries(recuentoEspecialidades(todos.map((c) => c.data)).map((r) => [r.nombre, r.n]));
 const anios = [...new Set(todos.map((c) => c.data.anio).filter((a): a is number => a !== null))].sort((a, b) => b - a);
+const grupos = porAnio(orden);
 const entradilla = activos.length === 0 ? 'Consulta el archivo de cursos celebrados.'
   : `${activos.length} ${activos.length === 1 ? 'curso activo' : 'cursos activos'} y un archivo con toda nuestra trayectoria.`;
 ---
 <BaseLayout title="Cursos · Inginium" description="Catálogo de cursos de Inginium: formación acreditada para profesionales de la salud, con cursos activos y archivo de ediciones anteriores.">
-  <SectionHero kicker="Cursos" titulo="Formación acreditada, patrocinada por la industria de la salud" entradilla={entradilla} imagen={hero} />
+  <SectionHero titulo="Formación acreditada, patrocinada por la industria de la salud" entradilla={entradilla} imagen={hero} />
   <div class="wrap listado">
-    <FilterBar especialidades={especialidades} anios={anios} />
-    <section id="activos" aria-labelledby="activos-h">
+    <FilterBar especialidades={especialidades} anios={anios} recuento={recuento} />
+    <section id="activos" aria-labelledby="activos-h" data-vista-rejilla>
       <h2 id="activos-h">Cursos activos</h2>
       <p class="vacio" hidden={activos.length > 0}>Pronto anunciaremos nuevos cursos.</p>
       <div class="grid">{activos.map((c) => <CourseCard curso={c} reveal={false} />)}</div>
     </section>
-    <section id="archivo" aria-labelledby="archivo-h">
+    <section id="archivo" aria-labelledby="archivo-h" data-vista-rejilla>
       <h2 id="archivo-h">Archivo</h2>
       <p class="intro">Cursos ya celebrados, con su programa y profesorado.</p>
       <div class="grid">{finalizados.map((c) => <CourseCard curso={c} reveal={false} />)}</div>
     </section>
+    <!-- Vista «Por años»: las secciones se rellenan con las mismas tarjetas (filtros.ts las mueve con Flip). Sin JS no se usa. -->
+    <div id="por-anios" class="anios" hidden>
+      {grupos.map((g) => (
+        <section class="anio-sec" data-anio-sec={g.anio} aria-labelledby={`anio-${g.anio}`}>
+          <h2 id={`anio-${g.anio}`} class="anio-h"><span class="mono">{g.anio}</span></h2>
+          <div class="grid"></div>
+        </section>
+      ))}
+    </div>
   </div>
   <ContactCTA />
   <script type="application/json" id="filtro-datos" set:html={jsonEnScript({ especialidades, anios })} />
   <script>import '../../scripts/filtros';</script>
 </BaseLayout>
 <style>
-  .listado { display: grid; gap: 56px; padding-block: 24px 80px; }
+  .listado { display: grid; gap: 56px; padding-block: 24px 96px; }
   section { display: grid; gap: 20px; align-content: start; }
-  section[hidden] { display: none; }
+  section[hidden], .anios[hidden] { display: none; }
   h2 { font-size: clamp(24px, 2.6vw, 32px); }
   .vacio[hidden] { display: none; }
   .intro, .vacio { margin: 0; color: var(--muted); }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px 20px; }
   .grid :global(.card[hidden]) { display: none; }
+  .anios { display: grid; gap: 64px; }
+  .anio-sec { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .anio-h { display: flex; align-items: center; gap: 20px; font: 500 clamp(40px, 6vw, 88px)/1 var(--f-mono); letter-spacing: -.04em; }
+  .anio-h::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .anio-h span::before { content: ''; display: inline-block; width: .16em; height: .16em; margin-right: .22em; border-radius: 50%; background: var(--lima); vertical-align: .5em; box-shadow: 0 0 0 4px color-mix(in srgb, var(--lima) 25%, transparent); }
 </style>

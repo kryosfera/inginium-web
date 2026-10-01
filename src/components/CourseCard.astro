@@ -1,45 +1,62 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import Pattern from './Pattern.astro';
+import CartelMedia from './CartelMedia.astro';
 import { etiquetaModalidad, textoCreditos } from '../lib/curso-vista';
 import { slugEspecialidad } from '../lib/cursos';
-interface Props { curso: CollectionEntry<'cursos'>; reveal?: boolean }
-const { curso, reveal = true } = Astro.props;
+import { fechaCorta } from '../lib/proximo';
+interface Props { curso: CollectionEntry<'cursos'>; reveal?: boolean; tituloNivel?: 'h2' | 'h3' }
+const { curso, reveal = true, tituloNivel = 'h3' } = Astro.props;
 const d = curso.data;
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/cursos/*', { eager: true });
 const imagen = d.imagen ? imgs[`../assets/cursos/${d.imagen}`]?.default : undefined;
 const fin = d.estado === 'finalizado';
-const meta = [etiquetaModalidad(d.modalidad), textoCreditos(d.creditos), d.fechas].filter(Boolean).join(' · ');
+const fecha = fechaCorta(d.fechas, d.anio);
+const creditos = textoCreditos(d.creditos);
+const H = tituloNivel;
 ---
 <article class:list={['card', { fin }]} data-reveal={reveal ? '' : undefined} data-id={curso.id} data-especialidades={d.especialidades.map(slugEspecialidad).join(' ')} data-anio={d.anio ?? ''} data-estado={d.estado} data-texto={`${d.titulo} ${d.resumen}`}>
-  <div class="media">
-    {imagen
-      ? <Image src={imagen} alt="" widths={[400, 800]} sizes="(max-width: 700px) 100vw, 400px" loading="lazy" />
-      : <Pattern />}
-  </div>
+  <div class="caja">
+  <CartelMedia class="media" imagen={imagen} />
   <div class="body">
-    {d.especialidades.length > 0 && <p class="esp">{d.especialidades.join(' · ')}</p>}
-    <h3><a href={`/cursos/${curso.id}`}>{d.titulo}</a></h3>
-    <p class="meta">{meta}</p>
-    {fin ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
+    <div class="top">
+      {fin ? <span class="tag tag-fin">Finalizado</span> : <span class="tag">Activo</span>}
+      <span class="mod">{etiquetaModalidad(d.modalidad)}</span>
+    </div>
+    <H class="tit"><a href={`/cursos/${curso.id}`}>{d.titulo}</a></H>
+    {d.especialidades.length > 0 && <ul class="esp" aria-label="Especialidades">{d.especialidades.map((e) => <li>{e}</li>)}</ul>}
+    <p class="datos mono">
+      {fecha && <span>{fecha}</span>}
+      {creditos && <span class="cfc">{creditos}</span>}
+    </p>
+  </div>
   </div>
 </article>
 <style>
-  .card { position: relative; display: grid; grid-template-rows: auto 1fr; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: border-color .2s, transform .2s; }
-  .card:hover, .card:focus-within { border-color: var(--fg); }
-  .media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--card); }
-  .media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: filter .3s; }
-  .fin .media :global(img) { filter: grayscale(1); }
-  .fin:hover .media :global(img), .fin:focus-within .media :global(img) { filter: none; }
-  .body { display: grid; gap: 10px; align-content: start; padding: 20px; }
-  .body .tag { justify-self: start; }
-  .esp { margin: 0; font: 500 11px/1.3 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  h3 { font-size: 20px; line-height: 1.15; }
-  h3 a { color: inherit; text-decoration: none; }
-  h3 a::after { content: ''; position: absolute; inset: 0; }
-  h3 a:focus-visible { outline: none; }
-  .card:has(h3 a:focus-visible) { outline: 2px solid var(--accent-text); outline-offset: 3px; }
-  .meta { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.4; }
-  @media (prefers-reduced-motion: reduce) { .card, .media :global(img) { transition: none; } }
+  /* .card es el elemento de la rejilla (lo mueve Flip); el relieve al pasar va en .caja para no mezclar transiciones CSS con Flip. */
+  .card { position: relative; display: grid; }
+  .caja { position: relative; display: grid; grid-template-rows: auto 1fr; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(11, 11, 44, .04);
+    transition: border-color .25s, transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1); }
+  .card:hover .caja, .card:focus-within .caja { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); transform: translateY(-4px); box-shadow: 0 22px 40px -24px rgba(11, 11, 44, .45); }
+  .card :global(.media) { aspect-ratio: 16 / 11; }
+  .card:hover :global(.cm-cartel), .card:focus-within :global(.cm-cartel) { transform: rotate(-1.6deg) scale(1.035); }
+  .fin :global(.cm-cartel) { filter: grayscale(.85) drop-shadow(0 10px 18px rgba(0, 0, 0, .35)); transition: filter .35s, transform .45s cubic-bezier(.16, 1, .3, 1); }
+  .fin:hover :global(.cm-cartel), .fin:focus-within :global(.cm-cartel) { filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .35)); }
+  .body { display: grid; gap: 10px; align-content: start; padding: 18px 20px 20px; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .mod { font: 500 12px/1 var(--f-mono); letter-spacing: .06em; color: var(--muted); }
+  .tit { font-size: 19px; line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
+  .tit a { color: inherit; text-decoration: none; }
+  .tit a::after { content: ''; position: absolute; inset: 0; }
+  .tit a:focus-visible { outline: none; }
+  .card:has(.tit a:focus-visible) .caja { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+  .esp { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  .esp li { font: 600 12px/1 var(--f-body); padding: 6px 9px; border-radius: 999px; background: color-mix(in srgb, var(--fg) 6%, transparent); color: var(--fg); }
+  .datos { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted); }
+  .datos:empty { display: none; }
+  .cfc { color: var(--accent-text); font-weight: 500; }
+  @media (prefers-reduced-motion: reduce) {
+    .caja, .fin :global(.cm-cartel) { transition: none; }
+    .card:hover .caja, .card:focus-within .caja { transform: none; }
+    .card:hover :global(.cm-cartel), .card:focus-within :global(.cm-cartel) { transform: none; }
+  }
 </style>

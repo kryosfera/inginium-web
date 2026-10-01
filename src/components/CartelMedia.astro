@@ -1,0 +1,20 @@
+---
+// Cartel de curso como objeto: completo (object-fit: contain) sobre su propio color, que sale de una miniatura desenfocada.
+// La miniatura pesa ~1 KB; el cartel se carga en diferido salvo que `eager`.
+import { Image } from 'astro:assets';
+import Pattern from './Pattern.astro';
+interface Props { imagen?: ImageMetadata; alt?: string; widths?: number[]; sizes?: string; eager?: boolean; class?: string }
+const { imagen, alt = '', widths = [360, 720], sizes = '(max-width: 700px) 92vw, 380px', eager = false, class: cls } = Astro.props;
+---
+<div class:list={['cm', cls]}>
+  {imagen ? <>
+    <Image class="cm-fondo" src={imagen} alt="" width={48} quality={40} loading={eager ? 'eager' : 'lazy'} decoding="async" aria-hidden="true" />
+    <Image class="cm-cartel" src={imagen} alt={alt} widths={widths} sizes={sizes} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </> : <Pattern />}
+</div>
+<style>
+  .cm { position: relative; overflow: hidden; isolation: isolate; display: grid; place-items: center; background: var(--tinta); }
+  .cm :global(.cm-fondo) { position: absolute; inset: -12%; width: 124%; height: 124%; max-width: none; object-fit: cover; filter: blur(18px) saturate(1.15) brightness(.8); z-index: -1; }
+  .cm :global(.cm-cartel) { display: block; width: 100%; height: 100%; object-fit: contain; padding: 7%; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .35)); transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
+  @media (prefers-reduced-motion: reduce) { .cm :global(.cm-cartel) { transition: none; } }
+</style>

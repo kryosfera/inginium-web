@@ -99,3 +99,25 @@ export function recuentoEspecialidades(cursos: { especialidades: string[] }[]): 
   for (const c of cursos) for (const e of c.especialidades) m.set(e, (m.get(e) ?? 0) + 1);
   return [...m.entries()].map(([nombre, n]) => ({ nombre, n })).sort((a, b) => b.n - a.n || a.nombre.localeCompare(b.nombre, 'es'));
 }
+
+const ABREV = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sept', 'oct', 'nov', 'dic'];
+const fmt = (x: Dia) => `${x.d} ${ABREV[x.m - 1]} ${x.y}`;
+
+/** Fecha compacta para tarjetas y datos en mono: «13 nov 2026», «1 sept 2024 – 31 jul 2025» o, si no se reconoce, el año. */
+export function fechaCorta(fechas: string | null | undefined, anio: number | null): string | null {
+  const primero = primerDia(fechas);
+  if (!primero) return anio ? String(anio) : null;
+  const t = sinAcentos(fechas!).toLowerCase();
+  const todas = [...t.matchAll(new RegExp(`(\\d{1,2})\\s+de\\s+(${MESES.join('|')})\\s+(?:de|del)\\s+(\\d{4})`, 'g'))]
+    .map((m) => ({ d: Number(m[1]), m: MESES.indexOf(m[2]) + 1, y: Number(m[3]) }));
+  const ultimo = todas.at(-1);
+  if (!ultimo || fmt(ultimo) === fmt(primero)) return fmt(primero);
+  if (ultimo.y === primero.y && ultimo.m === primero.m) return `${primero.d}–${fmt(ultimo)}`;
+  return `${fmt(primero)} – ${fmt(ultimo)}`;
+}
+
+/** Fecha ISO (AAAA-MM-DD) del primer día, para <time datetime>. */
+export function fechaIso(fechas: string | null | undefined): string | null {
+  const p = primerDia(fechas);
+  return p ? `${p.y}-${String(p.m).padStart(2, '0')}-${String(p.d).padStart(2, '0')}` : null;
+}

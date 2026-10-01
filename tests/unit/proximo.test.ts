@@ -61,3 +61,15 @@ describe('utilidades de presentación', () => {
       .toEqual([{ nombre: 'A', n: 2 }, { nombre: 'B', n: 1 }]);
   });
 });
+
+describe('fechaCorta', async () => {
+  const { fechaCorta, fechaIso } = await import('../../src/lib/proximo');
+  it('día, rango y año', () => {
+    expect(fechaCorta('13 de noviembre de 2026', 2026)).toBe('13 nov 2026');
+    expect(fechaCorta('Disponible online entre los días 1 de septiembre de 2024 y 31 de julio de 2025', 2025)).toBe('1 sept 2024 – 31 jul 2025');
+    expect(fechaCorta('los días 4 y 5 de noviembre de 2021 en Terrassa', 2021)).toBe('4–5 nov 2021');
+    expect(fechaCorta(null, 2020)).toBe('2020');
+    expect(fechaCorta(null, null)).toBeNull();
+    expect(fechaIso('13 de noviembre de 2026')).toBe('2026-11-13');
+  });
+});
