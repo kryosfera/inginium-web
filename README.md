@@ -20,6 +20,6 @@ npm run import:cms -- <ruta $BK>     # importa el backup de Webflow (ksf-workspa
 | `TURNSTILE_SECRET` | runtime (Worker) | `.dev.vars` en local; secreto del Worker (Settings → Variables and Secrets) |
 | `RESEND_API_KEY` | runtime (Worker) | `.dev.vars` en local; secreto del Worker (Settings → Variables and Secrets) |
 | `CONTACT_TO` | runtime (Worker) | destinatario del formulario |
-| `CONTACT_FROM` | runtime (Worker) | remitente (dominio verificado en Resend) |
+| `CONTACT_FROM` | runtime (Worker) | remitente (dominio verificado en Resend; `web@ksf.es` mientras inginium-ksf.com no esté verificado) |
 
-Plantilla de las de runtime: `.dev.vars.example`.
+Plantilla de las de runtime: `.dev.vars.example`. El Worker (`worker/index.ts`) sirve `dist/` y atiende `POST /api/contacto` (motivo, Turnstile y Resend); si falta alguna variable de runtime responde 500.

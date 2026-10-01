@@ -1,10 +1,11 @@
-# Variables del Worker /api/contacto (runtime). Copia este archivo a .dev.vars
+# Variables del Worker de inginium-web (/api/contacto, runtime). Copia este archivo a .dev.vars
 # para `npx wrangler dev`; en producción van en el Worker > Settings > Variables and Secrets
 # (RESEND_API_KEY y TURNSTILE_SECRET como secretos). Si falta alguna, /api/contacto responde 500.
 RESEND_API_KEY=re_xxx
 # Secreto de PRUEBA público de Turnstile (siempre valida). En producción, el secreto real.
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
 CONTACT_TO=info@ksf.es
+# Remitente de un dominio verificado en Resend: web@ksf.es mientras inginium-ksf.com no esté verificado.
 CONTACT_FROM=web@ksf.es
 
 # OJO: PUBLIC_TURNSTILE_SITEKEY NO va aquí. Es una variable de BUILD (Astro la incrusta en el

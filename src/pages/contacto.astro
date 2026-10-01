@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHero from '../components/SectionHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import hero from '../assets/hero/congreso.jpg';
+---
+<BaseLayout title="Contacto · Inginium" description="Contacta con Inginium: patrocina un curso, propón una formación o resuelve tus dudas sobre una inscripción.">
+  <SectionHero kicker="Contacto" titulo="Hablemos" entradilla="¿Quieres patrocinar un curso, proponer una formación o tienes dudas sobre una inscripción?" imagen={hero} />
+  <section class="wrap cols">
+    <div class="datos">
+      <h2>Datos de contacto</h2>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:info@ksf.es">info@ksf.es</a></dd>
+        <dt>Dirección</dt><dd>KSF Digital Healthcare<br />Nicaragua 106, 08029 Barcelona</dd>
+      </dl>
+    </div>
+    <ContactForm />
+  </section>
+</BaseLayout>
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); padding-block: 72px 110px; }
+  .datos { display: grid; gap: 12px; align-content: start; }
+  h2 { font-size: clamp(24px, 2.4vw, 32px); }
+  dl { display: grid; gap: 4px; margin: 0; }
+  dt { font: 500 12px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+  dd { margin: 0; }
+  dd a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+</style>

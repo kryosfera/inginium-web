@@ -1,0 +1,49 @@
+---
+import { MOTIVOS } from '../lib/motivos';
+const envKey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY;
+// 1x0000…AA es el sitekey de prueba de Cloudflare: en producción hay que definir PUBLIC_TURNSTILE_SITEKEY.
+if (!envKey && import.meta.env.PROD) console.warn('[contacto] AVISO: falta PUBLIC_TURNSTILE_SITEKEY; el build usa el sitekey de PRUEBA de Turnstile y el formulario no funcionará en producción.');
+const sitekey = envKey ?? '1x00000000000000000000AA';
+---
+<form class="cform" data-contact-form action="/api/contacto" method="post" novalidate>
+  <noscript><p class="nojs">Este formulario necesita JavaScript activado. Si lo prefieres, escríbenos directamente a <a href="mailto:info@ksf.es">info@ksf.es</a>.</p></noscript>
+  <div class="grid">
+    <div class="field"><label for="nombre">Nombre *<input id="nombre" name="nombre" required autocomplete="name" aria-describedby="nombre-error" /></label><p class="err" role="alert" id="nombre-error"></p></div>
+    <div class="field"><label for="empresa">Centro o empresa (opcional)<input id="empresa" name="empresa" autocomplete="organization" aria-describedby="empresa-error" /></label><p class="err" role="alert" id="empresa-error"></p></div>
+    <div class="field"><label for="email">Email *<input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-error" /></label><p class="err" role="alert" id="email-error"></p></div>
+    <div class="field"><label for="telefono">Teléfono<input id="telefono" name="telefono" type="tel" autocomplete="tel" aria-describedby="telefono-error" /></label><p class="err" role="alert" id="telefono-error"></p></div>
+    <div class="field full"><label for="motivo">Motivo *
+      <select id="motivo" name="motivo" required aria-describedby="motivo-error">
+        <option value="">Elige un motivo</option>
+        {MOTIVOS.map((m) => <option value={m.id}>{m.label}</option>)}
+      </select></label><p class="err" role="alert" id="motivo-error"></p></div>
+    <div class="field full"><label for="mensaje">Mensaje *<textarea id="mensaje" name="mensaje" rows="6" required aria-describedby="mensaje-error"></textarea></label><p class="err" role="alert" id="mensaje-error"></p></div>
+  </div>
+  <div class="trap" aria-hidden="true"><label for="web">No rellenes este campo<input id="web" name="web" tabindex="-1" autocomplete="off" /></label></div>
+  <label class="check" for="privacidad"><input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="privacidad-error" /> <span>He leído y acepto la <a href="/legal/privacidad">política de privacidad</a>. *</span></label>
+  <p class="err" role="alert" id="privacidad-error"></p>
+  <div data-turnstile data-sitekey={sitekey}></div>
+  <p class="err" role="alert" id="token-error"></p>
+  <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+  <p class="status" data-form-status role="status"></p>
+</form>
+<script>import '../scripts/contact-form';</script>
+<style>
+  .cform { display: grid; gap: 14px; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+  .field { display: grid; gap: 6px; align-content: start; }
+  .full { grid-column: 1 / -1; }
+  label { display: grid; gap: 6px; font: 600 14px/1.3 var(--f-body); }
+  input, select, textarea { font: 500 16px/1.4 var(--f-body); color: var(--fg); background: var(--card); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--fg); outline: 2px solid var(--accent-text); outline-offset: 2px; }
+  [aria-invalid="true"] { border-color: #B3261E; }
+  .err { color: #B3261E; font-size: 13.5px; min-height: 1em; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+  .check input { width: 20px; height: 20px; margin-top: 2px; }
+  .trap { position: absolute; left: -9999px; }
+  .btn { justify-self: start; } .btn[disabled] { opacity: .6; cursor: progress; }
+  .status { font-weight: 600; }
+  .nojs { font-weight: 600; }
+  .nojs a, .check a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
