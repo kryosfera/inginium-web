@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero } from '../../src/lib/cms-import';
+import { mapCurso, mapDocente, patrocinadoresDe, limpiarHtml, fusionarCurso, isPublicado, nombreFichero, nombreDesdeFichero } from '../../src/lib/cms-import';
 
 const docentes = new Map([['t1', 'dra-ana'], ['t2', 'dr-luis']]);
 const item = (f: Record<string, unknown>, extra: Record<string, unknown> = {}) =>
@@ -80,5 +80,30 @@ describe('utilidades', () => {
   });
   it('nombreFichero decodifica', () => {
     expect(nombreFichero('https://cdn.prod.website-files.com/a/61cd_Logo%20Palex.jpg')).toBe('61cd_Logo Palex.jpg');
+  });
+});
+
+describe('nombreDesdeFichero', () => {
+  const cdn = 'https://cdn.prod.website-files.com/a/';
+  it('deriva el nombre del logo', () => {
+    expect(nombreDesdeFichero(cdn + '5fbcbee8ddd21b4d340022c4_Laboratorios-Ferrer-logo.png')).toBe('Laboratorios Ferrer');
+    expect(nombreDesdeFichero(cdn + '5fbcbf3a9d448a5e2ac29da3_1987px-Sanofi_logo.svg.png')).toBe('Sanofi');
+  });
+  it('devuelve vacío si no queda nada', () => {
+    expect(nombreDesdeFichero(cdn + '6a2ef6bcff6ee0eb74ff078f_LOGO.jpg')).toBe('');
+    expect(nombreDesdeFichero(cdn + '6a2ef6bcff6ee0eb74ff078f_1987px.png')).toBe('');
+  });
+});
+
+describe('enlaces al propio sitio', () => {
+  it('no son enlace de acceso', () => {
+    for (const l of ['https://www.inginium-ksf.com/contact-us', 'https://inginium-ksf.com/x']) {
+      expect(mapCurso(item({ 'link-acceso-curso': l }), { docentes, imagen: null, programa: null })).toMatchObject({ url: null, destacado: false });
+    }
+  });
+  it('fusionarCurso toma el url nuevo si el existente apunta al propio sitio', () => {
+    const nuevo = mapCurso(item({}), { docentes, imagen: null, programa: null });
+    expect(fusionarCurso(nuevo, { ...nuevo, url: 'https://www.inginium-ksf.com/contact-us', destacado: true })).toMatchObject({ url: null, destacado: false });
+    expect(fusionarCurso(nuevo, { ...nuevo, url: 'https://otro.es/' }).url).toBe('https://otro.es/');
   });
 });

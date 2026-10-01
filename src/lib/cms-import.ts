@@ -12,6 +12,18 @@ export interface Docente { id: string; nombre: string; cargo: string; resumen: s
 
 export const isPublicado = (it: { isDraft?: boolean; isArchived?: boolean }) => !it.isDraft && !it.isArchived;
 export const nombreFichero = (url: string) => decodeURIComponent(new URL(url).pathname.split('/').pop() ?? '');
+
+/** Nombre provisional de un patrocinador a partir del fichero del logo (editable después). '' si no queda nada útil. */
+export function nombreDesdeFichero(url: string): string {
+  const base = nombreFichero(url)
+    .replace(/^[0-9a-f]{24}_/, '')
+    .replace(/(\.(png|jpe?g|svg|webp|gif))+$/i, '')
+    .replace(/\(alta calidad\)/gi, '')
+    .replace(/[-_]p-\d+$/i, '');
+  return base.split(/[\s_-]+/).filter((t) => t && !/^(logo|color|svg)$/i.test(t) && !/^\d+(px)?$/i.test(t)).join(' ');
+}
+
+const esDelSitio = (u: string | null) => { try { return /^(www\.)?inginium-ksf\.com$/i.test(new URL(u ?? '').hostname); } catch { return false; } };
 const txt = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
 
 export function limpiarHtml(html: string | null | undefined): string {
@@ -33,7 +45,8 @@ export function patrocinadoresDe(f: Record<string, any>): { id: string; url: str
 export function mapCurso(it: CmsItem, ctx: { docentes: Map<string, string>; imagen: string | null; programa: string | null }): CursoImportado {
   const f = it.fieldData;
   const estado = estadoDe(!!f.finalizado, !!f['no-activo']);
-  const url = txt(f['link-acceso-curso']);
+  const enlace = txt(f['link-acceso-curso']);
+  const url = esDelSitio(enlace) ? null : enlace; // un enlace al propio sitio no es de acceso
   const refs = [f['course-teacher'], f['profesor-2'], ...(Array.isArray(f.profesorado) ? f.profesorado : [])]
     .filter((x): x is string => typeof x === 'string');
   const profesorado = [...new Set(refs.map((r) => ctx.docentes.get(r)).filter((x): x is string => !!x))];
@@ -57,5 +70,6 @@ export function mapDocente(it: CmsItem, foto: string | null): Docente {
 /** Lo editado a mano (existente) manda; los binarios recién encontrados sustituyen a los vacíos o antiguos. */
 export function fusionarCurso(nuevo: CursoImportado, existente: CursoImportado | null): CursoImportado {
   if (!existente) return nuevo;
-  return { ...nuevo, ...existente, imagen: nuevo.imagen ?? existente.imagen, programa: nuevo.programa ?? existente.programa };
+  // url: si el existente apunta al propio sitio (enlace antiguo no válido), manda el nuevo (y destacado, que depende de él).
+  return { ...nuevo, ...existente, ...(esDelSitio(existente.url) ? { url: nuevo.url, destacado: nuevo.destacado } : {}), imagen: nuevo.imagen ?? existente.imagen, programa: nuevo.programa ?? existente.programa };
 }

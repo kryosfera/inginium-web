@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import yaml from 'js-yaml';
-import { mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
+import { nombreDesdeFichero, mapCurso, mapDocente, patrocinadoresDe, fusionarCurso, isPublicado, nombreFichero, type CmsItem, type CursoImportado } from '../src/lib/cms-import';
 
 const bk = process.argv[2];
 if (!bk) { console.error('Falta la ruta del backup de inginium-ksf'); process.exit(1); }
@@ -46,7 +46,7 @@ for (const it of leer('courses').filter(isPublicado)) {
     const src = local(p.url); if (!src) faltan.push(p.url);
     const logo = src ? `/patrocinadores/${copiar(src, 'public/patrocinadores', p.id)}` : null;
     const prev = patros.get(p.id);
-    patros.set(p.id, { id: p.id, nombre: prev?.nombre ?? '', logo: logo ?? prev?.logo ?? null });
+    patros.set(p.id, { id: p.id, nombre: prev?.nombre?.trim() || nombreDesdeFichero(p.url), logo: logo ?? prev?.logo ?? null });
   }
   const nuevo = mapCurso(it, { docentes, imagen: copiar(img, 'src/assets/cursos', f.slug), programa });
   const ruta = `src/content/cursos/${f.slug}.md`;

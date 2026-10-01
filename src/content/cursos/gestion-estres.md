@@ -8,13 +8,13 @@ anio: 2020
 duracion: 8hr
 creditos: null
 estado: activo
-url: https://www.inginium-ksf.com/contact-us
+url: null
 encuesta: null
 imagen: null
 programa: null
 profesorado: []
 patrocinadores: []
-destacado: true
+destacado: false
 ---
 <p>Curso acerca de la identificación de las causas del estrés así como de técnicas de reducción del mismo y mejora de la eficiencia.</p>
 

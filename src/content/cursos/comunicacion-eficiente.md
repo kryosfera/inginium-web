@@ -8,13 +8,13 @@ anio: 2020
 duracion: null
 creditos: null
 estado: activo
-url: https://www.inginium-ksf.com/contact-us
+url: null
 encuesta: null
 imagen: null
 programa: null
 profesorado: []
 patrocinadores: []
-destacado: true
+destacado: false
 ---
 <p>Acerca del curso</p>
 
